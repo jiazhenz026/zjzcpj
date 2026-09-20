@@ -25,9 +25,10 @@
    "announced": "2026-09-20 14:26 EDT (awards ceremony slide)",
    "winners": [
     "Heard!",
-    "SurrealEstate"
+    "SurrealEstate",
+    "Weave"
    ],
-   "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) names the top two in order: Heard! first, SurrealEstate second. SurrealEstate was not found by this analysis: no public GitHub repository under that name mentions SteelHacks, so it was either private, differently named, or submitted outside GitHub."
+   "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) names Heard! first and SurrealEstate second; the third place, announced separately, went to Weave. Neither SurrealEstate nor Weave was found by this analysis: no public GitHub repository under those names mentions SteelHacks, so they were private, differently named, or submitted outside GitHub. Two of the three winners being invisible to a keyword search is the clearest limit of this method."
   }
  ]
 }
