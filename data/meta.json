@@ -27,7 +27,7 @@
     "Heard!",
     "SurrealEstate"
    ],
-   "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) lists two winners: Heard! and SurrealEstate. SurrealEstate was not found by this analysis: no public GitHub repository under that name mentions SteelHacks, so it was either private, differently named, or submitted outside GitHub."
+   "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) names the top two in order: Heard! first, SurrealEstate second. SurrealEstate was not found by this analysis: no public GitHub repository under that name mentions SteelHacks, so it was either private, differently named, or submitted outside GitHub."
   }
  ]
 }
