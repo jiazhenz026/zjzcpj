@@ -324,6 +324,24 @@ def dossier_html():
 </details>''')
     return f'<section id="dossiers" class="sec"><h2>Project dossiers</h2><p class="lede">Evidence behind every score. Expand a project for the core loop, what is mocked, demo risks and the full breakdown.</p>{"".join(items)}</section>'
 
+
+def results_html():
+    res = META.get('actual_results') or []
+    if not res: return ''
+    blocks = []
+    for r in res:
+        k = r['track']; lst = by_track.get(k, [])
+        rows = []
+        for w in r['winners']:
+            p = next((x for x in lst if x['name'].lower() == w.lower()), None)
+            if p:
+                rows.append(f'<tr><td><strong>{e(w)}</strong></td><td class="num">{p["track_rank"][k]} of {len(lst)}</td><td class="num">{e(p["judge_range"][k])}</td><td class="num">{fmt(p["TOTAL"])}</td><td class="num"><span class="wow w{int(round(p["scores"]["wow"]))}">{fmt(p["scores"]["wow"])}</span></td><td class="note">Predicted judge range {e(p["judge_range"][k])} in a field of {len(lst)}; the score-based rank was {p["track_rank"][k]}.</td></tr>')
+            else:
+                rows.append(f'<tr><td><strong>{e(w)}</strong></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="note">Not in this analysis.</td></tr>')
+        blocks.append(f'<h3><span class="chip t-{e(k)}">{e(track_label(k))}</span> <span class="muted">announced {e(r["announced"])}</span></h3><div class="tbl-wrap"><table class="lb small-t"><thead><tr><th>Winner</th><th class="num">Score rank</th><th class="num">Predicted judge range</th><th class="num">Total</th><th class="num">Wow</th><th>Read</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div><p class="small muted">{e(r.get("note",""))}</p>')
+    return f'''<section id="results" class="sec"><h2>Actual results vs prediction</h2><p class="lede">Official winners as they were announced, next to what this scoreboard predicted. Added after the ceremony; scores above were not changed.</p>{"".join(blocks)}
+<p><strong>What the outcome says about the model.</strong> The Nemotron track was called correctly as Heard!'s best chance because it is the one track that explicitly asks for evidence, and Heard! shipped a written Nemotron eval. The predicted judge range (5–8) still undershot a win, which points to two adjustments for next time: the Wow model overweights visual spectacle relative to a moment the judge can trigger and hear personally, and objective penalties such as fresh-code integrity have no weight with live judges who never open git history.</p></section>'''
+
 def appendix_html():
     rows = ''.join(f'<tr><td>{repo_link(x["repo"])}</td><td class="num">{x["obj"]["code_loc"]}</td><td class="num">{x["obj"]["commits_during"] + x["obj"]["commits_pre"]}</td><td>{e(x["reason"])}</td></tr>' for x in sorted(placeholders, key=lambda x: x['repo'].lower()))
     na = ''.join(f'<tr><td>{repo_link(x["repo"])}</td><td>{e(x["note"])}</td></tr>' for x in EXCLUDED_404)
@@ -526,9 +544,9 @@ def build():
 <div class="hero"><div><h1>SteelHacks XIII<br>Scoreboard</h1><p class="sub">{n_scored} public repositories from this year's hackathon, scored 100 points each: 40 machine-computed from the code and git history, 60 from a reviewed reading of what each project actually does, plus a separate Wow index for the 3-minute live demo. Snapshot {e(snapshot)}, before the submission deadline.</p></div></div>
 <div class="tiles"><div class="tile"><b>{n_found}</b><span>repositories found</span></div><div class="tile"><b>{n_scored}</b><span>projects scored</span></div><div class="tile"><b>{len(placeholders) + len(EXCLUDED_404)}</b><span>placeholders or unreachable</span></div><div class="tile"><b>{len([t for t in TRACKS if by_track.get(t['key'])])}</b><span>tracks with entrants</span></div></div>
 </header>
-<nav class="sticky"><ul><li><a href="#summary">Summary</a></li><li><a href="#method">Method</a></li><li><a href="#tracks">Tracks</a></li><li><a href="#leaderboard">Leaderboard</a></li><li><a href="#track-rankings">By track</a></li><li><a href="#dossiers">Dossiers</a></li><li><a href="#appendix">Appendix</a></li></ul></nav>
+<nav class="sticky"><ul><li><a href="#summary">Summary</a></li><li><a href="#results">Results</a></li><li><a href="#method">Method</a></li><li><a href="#tracks">Tracks</a></li><li><a href="#leaderboard">Leaderboard</a></li><li><a href="#track-rankings">By track</a></li><li><a href="#dossiers">Dossiers</a></li><li><a href="#appendix">Appendix</a></li></ul></nav>
 <main>'''
-    body = summary_html() + method_html() + tracks_html() + leaderboard_html() + track_rank_html() + dossier_html() + appendix_html()
+    body = summary_html() + results_html() + method_html() + tracks_html() + leaderboard_html() + track_rank_html() + dossier_html() + appendix_html()
     page = head + body + '</main>' + JS
     out = os.path.join(BASE, 'report.html')
     open(out, 'w').write(page)

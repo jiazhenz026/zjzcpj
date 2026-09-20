@@ -18,5 +18,16 @@
   "<strong>Hygiene slips worth fixing before the deadline.</strong> Live keys or tokens are committed in SplitSense (NVIDIA), PennyWise (Presage), Panther Post (ElevenLabs, plus recipient and staff PII), Bad Faith (Supabase auth tokens) and GutGuide (ElevenLabs, in history); Night Shift committed a full .venv.",
   "<strong>Provenance gaps.</strong> Several repositories arrive as one or two bulk commits with no development history (RealityCheck, Fernvale GBA, PGH Transit, Noise2Node, Stockd's first 7k lines). Meal Plan Tracker landed eight feature commits before the 11:00 start and Heard! ported 3,867 lines from a prior build; both are reflected in the objective fresh-code score.",
   "<strong>Finance dominates the themes.</strong> A dozen projects are fintech (fraud desks, banking agents, budgeting, valuation, credit), followed by games, campus utilities and voice products. Presage and Solana drew almost nothing: one real Presage integration (Canopy Co.) and no Solana build was found."
+ ],
+ "actual_results": [
+  {
+   "track": "nemotron",
+   "announced": "2026-09-20 14:26 EDT (awards ceremony slide)",
+   "winners": [
+    "Heard!",
+    "SurrealEstate"
+   ],
+   "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) lists two winners: Heard! and SurrealEstate. SurrealEstate was not found by this analysis: no public GitHub repository under that name mentions SteelHacks, so it was either private, differently named, or submitted outside GitHub."
+  }
  ]
 }
