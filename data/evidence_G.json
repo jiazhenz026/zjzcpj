@@ -1,0 +1,96 @@
+[
+  {
+    "repo": "Ech118/BankManager",
+    "project_name": "BankManager",
+    "one_liner": "Enter a ticker; code pulls SEC filings and market data, computes every number, a panel of Claude analyst agents plus a red team interpret them, a verifier checks each claim, and a report says whether the stock beats the S&P 500 over three horizons.",
+    "problem": "LLM stock research invents numbers, uses stale data and produces unanchored confidence; the design forces code to compute, agents to cite fact_ids, point-in-time data and a deterministic verification gate.",
+    "target_user": "Retail investors and junior analysts who want a filings-grounded, auditable research memo instead of chatbot prose.",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "Xtract (LANXESS)",
+      "General / no track",
+      "Compound"
+    ],
+    "team_size_claimed": 3,
+    "live_url": null,
+    "stack": [
+      "Python 3.12",
+      "FastAPI + SSE",
+      "pydantic contracts + generated JSON schema",
+      "MCP SDK (in-memory/stdio)",
+      "Anthropic SDK (Claude Sonnet/Haiku, never run)",
+      "SEC EDGAR/XBRL companyfacts",
+      "Finnhub",
+      "Postgres (planned, not started)",
+      "Next.js 15 / React 19 / TypeScript",
+      "pytest + vitest + ruff + GitHub Actions"
+    ],
+    "core_loop": "web ticker form -> POST /api/analyze -> Coordinator runs financial||business -> valuation -> scenario -> red team -> calc.evaluate_scenarios -> synthesizer -> audit/retry -> report generator -> Verdict rendered as card + red-team + 14 sections, with per-agent SSE lanes.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "Only ticker ACME (fictional) works; any other ticker is rejected. orchestrator.api.run_analysis returns fixtures/mock/verdict.json; live MODE raises NotImplementedError in orchestrator.api, calc.api and mcp_server.backends. All of calc/metrics, calc/valuation, calc/scenarios are `raise NotImplementedError` stubs; audit.api returns a fixture; P2's real work sits unmerged on branch p2-calc against a superseded scaffold. LLM_MODE=mock returns canned JSON for all 7 agents; the live Anthropic path is written but per STATUS 'never run' (no key). The demo composition (tests/e2e/support/dev_app.py) wires fixture data over real MCP + FakeCalc + fake auditor and sleeps 1.5s per agent so lanes animate. Real but unreachable from the pipeline: P1's EDGAR client, XBRL normalization, splits/restatements, Finnhub snapshot, recorded fixtures for 12 real filers.",
+    "demo_risks": "Any ticker other than ACME errors on stage. The verdict is the same frozen fictional report every run. Two processes needed (uvicorn dev_app + next dev) and Python>=3.10 for the MCP SDK. No network dependency, so it will not break, but nothing it shows is real data or a real model call.",
+    "ui_experience": "Next.js pages with hand-written CSS (143 lines, light/dark tokens): ticker input, a text list of agent lanes with status/tokens, a 'Mock data' banner, verdict card with a 3-horizon score table, 'case against' block, colour-coded fact/estimate/assumption number badges with hover titles (no click-to-source), 14 collapsible-style sections with status chips, audit summary line, disclaimer. Clean and readable but plain; no charts, no animation beyond lanes appearing.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "All 20 commits fall inside the window (12:11 EDT Sep 19 to 23:34 EDT Sep 19); no .env or key committed (the commit titled '.env file' contains only fixture/test code); .env.example keys empty; pre-commit secret-scan script. archive/plan.txt (980 lines) is a planner doc written at 12:36 on day one. No template/starter reuse seen. Only two git authors on main (Elias, krish-batra) though README describes three partitions; P2 branch never merged.",
+    "ai_scaffolding_flags": "Heavy: 16 CLAUDE.md files (root plus one per package), 7 ADRs, per-partition README/STATUS/CLAUDE docs, 10 docs/requests inter-agent memos, a 980-line archive/plan.txt planner context, and the README ends with a literal 'PUT THIS IN CLAUDE CODE BEFORE STARTING' prompt. The repo is explicitly designed for three humans each driving a Claude instance in a partition. ~5.5k lines of markdown vs ~22k Python (much of it stubs, tests and generated schemas) plus 6MB recorded fixtures; commit messages read '[p3] Roadmap Step 5 (offline)'.",
+    "novelty_notes": "AI stock analyst is a well-worn hackathon category; the twists are real and well-argued: model never types a number (Claim model requires fact_id), point-in-time as_of on every query, bounded scenario weights/prior shift, deterministic audit with capped targeted retry, red team fed raw facts, prompt-injection e2e test with controls. Deep SEC/XBRL domain findings (NVDA fiscal-year labelling, BRK.B share-class trap, XOM CIK override) are genuinely insightful. But none of it is demonstrable on a real ticker today.",
+    "need_notes": "Plausible but generic; no user evidence or quotes. The design docs show real domain understanding of why chatbot research fails, which supports credibility more than any user validation.",
+    "wow_moment": "Pitch line 'the model is never allowed to type a number; code computes, the red team argues the other side, the verifier checks every claim' while agent lanes fill in parallel. Undercut immediately if a judge types NVDA and gets 'Mock mode only knows ACME'.",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 6,
+      "S2": 5,
+      "S3": 4,
+      "S4": 6,
+      "S5": 5,
+      "wow": 3
+    },
+    "score_rationale": "Common category with a strong, well-reasoned mechanism (S1 6). Need plausible, no evidence (S2 5). Xtract fit is conceptual only since no real documents flow through (S3 4). Architecture, contracts, tests and P1 data layer are substantial, but the core loop runs only on fixtures, canned agent output and stub calc/audit; one fictional ticker (S4 6). Plain but clean web UI (S5 5). Little a judge can touch live (wow 3).",
+    "judge_summary": "An ambitious, meticulously documented multi-agent equity-research architecture that, as submitted, only replays a fictional ACME fixture: no real ticker, no real model call, math and audit are stubs. Impressive engineering scaffold and SEC data insight; not a working product yet. Enormous Claude-Code scaffolding."
+  },
+  {
+    "repo": "SporkyPorks/LABHEEK",
+    "project_name": "Fernvale (LABHEEK)",
+    "one_liner": "A native Game Boy Advance ROM written in bare-metal C: drive into neon Pittsburgh, wake a hungover teammate with an energy drink, pass a bench-press timing minigame at the gym, and settle a score on the Cathedral of Learning rooftop to assemble your SteelHacks team.",
+    "problem": "None real; it is a playful retro game about recruiting a hackathon team, set in a pixel-art Pittsburgh.",
+    "target_user": "Judges and fellow hackers who want to play a short retro game; the team itself (characters are Jibb, Nick, Abheek).",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "No Wrapper",
+      "Cold Start",
+      "General / no track"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "C11 for ARM7TDMI (no libc, no libgba)",
+      "ARM/Thumb startup assembly + custom linker script",
+      "devkitARM/arm-none-eabi-gcc via build.py",
+      "Python/Pillow asset pipeline (13 tools)",
+      "GBA mode-4 double-buffered DMA renderer, OAM hardware sprites",
+      "mGBA for testing"
+    ],
+    "core_loop": "title_screen (panning skyline, animated car, PRESS START) -> main loop: read KEYINPUT -> move_player with 4-pixel collision bitmap -> camera clamp -> DMA3 row copy of 1208x648 world into hidden mode-4 page -> VBlank page flip; door tiles switch areas (red house, gym, rooftop) with hardware fades; state machines drive the Jibb fetch-quest dialogue, Nick's 3-rep timing minigame, and Abheek's scripted punch cutscene with flash and BG-scroll screen shake.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Nothing mocked; the shipped 2 MiB ROM (fernvale-bench-couple.gba) is a newer build than the one in the zip. Content is small and hardcoded: 14 dialogue pages, 3 interiors, one minigame, one cutscene. Select jumps straight to the rooftop cutscene from anywhere (debug-style shortcut). No music, no save. The zip's ROM was binary-patched by hand rather than rebuilt (JIBB_TEXTBOX_FIX.md); source contains the same fix.",
+    "demo_risks": "Low: runs offline in any GBA emulator. Docs state no physical-hardware test, so a real GBA/flash cart demo is unproven. Repo README is two lines, so a judge must be told the controls (Up at doors, A to interact, Select for the rooftop).",
+    "ui_experience": "Polished 240x160 pixel art: neon Pittsburgh skyline intro with a 4-frame orange car, hub animation and streaking road lights; a large scrolling mountain-village-to-city map; hand-authored house interior, gym and gothic Cathedral rooftop; 16x32 four-direction walk sprites for four characters plus a sleeping-head and knockdown pose; dialogue panels with bitmap font, pause/controls overlay, fade transitions, white impact flash and screen shake. Judges can pick up the controls immediately.",
+    "physical_or_sensory": "game",
+    "integrity_flags": "Git has only two commits at 02:19-02:20 EDT Sep 20 ('Initial commit', 'The base files for the game'): no development history, work happened elsewhere. main.c is a 'previous village implementation' and the world is named Fernvale, suggesting the engine predates the Pittsburgh reskin (timing unverifiable). File names ('fernvale-bench-couple.gba', 'fernvale-recognizable-nick.zip', 'fernvale__5_.gba') and the docs' voice ('supplied artwork', 'approved concept sheet', 'All 29 checks passed in mGBA', 'No ARM compiler was available when this was made, so the fix was applied to the existing ROM') strongly indicate an AI agent wrote the code, docs and a binary ROM patch. Interior/rooftop/panorama source art is 1536x1024, a typical AI image-generator size, then downsampled by scripts. No secrets; steelhacks-pittsburgh.png is the event's own graphic.",
+    "ai_scaffolding_flags": "No CLAUDE.md/AGENTS.md, but VALIDATION.txt, NICK_FIX.md and JIBB_TEXTBOX_FIX.md read as AI-agent handoff/validation reports; docs are small relative to code (~200 lines vs ~1,000 lines of hand code plus 2,600 lines of generated asset data).",
+    "novelty_notes": "Hackathon games are common, but a from-scratch GBA cartridge with no library (own startup.s, linker script, header checksum, DMA double-buffering, OAM sprites, hardware blend fades) is uncommon and explainable. The Pittsburgh/SteelHacks in-joke story (Penn State taunt, Cathy rooftop fight) is a nice local hook. Gameplay itself is a short scripted walk with one timing minigame.",
+    "need_notes": "No user need; entertainment/in-joke. Fits No Wrapper's 'hard thing you can explain plus a demo judges can try' rather than a problem statement.",
+    "wow_moment": "Judge presses Start on the neon-Pittsburgh drive-in, walks a pixel city into the Cathedral rooftop, and the screen flashes white and shakes as they deck a teammate for defecting to Penn State, all on a real GBA ROM with no engine or library.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 6,
+      "S2": 2,
+      "S3": 6,
+      "S4": 9,
+      "S5": 11,
+      "wow": 6
+    },
+    "score_rationale": "Retro game category with a real technical twist (bare-metal GBA) and a local in-joke story (S1 6). No problem or user (S2 2). Strong No Wrapper fit: no LLM in the ROM, explainable hard part, playable (S3 6). Complete loop shipped as a validated ROM with rough edges: tiny content, debug Select shortcut, no audio/save, no hardware test (S4 9). Attractive pixel art, animated intro, cutscene effects, interactive (S5 11). One clear neat moment (wow 6).",
+    "judge_summary": "A genuinely playable, good-looking Game Boy Advance ROM built from scratch in C with no library, telling a Pittsburgh-flavoured team-recruitment story with a gym minigame and a rooftop punch cutscene. Small in content and almost certainly AI-assisted end to end, but it works and judges can play it."
+  }
+]

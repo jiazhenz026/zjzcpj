@@ -1,0 +1,22 @@
+{
+ "snapshot_utc": "2026-09-20 12:30 UTC (08:30 EDT)",
+ "not_accessible": [
+  {
+   "repo": "RohanPejaver/steelhacks",
+   "note": "'Casefile': a security-alert investigation agent where Nemotron decides which question to ask next, writes SQL and decides when to stop. Returned 404 at snapshot time (made private or deleted)."
+  },
+  {
+   "repo": "BrianCode9/VOTR",
+   "note": "SteelHacks 2026 project using Anthropic tool use for extraction, Nemotron for routing and judging, ElevenLabs for transcription and briefings (Next.js 16, Drizzle, Neon). Returned 404 at snapshot time."
+  }
+ ],
+ "observations": [
+  "<strong>Beyond the Chatbot is the crowded room.</strong> Because the Nemotron track stacks with everything, roughly half the field enters it. The entries with real evidence that Nemotron does more than chat are Dryrun (deterministic capability search after extraction, live URL, tests), Nemotron as Verifier (43-case eval with a coverage-versus-recall curve), Trouvé (rules-plus-model scoring with honest evals) and Heard! (a written Nemotron eval).",
+  "<strong>Total score and Wow diverge, and that is the point.</strong> Games and hardware projects (Explain Yourself, Light Wizard Money Gang, Fernvale GBA, Pickleball On The Go, Mesh Mail, Canopy Co.) post middling totals but sit at the top of the predicted judge ranges. Dense finance and document tools (RealityCheck, BankManager, Panther Post) do the opposite.",
+  "<strong>Mock-by-default is the norm.</strong> Around a third of the scored projects ship a labelled fixture, stub or 'offline preview' path as the documented demo default. Live judges should ask 'is this live right now?' before crediting an AI step.",
+  "<strong>Agent scaffolding is everywhere.</strong> CLAUDE.md, AGENTS.md, handoff briefs and PRDs appear in well over a third of repositories; in RealityCheck, BankManager, OmniSight and HelloWord the planning documents outweigh the code. Completeness was scored on the wired code path, never on the plan.",
+  "<strong>Hygiene slips worth fixing before the deadline.</strong> Live keys or tokens are committed in SplitSense (NVIDIA), PennyWise (Presage), Panther Post (ElevenLabs, plus recipient and staff PII), Bad Faith (Supabase auth tokens) and GutGuide (ElevenLabs, in history); Night Shift committed a full .venv.",
+  "<strong>Provenance gaps.</strong> Several repositories arrive as one or two bulk commits with no development history (RealityCheck, Fernvale GBA, PGH Transit, Noise2Node, Stockd's first 7k lines). Meal Plan Tracker landed eight feature commits before the 11:00 start and Heard! ported 3,867 lines from a prior build; both are reflected in the objective fresh-code score.",
+  "<strong>Finance dominates the themes.</strong> A dozen projects are fintech (fraud desks, banking agents, budgeting, valuation, credit), followed by games, campus utilities and voice products. Presage and Solana drew almost nothing: one real Presage integration (Canopy Co.) and no Solana build was found."
+ ]
+}

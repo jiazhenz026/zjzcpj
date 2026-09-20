@@ -1,0 +1,479 @@
+[
+  {
+    "repo": "AdamLashnuk/WhereisMyMoney",
+    "project_name": "Where Is My Money",
+    "one_liner": "Budgeting app that phones you (Twilio call with ElevenLabs voice) when you blow a weekly category limit; expenses logged by voice, receipt photo or text and parsed by Nemotron.",
+    "problem": "Budget apps are silently ignored; a phone call is harder to ignore than a push notification.",
+    "target_user": "Students / young adults who overspend on food, transport, subscriptions.",
+    "claimed_tracks": [
+      "none stated in README (Nemotron, ElevenLabs, Twilio integrations imply Compound / Out Loud / Beyond the Chatbot)"
+    ],
+    "best_fit_tracks": [
+      "Compound",
+      "Out Loud!",
+      "Beyond the Chatbot"
+    ],
+    "team_size_claimed": 3,
+    "live_url": null,
+    "stack": [
+      "Expo SDK 57 / React Native",
+      "FastAPI",
+      "SQLite",
+      "Twilio outbound calls",
+      "ElevenLabs TTS (Victoria, ulaw_8000) + Scribe STT",
+      "NVIDIA Nemotron super-120b (text) + nano-omni vision (receipts)",
+      "Whisper fallback",
+      "ngrok"
+    ],
+    "core_loop": "Phone app records voice / snaps receipt / types text -> multipart POST /log-expense -> STT (ElevenLabs Scribe / Whisper / stub) or Nemotron vision receipt parse -> Nemotron or heuristic categorizer -> SQLite -> weekly per-category limit check -> Twilio call plays ElevenLabs TTS via public TwiML URL (Twimlets <Say> fallback); hourly scheduler places weekly summary call.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "main branch contains ONLY the backend (app/ and ai/ are .gitkeep); the integrated app+AI+backend lives on unmerged branch cursor/spoken-call-gather-b399 (last commit 03:34 Sep 20). WHISPER_STUB returns 'spent fourteen bucks on lunch'; receipt stub 'RECEIPT TOTAL 14.00 LUNCH'; heuristic keyword categorizer fallback; single hardcoded user 'demo'; backend LAN IP hardcoded in app config; backup mp3s in demo/.",
+    "demo_risks": "Twilio trial account (verified numbers only, trial notice); ElevenLabs call audio needs ngrok PUBLIC_BASE_URL; NVIDIA free-tier 503s; Expo Go must share Wi-Fi with laptop; 14 branches, main not integrated, so demo depends on running the right branch.",
+    "ui_experience": "Expo mobile app, 4 tabs (Log / History / Limits / Settings), editorial coral-yellow palette with serif display font, camera + mic capture with permission handling, loading spinners and error messages, hidden developer screen to place a test call. Decent but plain; no charts.",
+    "physical_or_sensory": "audio",
+    "integrity_flags": "Roughly half the commits are authored by 'Cursor Agent'; no secrets committed (.env.example only); README is 6 lines; main branch stale relative to feature branches.",
+    "ai_scaffolding_flags": "CONTRACT.md and PERSON_A_INTEGRATION.md handoff docs, Cursor-agent commits; docs modest relative to ~2.5K lines of code.",
+    "novelty_notes": "Budget tracker is a 0-3 category; the twist is the nagging phone call with a synthetic voice reading your overspend, plus receipt-vision parsing.",
+    "need_notes": "Plausible but generic; no user evidence or data offered.",
+    "wow_moment": "The judge's phone actually rings mid-demo and a voice says 'You went over your Food limit by 14 dollars.'",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 4,
+      "S2": 4,
+      "S3": 6,
+      "S4": 8,
+      "S5": 8,
+      "wow": 5
+    },
+    "score_rationale": "Common budget-app category with one memorable twist (phone call). Loop is wired on the integration branch with layered fallbacks (Nemotron->heuristic, ElevenLabs->Twimlets, Whisper->stub) but main holds only the backend, and the sponsor-tech path depends on Twilio trial + ngrok. No eval for Nemotron. Mobile UI is tidy, the live call is the only sensory hook.",
+    "judge_summary": "A budgeting app whose gimmick is that it calls your phone to scold you. Voice/receipt logging via Nemotron and ElevenLabs works with stubs behind everything; the live call is the demo moment but hinges on Twilio and ngrok cooperating."
+  },
+  {
+    "repo": "Adkhzhan/light",
+    "project_name": "splitsense",
+    "one_liner": "Splitwise-style group-expense dashboard where Nemotron parses natural-language expenses ('dinner was $84, Sam wasn't there') into who owes what, plus a Nemotron 'financial goal' cost planner.",
+    "problem": "Splitting shared expenses fairly (with exclusions) and planning group savings goals is tedious.",
+    "target_user": "Roommates / friend groups sharing costs.",
+    "claimed_tracks": [
+      "none stated (README is empty)"
+    ],
+    "best_fit_tracks": [
+      "Compound",
+      "Beyond the Chatbot"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "Flask",
+      "vanilla HTML/CSS/JS single-page app",
+      "localStorage",
+      "NVIDIA Nemotron via REST (requests)",
+      "pytest"
+    ],
+    "core_loop": "User types an expense -> POST /expense-analysis -> Nemotron JSON classification (heuristic keyword fallback) -> regex pulls the amount -> compute_split -> JSON -> SPA renders split, saves to localStorage, generates notifications/balances. Goal planner: POST /goal-analysis -> Nemotron cost breakdown JSON (no fallback, 503 on failure).",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Group is hardcoded DEFAULT_GROUP ['Alex','Sam','Priya','Leo']; example transaction history is generated client-side; balances, members, cash-flow chart and notifications derive from that seeded data; persistence is localStorage only; amount extraction takes the first number in the text.",
+    "demo_risks": "NVIDIA free-tier flakiness (goal planner has no fallback and returns 503); the hardcoded API key may be revoked; Google Fonts CDN dependency.",
+    "ui_experience": "Polished-looking finance dashboard (~120KB HTML/CSS/JS): sidebar with workspace switcher, overview with hand-drawn SVG cash-flow chart, expense review, balances, members, notification center, settings, dark mode, multiple modals. Attractive and clickable.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "A live NVIDIA API key (nvapi-...) is hardcoded as the default in nemotron_client.py despite an earlier commit 'Stop tracking secrets.toml'; README empty; __pycache__ committed. All 27 commits inside the window by 3 authors.",
+    "ai_scaffolding_flags": "none visible",
+    "novelty_notes": "Expense splitting is a very common hackathon category; NL exclusion parsing and the goal/trip cost planner are small twists.",
+    "need_notes": "Plausible, generic; no evidence beyond the Splitwise analogy.",
+    "wow_moment": "Typing 'Sam wasn't there' and watching Sam drop out of the split with a Nemotron-written summary.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 3,
+      "S2": 4,
+      "S3": 4,
+      "S4": 8,
+      "S5": 8,
+      "wow": 3
+    },
+    "score_rationale": "Splitwise clone with an LLM parser: low novelty, generic need. Nemotron does non-chat structured extraction with a rules fallback but no eval; Compound fit is partial. Core loop works end to end on fixture data with localStorage persistence. The dashboard is genuinely attractive with dark mode and a chart, which carries the demo.",
+    "judge_summary": "A good-looking Splitwise-style dashboard where you type an expense in plain English and Nemotron decides who splits it. Works, looks nice, but it is a familiar idea and the API key is committed in the repo."
+  },
+  {
+    "repo": "AllenTimco/PennyWise",
+    "project_name": "PennyWise",
+    "one_liner": "Multi-page personal-finance site (expense tracker, goals, five calculators, lessons) on a Spring Boot API, with a 'Before You Buy' pause that opens your webcam as a Presage placeholder.",
+    "problem": "Young people lack financial literacy and a simple place to track spending and goals.",
+    "target_user": "Students / first-time budgeters.",
+    "claimed_tracks": [
+      "none stated (presage/ folder implies MLH Presage; finance implies Compound)"
+    ],
+    "best_fit_tracks": [
+      "Compound",
+      "Presage"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "static HTML/CSS/JS (6 pages)",
+      "Spring Boot 4 / Java 25 + JPA",
+      "PostgreSQL (switched from H2 at 01:27 Sep 20)",
+      "Node @smartspectra/node-sdk script"
+    ],
+    "core_loop": "HTML forms -> fetch http://localhost:8080/api (transactions, goals, financial-profile, analytics/monthly, calculators) -> Spring controllers/services -> JPA -> Postgres -> lists re-rendered. 'Before You Buy': form -> getUserMedia shows webcam -> client-side arithmetic shows money left after purchase.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "Presage SmartSpectra is a standalone node script that logs metrics to the console and is not connected to the site; the browser only displays the camera feed; purchase impact is plain subtraction; BankController is a 'backend connected' status stub (PNC API never touched); learn/about pages are static copy; no charts despite README plans.",
+    "demo_risks": "application.properties now requires PENNYWISE_DB_URL/USERNAME/PASSWORD env vars for Postgres (last-minute switch from H2) so the API will not boot without a DB; frontend hardcodes localhost:8080; camera permission prompt; Presage never produces a vital sign on screen.",
+    "ui_experience": "Six static pages with ~2K lines of hand-written CSS, hero landing, form grids, cards and lists; no charts, no animation. Basic but tidy.",
+    "physical_or_sensory": "none (webcam preview only)",
+    "integrity_flags": "Presage API key committed in presage/.env; .DS_Store files; 'I let VSCode make most of the starter files'; auto-generated 'appmod/java-upgrade' branches; a 12-phase TODO.md with almost every box unchecked.",
+    "ai_scaffolding_flags": "TODO.md roadmap and springBootExplanation; light.",
+    "novelty_notes": "Expense tracker + compound-interest calculators is the canonical 0-3 idea; the 'pause and breathe before buying' concept could have been a twist but is not implemented.",
+    "need_notes": "Financial literacy is a real gap but stated generically with no evidence.",
+    "wow_moment": "None; the webcam turning on during 'Before You Buy' is the closest thing but nothing is measured.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 1,
+      "S2": 3,
+      "S3": 3,
+      "S4": 5,
+      "S5": 5,
+      "wow": 1
+    },
+    "score_rationale": "Generic expense tracker/calculator site. Transactions, goals and calculators are wired to a Spring API, but the Presage/vitals hook is a console script disconnected from the UI, the bank API is a stub, and a last-minute Postgres switch makes boot fragile. Plain multi-page UI, no charts, no interactive hook.",
+    "judge_summary": "A student budgeting website with calculators and a Spring Boot backend. The 'Before You Buy' camera pause sounds interesting but only shows your webcam; Presage vitals never reach the page. Standard idea, partially wired."
+  },
+  {
+    "repo": "Connor-W-Cahill/callback",
+    "project_name": "Trouvé",
+    "one_liner": "Vendor payment-change (business-email-compromise) fraud interceptor: reads inbound AP email, scores risk with Nemotron + rules, holds the payment, places an ElevenLabs-voiced callback to the on-file number, and has Nemotron judge what the vendor said.",
+    "problem": "In BEC fraud an attacker emails accounts payable posing as a known vendor with 'new bank details'; callback verification prevents it but is the first thing skipped when AP is busy.",
+    "target_user": "Accounts-payable clerks at small businesses (persona: AP at a 40-person HVAC contractor).",
+    "claimed_tracks": [
+      "Compound",
+      "Beyond the Chatbot",
+      "Out Loud!",
+      "Seed Round"
+    ],
+    "best_fit_tracks": [
+      "Compound",
+      "Beyond the Chatbot",
+      "Out Loud!",
+      "Seed Round"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "FastAPI + SQLite",
+      "vanilla JS/CSS UI with dark/light theme",
+      "httpx",
+      "NVIDIA Nemotron nano-omni-30b-reasoning + super-120b (json_schema constrained)",
+      "ElevenLabs TTS (eleven_turbo_v2_5) + STT (scribe_v1)",
+      "Twilio (optional real calls, signed webhooks)",
+      "Vercel serverless",
+      "GitHub Actions CI",
+      "unittest + node --test",
+      "eval harness (79 emails, 20 transcripts)"
+    ],
+    "core_loop": "Seeded or real inbox email -> Nemotron extraction (rules fallback, rules always merged) -> vendor resolve (fuzzy, LLM lead) -> 10 deterministic risk features -> Nemotron score + rationale (rules fallback) -> policy hold on any payment-detail change -> clerk clicks 'Place verification call' -> ElevenLabs TTS plays agent script -> judge speaks reply into mic -> ElevenLabs STT -> Nemotron judge (rules safety net) -> hold blocked/approved/escalated, vendor master + audit log updated; telemetry tab shows every model call.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Inbox is 4 seeded synthetic emails (plus an optional real demo mailbox); vendor phones are 555 placeholders; in demo mode the 'call' is a transcript assembled from the TTS agent line plus the spoken/typed/scripted vendor reply rather than a dialed phone call (real Twilio path exists but is off by default); every external call has a deterministic offline fallback, and the eval reports the fallback rate.",
+    "demo_risks": "NVIDIA free tier 503s/timeouts (documented, mitigated by model chain, 12-40s timeouts, cooldowns); ElevenLabs free-tier character credits; browser mic permission on stage; Vercel /tmp state is per-instance; Reset takes ~30s with live Nemotron.",
+    "ui_experience": "Purpose-built AP 'verification desk': queue with Open/Settled/Extraneous filters, detail pane showing the email, fired signals and rationale, call panel with audio playback and record button, editable Vendors tab, 'Under the hood' telemetry tab listing each Nemotron/ElevenLabs request. Dark/light theme, ARIA roles, skip link. Attractive and coherent.",
+    "physical_or_sensory": "audio",
+    "integrity_flags": "None found: no secrets, all data synthetic, first commit 11:21 Sep 19 and 29 commits by one author within the window, CI and tests present. Prose quality suggests heavy AI assistance in writing but no agent scaffolding files.",
+    "ai_scaffolding_flags": "DEMO.md runbook and a long README; no CLAUDE.md/AGENTS.md. Docs proportionate to ~5K lines of code.",
+    "novelty_notes": "BEC callback automation is an uncommon hackathon problem; the design insight that holding is policy while the score only sets urgency (score catches 0/8 compromised-mailbox cases yet none escape) is a genuinely thought-through mechanism.",
+    "need_notes": "BEC is a well-documented multi-billion-dollar fraud class; persona and cost framing (false positive = 2-minute call) show domain understanding; still no external user quotes.",
+    "wow_moment": "The presenter hands a judge the mic, the judge says 'no, we never sent that', and the payment flips to BLOCKED on the judge's own voice with the transcript and verdict on screen.",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 8,
+      "S2": 8,
+      "S3": 8,
+      "S4": 13,
+      "S5": 11,
+      "wow": 7
+    },
+    "score_rationale": "Uncommon, well-understood problem with a real mechanism. Nails Compound (synthetic payments fraud) and Beyond the Chatbot (three non-chat Nemotron jobs with evals, documented failures and fallback accounting) and stacks Out Loud. Pipeline, API, UI, tests, CI and evals all run offline. Polished UI plus a live mic moment; not physical or 3D.",
+    "judge_summary": "An AP fraud desk that catches 'our bank details changed' emails, holds the payment, and phones the vendor with an ElevenLabs voice; a judge can answer into the mic and watch Nemotron block it. Honest evals, clean fallbacks, memorable demo."
+  },
+  {
+    "repo": "HajinHyukson/RealityCheck",
+    "project_name": "RealityCheck",
+    "one_liner": "Nemotron builds an assumption register from a private-credit loan's origination documents, attributes each new report to those assumptions and covenant duties with verified quotes, and asks 'would we write this loan package today?' to detect economic drift.",
+    "problem": "Loan terms are approved on assumptions that silently stop matching reality; analysts do not systematically re-check the original thesis as reports arrive.",
+    "target_user": "Private-credit analysts / lenders monitoring covenant packages.",
+    "claimed_tracks": [
+      "Compound (synthetic FluxRail demo)",
+      "Beyond the Chatbot (Nemotron)",
+      "Xtract (public-source benchmark)"
+    ],
+    "best_fit_tracks": [
+      "Xtract (LANXESS)",
+      "Beyond the Chatbot",
+      "Compound"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "Python 3 stdlib http.server + SQLite",
+      "single-file HTML/JS workspaces (b01.html 132KB)",
+      "NVIDIA Nemotron super-120b (reasoning) via urllib, 420s timeout",
+      "nemotron-parse-2.0 for PDF/image OCR",
+      "unittest",
+      "Playwright verify scripts",
+      "30-company synthetic portfolio",
+      "2 real SEC-filing benchmark cases"
+    ],
+    "core_loop": "Load agreement/memo/model -> Nemotron generates assumption register with quoted sources (or recorded seed) -> introduce a dated report -> Nemotron attributes it to assumptions and covenant duties, quotes validated against source, unverifiable findings withheld -> candidate package drafted twice (origination-only vs with reports) and diffed for drift -> analyst reviews in an evidence-network workspace, adopts or rejects amendments, history preserved.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Demo runs on recorded Nemotron responses seeded from JSON (explicitly labelled 'recorded replay, not fresh inference'); amendments are scripted scenario decisions; the 30 borrower packages are authored; Crocs scenario uses a real company name with invented financials; dashboard-studio is a static design prototype with five alternative dashboards where 'live inference remains disconnected'; benchmark is one run per checkpoint on 2 real cases.",
+    "demo_risks": "Live Nemotron reasoning calls take 5-20s per packet (up to 420s timeout) with NVIDIA 503s; a live 'Introduce report' on stage is slow, so the team will likely replay; dense analyst UI is hard to absorb in 3 minutes; benchmark results are self-described as mixed and not showing an advantage.",
+    "ui_experience": "Custom single-file workspaces: interactive evidence-network graph (sources / assumptions / provisions) with hover summaries, inspector drawer, zoom, timeline replay of package versions, detection cards with quoted evidence and reviewer notes, upload flow with animations, benchmark page. Plus a gallery of five styled dashboard concepts with screenshots. Dense and professional rather than flashy.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "Entire 862-file repo arrives in two commits at 05:21 and 05:49 on Sep 20, so the build timeline cannot be verified from history; ~460KB of top-level strategy/plan/status markdown versus ~5K lines of Python; team-member placeholder in README is unfilled; README explicitly discloses Claude Code use; references competitor Lumonic suggesting prior market research; real SEC filings included (public, allowed).",
+    "ai_scaffolding_flags": "Heavy: RealityCheck-Current-Status.md (85KB 'progress and handoff record'), dashboard-studio/PLAN.md, verify-*.cjs Playwright checks with committed screenshots, verification.json; docs far larger than code.",
+    "novelty_notes": "Covenant/assumption drift monitoring with a 'redraft the package and diff it' mechanism is something judges are unlikely to have seen; strongest idea in the batch on paper.",
+    "need_notes": "Specific user and credible domain framing (assumption vs duty vs default separation), but evidence is synthetic and the real-loan benchmark is self-reported as not beating direct review.",
+    "wow_moment": "The model derives a $33.6M covenant cash figure from three stated amounts, flags the floor breach, and refuses to let good sales news offset it, with the quote highlighted in the source.",
+    "wow_type": "NEW-ARENA",
+    "scores": {
+      "S1": 9,
+      "S2": 7,
+      "S3": 8,
+      "S4": 11,
+      "S5": 7,
+      "wow": 5
+    },
+    "score_rationale": "Genuinely new problem framing and mechanism. Strong Xtract fit (documents to traceable signals with a usable analyst output) and Nemotron with a real benchmark including documented failures. Works end to end on recorded replays with tests; live path is slow. UI is a dense interactive graph, no sensory hook. Provenance concerns: two-commit dump, docs dwarf code.",
+    "judge_summary": "A private-credit analyst tool where Nemotron keeps a loan's original assumptions attached and flags when new reports contradict them, with quotes verified against sources. Deep, honest about a mixed benchmark, but dense to demo and the repo was pushed in two commits at 5am."
+  },
+  {
+    "repo": "IvanC0821/SteelHacks2026",
+    "project_name": "Verity",
+    "one_liner": "Rubric-based practice feedback on handwritten math homework PDFs: students upload, map pages to questions and get per-criterion coaching prompts; staff build rubrics, grade and release, all with an unconfigured model slot.",
+    "problem": "Students get no feedback before a final hand-in and TAs are overloaded grading.",
+    "target_user": "Students and TAs in university math courses (fictional 21-241 Linear Algebra section).",
+    "claimed_tracks": [
+      "none stated"
+    ],
+    "best_fit_tracks": [
+      "General / no track"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "FastAPI + SQLite + pypdf",
+      "React 19 + TypeScript + Vite",
+      "pdf.js",
+      "react-router",
+      "Vitest + Testing Library",
+      "Playwright e2e scripts",
+      "ruff",
+      "OpenAI Codex (backend) and Claude Code (frontend) per README"
+    ],
+    "core_loop": "Student uploads PDF -> assigns pages to questions -> assessment job -> provider.assess(context) -> per-criterion decisions with evidence ids -> student sees estimated score and coaching prompts anchored to pages -> revise -> hand in -> TA reviews criterion by criterion -> grade release -> analytics. The default provider is UnconfiguredProvider (raises); the dev fixture provider picks met/not-met from a SHA-256 hash roll (digest[0] % 10).",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "No model exists anywhere in the repo: assessment outcomes are pseudo-random fixtures and the student UI literally says 'Scores and flags are simulated... No model has checked this paper'; coaching text is a hardcoded REQUIREMENT_HINTS dict keyed on rubric strings; homework PDFs are hand-authored fictional fixtures; no OCR (handwriting is never read); loopback-only demo session switcher.",
+    "demo_risks": "The central promise (AI feedback) is absent; any judge question about what the model saw exposes it. Needs backend on :8026, Vite dev server on localhost:5173 (CORS-locked) and a seeded .dev/session.json.",
+    "ui_experience": "Large, polished React app (~20K lines incl. tests): design tokens, IBM Plex fonts, PDF viewer with thumbnails and marks, keyboard-driven grading workspace, rubric studio with autosave and versions, student stepper with upload zone and feedback, course overview/reports/roster, toasts, drawers, dialogs, responsive to phone width.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "README/SPEC describe an 'authorized rebuild' of a prior HackCMU project also called Verity (claims no old code reused, but the idea and workflow predate the event); VERIFICATION.md notes a 'current access blocker' on the publication target; built with Codex + Claude Code (disclosed); no secrets.",
+    "ai_scaffolding_flags": "frontend/design/tasks/01-07 per-agent task specs, BRIEF.md, DESIGN.md, docs/FRONTEND.md 'Claude's handoff', VERIFICATION.md, MODEL.md contract; explicit multi-agent orchestration with ownership rules. Docs moderate relative to the large codebase.",
+    "novelty_notes": "AI homework grader is a common category; the attempt-versioning, page-mapping and human-review-of-every-final workflow is a modest twist.",
+    "need_notes": "Real pain (feedback latency, TA load) but stated generically; fictional data only.",
+    "wow_moment": "Flipping through a handwritten PDF while criterion cards light up; but the verdicts are random, so nothing to say 'wow' about.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 4,
+      "S2": 5,
+      "S3": 1,
+      "S4": 7,
+      "S5": 8,
+      "wow": 2
+    },
+    "score_rationale": "Familiar AI-grading idea whose AI does not exist: outcomes are hash-rolled fixtures and the UI admits it. No sponsor track applies. The surrounding workflow is thorough and tested (33 API tests, e2e scripts) so parts are solid, but the core loop is mocked. Very polished UI with a PDF viewer earns the demo points. Rebuild of a prior HackCMU concept.",
+    "judge_summary": "A beautifully built grading and feedback web app for handwritten math homework with rubrics, revisions and TA review, but no model behind it: every 'assessment' is simulated. Great scaffolding around an empty core, and a re-do of a previous hackathon idea."
+  },
+  {
+    "repo": "JackDowell-08/SteelHacksXIII_Project",
+    "project_name": "SteelHacksXIII_Project (Nemotron financial analyst agent)",
+    "one_liner": "A LangChain ReAct agent (Nemotron super-120b + Tavily search) meant to summarize analyst news and prices for a stock; the Flask web page currently just uppercases whatever you type.",
+    "problem": "Individuals want a digest of what analysts are saying about a stock/sector before investing.",
+    "target_user": "Retail investors.",
+    "claimed_tracks": [
+      "none stated (Nemotron use implied)"
+    ],
+    "best_fit_tracks": [
+      "General / no track",
+      "Beyond the Chatbot (weak)"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "Flask",
+      "LangChain create_agent + ChatOpenAI pointed at NVIDIA integrate API (nemotron-3-super-120b)",
+      "Tavily search tool",
+      "IPython Markdown in client.py"
+    ],
+    "core_loop": "Intended: user topic -> agent searches Tavily (finance/news) -> verifies with 3 sources -> two-paragraph stock summary. Actual: index.html textarea -> POST /submit -> Flask returns text.upper(); the agent is only invoked from client.py's __main__ with a hardcoded 'Tesla (TSLA)' prompt and is not connected to the web route.",
+    "wired_end_to_end": false,
+    "mocked_or_hardcoded": "/submit is a placeholder that uppercases input; agent output never reaches the UI; prompt hardcoded in client.py; no error handling.",
+    "demo_risks": "Needs NVIDIA_API_KEY and TAVILY_API_KEY; agent untested end to end; only 2 commits, the substantive one at 02:41 Sep 20; a stock summary is a chat-style use of Nemotron.",
+    "ui_experience": "Unstyled textarea, one button and a response paragraph.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "requirements.txt is a copied NVIDIA/LangChain course environment (data-designer, nemo-microservices, unsloth, ragas, jupyterlab) unrelated to the code; README is one sentence; __pycache__ committed.",
+    "ai_scaffolding_flags": "none",
+    "novelty_notes": "Web-search stock summarizer is a generic LLM agent tutorial pattern.",
+    "need_notes": "Vague; no user or evidence.",
+    "wow_moment": "None.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 2,
+      "S2": 3,
+      "S3": 2,
+      "S4": 2,
+      "S5": 1,
+      "wow": 0
+    },
+    "score_rationale": "Skeleton: a tutorial-style Nemotron+Tavily agent exists in a file but the web app returns uppercase text and nothing is wired. Generic idea, unstated need, sponsor tech superficial and chat-shaped. Bare unstyled page.",
+    "judge_summary": "An unfinished stock-news summarizer: a LangChain agent file using Nemotron and Tavily, plus a web page that only capitalizes your input. Not connected, not demoable."
+  },
+  {
+    "repo": "LeyuDing/SteelHacks2026",
+    "project_name": "SteelHack2026 (Light Wizard Money Gang survivor game)",
+    "one_liner": "Godot 4 top-down wizard survivors game where levelling up lets you pick up a 'magical brick phone' and talk to Doyle, a Nemotron-powered spell handler with moods, who quips back and generates three new spells as JSON you slot into your loadout.",
+    "problem": "None stated; entertainment (README is 'Hello').",
+    "target_user": "Players / hackathon judges.",
+    "claimed_tracks": [
+      "none stated"
+    ],
+    "best_fit_tracks": [
+      "Beyond the Chatbot",
+      "General / no track"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "Godot 4.7 / GDScript",
+      "Jolt physics",
+      "GPU particles + enemy shader",
+      "HTTPRequest to an NVIDIA Brev-hosted nemotron-3.5-lightning endpoint (plain HTTP, no auth)",
+      "pixel-art sprites (some from pngwing)"
+    ],
+    "core_loop": "WASD movement, keys 1-4 cast AoE spells (rectangle/circle, fire/ice/lightning, particles), enemies spawn and scale, exp drops fill a bar -> 'Press F' blinks -> game pauses, 4-screen menu -> player types a request -> POST chat completion with system persona + current spells -> parse quip / ---EMOTION--- / three JSON spells (schema-validated, 3 retries) -> pick a spell, pick a slot -> resume; HP 0 -> 'FIRED FOR LOSS OF SWAG' fade.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "generate_default() returns {} so if all three API attempts fail the menu indexes spells[0] and crashes (no fallback spells); API URL is a hardcoded Brev instance that may be down; two starter spells hardcoded; placeholder sprite files (pngwing.com.png); test_api_call scene.",
+    "demo_risks": "Brev endpoint availability and latency (60s timeout, max_tokens 20000, game sits paused on 'Waiting...'); no offline fallback; Windows D3D12 renderer setting; last balance commits at 05:39 Sep 20.",
+    "ui_experience": "Real-time 2D game: wizard sprites with random colour variants, particle-based spell effects, shader-tinted enemies, health/mana/exp bars with custom textures, blinking level-up prompt, phone menu with Doyle emotion sprites (happy/sad/mad/regular), fade-to-black game-over screen. Judges can pick up the keyboard and play.",
+    "physical_or_sensory": "game",
+    "integrity_flags": "README is 'Hello'; endpoint is an unauthenticated public URL (no secrets); some assets pulled from pngwing; 40+ commits by 4 authors all within the window.",
+    "ai_scaffolding_flags": "Code comments like '(see the task: ...)' hint at agent-written scripts; no CLAUDE.md or handoff docs.",
+    "novelty_notes": "Survivor-likes are common, but an LLM quartermaster with a personality that reacts to how you treat it and hands you bespoke spells is a distinctive twist.",
+    "need_notes": "No need argued; it is a game.",
+    "wow_moment": "Typing 'give me something that sets the laundromat on fire' and having Doyle sass you in gang-slang-Q-branch voice before offering three custom spells that immediately work in the arena.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 6,
+      "S2": 2,
+      "S3": 4,
+      "S4": 9,
+      "S5": 10,
+      "wow": 6
+    },
+    "score_rationale": "Common genre with a fun LLM-generated-loadout twist. No stated need. Nemotron does structured generation with validation (non-chat-ish) but no eval and the game crashes if the hosted endpoint fails. Playable loop is wired with particles, bars and a handler character; judges can play it. One clear 'neat' moment when Doyle answers.",
+    "judge_summary": "A playable Godot wizard-survivor game where levelling up means texting a moody Nemotron handler named Doyle who invents three new spells for you on the spot. Fun and touchable; lives or dies on a hosted endpoint staying up."
+  },
+  {
+    "repo": "MichaelYeh507/OmniSight",
+    "project_name": "OmniSight",
+    "one_liner": "See through the wall: an iPhone LiDAR walkthrough becomes a timestamped 3D point map replayed in WebXR AR on a Samsung phone aligned to the real wall, with person 'ghosts' and staleness fading, plus an iPad/laptop commander view.",
+    "problem": "Fire and search-and-rescue teams outside a room cannot see what the first responder inside has already seen.",
+    "target_user": "Incident commanders in fire / SAR (defense mentioned only as market).",
+    "claimed_tracks": [
+      "No Wrapper (default path)",
+      "Seed Round",
+      "bonus tracks considered: Presage, DigitalOcean/.Tech, Tiger Data",
+      "Beyond the Chatbot explicitly rejected (no LLM)"
+    ],
+    "best_fit_tracks": [
+      "No Wrapper",
+      "Seed Round"
+    ],
+    "team_size_claimed": 3,
+    "live_url": "https://michaelyeh507.github.io/OmniSight/",
+    "stack": [
+      "Python pipeline (numpy/scipy/opencv/open3d) over Stray Scanner LiDAR recordings",
+      "Ultralytics YOLO-seg person masks",
+      "custom binary chunk scene format with validator",
+      "Vite + three.js + WebXR (ARCore) viewer with GPU staleness/reveal shaders",
+      "GitHub Actions -> GitHub Pages",
+      "node tests",
+      "QR generator",
+      "Samsung S21 Ultra + iPhone 14 Pro + iPad"
+    ],
+    "core_loop": "iPhone records RGB+depth+poses -> extract/normalize/fuse -> export scene folder (time chunks, alignment, people.bin/json) -> viewer fetches and validates -> replay clock reveals points with per-point age fade -> AR mode anchors the map to the real wall via jig + saved nudges, gaze-following portal, person ghosts held/faded with 'last seen N s' -> commander mode with cutaway, minimap, responder trails.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "The three scenes on main (box, fake, two) are all synthetic generator output; real iPhone recordings (room012/room013, 'iPhone 14 Pro, Stray Scanner', 200-335k points, 51-63s processing) exist only on branch feat/people-run-and-spark-renderer and are not deployed; real-room alignment accuracy is explicitly 'not measured, do not claim'; record-and-replay, no live streaming; wall_z/floor_y constants.",
+    "demo_risks": "WebXR needs HTTPS + ARCore on the specific Samsung; alignment jig must be set up at the table; deployed main lacks real scenes; 6-30MB scene downloads on venue Wi-Fi; Pages source must be configured; first Enter-AR tap sometimes fails.",
+    "ui_experience": "AR view on the phone with a minimal tracked-caps HUD: heading tape, minimap with keys, points/fps readout, view wheel, x-ray/color/blueprint looks, portal iris through the wall, orange person ghosts with labels; commander 3D view with cutaway and trails; QR on the table opens it on judges' own phones. Visually striking when tracking holds.",
+    "physical_or_sensory": "AR",
+    "integrity_flags": "CLAUDE.md with agent conventions and 'Agent handoff' commits; many commits authored 'unknown'; a 40KB master design doc landed 19 minutes after hacking start (may have been drafted beforehand); otherwise all work inside the window; no LLM anywhere (honest to No Wrapper).",
+    "ai_scaffolding_flags": "Heavy: CLAUDE.md, viewer/PLAN.md (50KB status/gates), NUMBERS.md, SAMSUNG.md, docs/PHASE1_C/PHASE2_C, CONTRACT.md; ~117KB docs vs ~3.8K lines of code plus tests, so docs are large but code is substantial.",
+    "novelty_notes": "Through-wall AR replay with staleness-aged surfaces for first responders is an uncommon problem and a real mechanism; judges are unlikely to have seen it.",
+    "need_notes": "Urgent, credible domain (fire/SAR) but no user evidence beyond framing; the honest 'not measured' list is a plus.",
+    "wow_moment": "Holding the Samsung up to a real wall and seeing the room behind it fill in as the recording plays, with a glowing 'person - last seen 4 s ago' ghost moving through it.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 9,
+      "S2": 6,
+      "S3": 7,
+      "S4": 10,
+      "S5": 13,
+      "wow": 8
+    },
+    "score_rationale": "Uncommon problem with a real geometric pipeline and a hardware AR demo. Strong No Wrapper fit (hard, explainable, no LLM, judges can try it) and plausible Seed Round. Pipeline, format, viewer and deploy are wired with tests, but main ships only synthetic scenes and alignment accuracy is unmeasured. AR through a wall is the most visually striking thing in the batch.",
+    "judge_summary": "Point a Samsung at a wall and see a LiDAR-scanned room behind it, complete with ghosted people and surfaces that fade as they age. Real pipeline, real AR, deployed to GitHub Pages; the real-room recordings are on a branch and alignment accuracy is unproven."
+  },
+  {
+    "repo": "NithyaJayakaran/Noise2Node",
+    "project_name": "Noise2Node (edge_perception_ekf / edge_perception_fusion)",
+    "one_liner": "ROS 2 C++ edge-perception stack: a 15-state IMU + point-cloud EKF odometry node with a synthetic sensor publisher, plus a lifecycle fusion node with CUDA voxel/radius filtering feeding an ONNX Runtime/TensorRT detector; no README, one commit labelled 'boilerplate'.",
+    "problem": "Unstated; implied: robust robot state estimation and detection from noisy IMU and LiDAR on edge GPUs.",
+    "target_user": "Robotics / autonomous-vehicle developers.",
+    "claimed_tracks": [
+      "none stated"
+    ],
+    "best_fit_tracks": [
+      "No Wrapper (weak)",
+      "General / no track"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "ROS 2 rclcpp + rclcpp_lifecycle",
+      "Eigen",
+      "CUDA kernels (voxel accumulate/emit, tiled radius filter, compact, pack tensor)",
+      "ONNX Runtime with CUDA/TensorRT providers (pimpl, optional)",
+      "nlohmann_json",
+      "rclpy mock publisher with numpy"
+    ],
+    "core_loop": "mock_sensor_pub.py publishes synthetic IMU at 100 Hz and a noisy PointCloud2 blob at 10 Hz on a Lissajous trajectory -> perception_ekf_node predicts on IMU, updates on cloud centroid -> nav_msgs/Odometry with covariances. Second package: cloud -> CUDA filter -> tensor -> ONNX detector at /opt/models/edge_perception/detector.onnx -> detections + EKF.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "Only data source is the synthetic publisher; detector.onnx path is a placeholder that does not exist; class labels (pedestrian/cyclist/car/truck/sign) are autonomous-driving boilerplate; no launch files, no rviz config, no tests, no README; CUDA and ORT are optional build flags with CPU fallback.",
+    "demo_risks": "Requires a ROS 2 + Eigen (+ CUDA + ONNX Runtime) build; nothing visual to show; single commit at 08:05 Sep 20 titled 'full boilerplate draft1', three hours before submission; unverified that it compiles.",
+    "ui_experience": "None; ROS topics and log lines only.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "One commit, self-described as boilerplate; the ~3.8K lines of heavily doc-commented C++/CUDA (Joseph-form updates, lifecycle transitions, pimpl ORT wrapper) show no hackathon iteration and read as generated in one pass; no README, no team info.",
+    "ai_scaffolding_flags": "none (no docs at all)",
+    "novelty_notes": "IMU+LiDAR EKF fusion with a detector is textbook robotics middleware.",
+    "need_notes": "No problem or user articulated.",
+    "wow_moment": "None.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 3,
+      "S2": 2,
+      "S3": 2,
+      "S4": 4,
+      "S5": 0,
+      "wow": 1
+    },
+    "score_rationale": "Textbook sensor-fusion boilerplate with no stated problem, no README, no UI and no demo a judge could try. Classical ML so No Wrapper is technically open, but the track wants a working demo. The EKF plus mock publisher is a coherent loop on paper; the detector path points at a nonexistent model. Single last-minute commit.",
+    "judge_summary": "A ROS 2 Kalman-filter and CUDA point-cloud pipeline dumped in one commit called 'boilerplate' three hours before the deadline, with no README, no demo and no visuals. Competent-looking code, nothing to judge."
+  }
+]

@@ -1,0 +1,647 @@
+{
+ "RecursiveFunctions_HelloWord": {
+  "S1": 5,
+  "S2": 5,
+  "S3": 6,
+  "S4": 12,
+  "S5": 8,
+  "wow": 4,
+  "tracks": [
+   "nemotron",
+   "mlh"
+  ],
+  "note": "Reviewer scores kept. AI_MOCK=1 is the documented default and the referenced benchmark script is absent; the live Nemotron path with DigitalOcean failover is real. Planning documents (~135 KB) are unusually large for a weekend build."
+ },
+ "Ryan-M-Smith_explain-yourself": {
+  "S1": 7,
+  "S2": 3,
+  "S3": 7,
+  "S4": 11,
+  "S5": 13,
+  "wow": 8,
+  "tracks": [
+   "outloud",
+   "nemotron"
+  ],
+  "note": "Kept. Voice in, Nemotron judges the actual audio, ElevenLabs answers in character; no mocks, but also no fallback if either API stalls on stage."
+ },
+ "Tim4769_SteelHacks-XIII": {
+  "S1": 8,
+  "S2": 6,
+  "S3": 7,
+  "S4": 11,
+  "S5": 8,
+  "wow": 6,
+  "tracks": [
+   "outloud",
+   "nemotron"
+  ],
+  "name": "Interrogation Monitor",
+  "note": "Kept. Mock STT/analysis is the documented demo default; live ElevenLabs and Nemotron adapters exist. New arena (custodial-interrogation safeguards) is the strength; the visual is a dark workspace, not a spectacle."
+ },
+ "TouhouEngie_steelhax": {
+  "S1": 2,
+  "S2": 2,
+  "S3": 1,
+  "S4": 2,
+  "S5": 1,
+  "wow": 0,
+  "tracks": [
+   "general"
+  ],
+  "name": "Speedometer (Android)",
+  "note": "Skeleton: template activity plus one untested sensor class not wired into the app."
+ },
+ "Zaku-Seven_SH26": {
+  "S1": 7,
+  "S2": 2,
+  "S3": 7,
+  "S4": 10,
+  "S5": 11,
+  "wow": 7,
+  "tracks": [
+   "nowrapper",
+   "general"
+  ],
+  "name": "Fernvale (SteelHacks GBA)",
+  "note": "Merged with SporkyPorks/LABHEEK, which carries a newer ROM build of the same game (rooftop cutscene, gym minigame). Novelty trimmed from 8 to 7: the medium (bare-metal GBA C) is the surprise, the game itself is a short walking RPG. Git holds only 2+2 commits with no development history, so timing cannot be verified."
+ },
+ "alanpham06_wellfigureitout": {
+  "S1": 5,
+  "S2": 4,
+  "S3": 5,
+  "S4": 10,
+  "S5": 8,
+  "wow": 5,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "name": "Lecture Template",
+  "note": "Kept. Every AI step has a labelled local stub fallback, so a demo can silently show non-model output."
+ },
+ "cadent06_SteelHacks": {
+  "S1": 2,
+  "S2": 3,
+  "S3": 4,
+  "S4": 9,
+  "S5": 5,
+  "wow": 2,
+  "tracks": [
+   "nowrapper",
+   "general"
+  ],
+  "name": "Monte Carlo Risk Lab",
+  "note": "Track fit trimmed to 4: LLM-free and working, but a textbook VaR calculator is not the 'something hard' No Wrapper asks for."
+ },
+ "chrisyang-gg_NemoScantron": {
+  "S1": 5,
+  "S2": 4,
+  "S3": 7,
+  "S4": 10,
+  "S5": 10,
+  "wow": 6,
+  "tracks": [
+   "compound",
+   "nemotron"
+  ],
+  "note": "Wow raised 5 to 6: the swinging fraudometer plus the Toronto-to-Lagos arrow is a real visual beat in a 3-minute demo. Red-team results are gitignored, so no accuracy evidence is in the repo."
+ },
+ "donaldheddesheimer_sh-project": {
+  "S1": 8,
+  "S2": 7,
+  "S3": 6,
+  "S4": 9,
+  "S5": 12,
+  "wow": 7,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "name": "Traffic Operations Center",
+  "note": "Completeness trimmed 10 to 9 and novelty 9 to 8: the SUMO twin and console are real, but the README states 24 times that the Nemotron/Claude analysis, VSS feed and deploy were never run; only the rule-based mock agent path has executed. Duplicate repo donaldheddesheimer/traffic-sim excluded."
+ },
+ "ethanliu2026_meal-plan-tracker": {
+  "S1": 5,
+  "S2": 7,
+  "S3": 6,
+  "S4": 13,
+  "S5": 8,
+  "wow": 4,
+  "tracks": [
+   "nowrapper",
+   "mlh",
+   "seed"
+  ],
+  "note": "Kept. Live at meal-blocks.tech with on-device OCR and a Monte Carlo forecast. Eight feature commits landed 09:29-10:47 EDT on Saturday, before the 11:00 start; the objective fresh-code score already reflects this."
+ },
+ "ethantran12345_loan-operability": {
+  "S1": 7,
+  "S2": 7,
+  "S3": 8,
+  "S4": 12,
+  "S5": 7,
+  "wow": 5,
+  "tracks": [
+   "nemotron",
+   "compound",
+   "xtract"
+  ],
+  "name": "Dryrun",
+  "note": "Novelty 8 to 7 and completeness 13 to 12: only 4 of 32 clauses are checked and every input is synthetic, but the build is live, tested and scrupulously labelled. Solo build."
+ },
+ "etsbr3514_SteelHacks_Finding-NEMOtron": {
+  "S1": 3,
+  "S2": 3,
+  "S3": 2,
+  "S4": 3,
+  "S5": 0,
+  "wow": 1,
+  "tracks": [
+   "nemotron"
+  ],
+  "name": "Finding NEMOtron",
+  "note": "Two scripts, no README content, no outputs."
+ },
+ "hanabenko_steelhacksxiii": {
+  "S1": 7,
+  "S2": 5,
+  "S3": 6,
+  "S4": 10,
+  "S5": 13,
+  "wow": 8,
+  "tracks": [
+   "mlh",
+   "outloud",
+   "general"
+  ],
+  "name": "Interlock",
+  "note": "Novelty 8 to 7, need 6 to 5, completeness 11 to 10: the default simulation engine is an explicitly uncalibrated surrogate and the root README oversells 'Monte Carlo SUMO'. Still the most spectacular thing to look at in the field."
+ },
+ "jarfrey_Steelhacks-2026": {
+  "S1": 5,
+  "S2": 4,
+  "S3": 3,
+  "S4": 8,
+  "S5": 5,
+  "wow": 3,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "name": "Signal Foundry",
+  "note": "Kept. Compiled classes and IDE junk committed; polished README versus chaotic history."
+ },
+ "jazhg_Pickleball-On-The-Go": {
+  "S1": 7,
+  "S2": 3,
+  "S3": 6,
+  "S4": 10,
+  "S5": 12,
+  "wow": 7,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "note": "Novelty 6 to 7: phone-as-paddle plus a rule-citing LLM referee is a twist judges will not have seen. Nemotron evaluation is offline-only and honest about it; HTTPS/Wi-Fi setup is the stage risk."
+ },
+ "jiazhenz026_heard-meeting": {
+  "S1": 6,
+  "S2": 5,
+  "S3": 7,
+  "S4": 11,
+  "S5": 10,
+  "wow": 6,
+  "tracks": [
+   "nemotron",
+   "outloud",
+   "seed"
+  ],
+  "name": "Heard!",
+  "OBJ": 27.0,
+  "note": "Track fit 8 to 7 (Out Loud and Nemotron are strong; Seed Round and Xtract are weaker). Objective O5 cut from 5 to 2: the first commit ports 3,867 lines of a prior 'Heard! kitchen build' (STT/TTS, hub, NIM client), so roughly 40% of the Python predates the event even though every commit falls inside the window."
+ },
+ "joe-magg_argus": {
+  "S1": 3,
+  "S2": 3,
+  "S3": 4,
+  "S4": 10,
+  "S5": 7,
+  "wow": 3,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "name": "Argus",
+  "note": "Kept. v0-generated dashboard scaffold; README deleted at HEAD."
+ },
+ "josiahw095-maker_SteelHacks2026-Squoders": {
+  "S1": 7,
+  "S2": 5,
+  "S3": 7,
+  "S4": 8,
+  "S5": 9,
+  "wow": 7,
+  "tracks": [
+   "nowrapper",
+   "general"
+  ],
+  "name": "Mesh Mail",
+  "note": "Novelty 8 to 7 (Meshtastic mail bridges exist, but not at hackathons), completeness 9 to 8 (README admits the Gmail-to-radio gateway loop and phone app are not built), wow 6 to 7: two blinking LoRa radios and an air-gapped inbox are exactly what live judges remember."
+ },
+ "kyuhan28_nemotrontriagemodel": {
+  "S1": 7,
+  "S2": 6,
+  "S3": 7,
+  "S4": 10,
+  "S5": 5,
+  "wow": 5,
+  "tracks": [
+   "nemotron"
+  ],
+  "name": "Nemotron as Verifier",
+  "note": "Completeness 11 to 10 (README cites artifacts not in the repo) and wow 6 to 5: the 'switch the verifier off' moment is clever but lands on a Gradio form. Strong Nemotron-track evidence (43-case eval)."
+ },
+ "leonac24_steelhacks-2026": {
+  "S1": 6,
+  "S2": 7,
+  "S3": 7,
+  "S4": 11,
+  "S5": 10,
+  "wow": 7,
+  "tracks": [
+   "outloud",
+   "compound",
+   "seed"
+  ],
+  "name": "NestEgg (June)",
+  "note": "Novelty 7 to 6 and track fit 8 to 7. Built from the Better-T-Stack scaffold; bank provider is mock with a Plaid sandbox path. The phone ringing on the table is the demo. Mirror repo matmanna/steelhacks-2026 excluded."
+ },
+ "nathanPozzuto_corrective": {
+  "S1": 2,
+  "S2": 3,
+  "S3": 4,
+  "S4": 7,
+  "S5": 5,
+  "wow": 2,
+  "tracks": [
+   "coldstart",
+   "general"
+  ],
+  "name": "Corrective",
+  "note": "Kept. Honest first-timer build; v0-generated, in-memory data."
+ },
+ "232squreincircle_hack2026": {
+  "exclude": "Placeholder: README title only, single commit made the day before hacking started."
+ },
+ "shirinkhandare_sms_steelhacks": {
+  "S1": 7,
+  "S2": 3,
+  "S3": 7,
+  "S4": 9,
+  "S5": 10,
+  "wow": 7,
+  "tracks": [
+   "presage",
+   "nowrapper"
+  ],
+  "name": "Canopy Co.",
+  "note": "Novelty 8 to 7. Webcam stress from Presage SmartSpectra shortening your turn timer and stacking the deck is a genuine biofeedback twist; the simulated-stress fallback is clearly labelled."
+ },
+ "RuadhanKM_Steelhacks26": {
+  "S1": 5,
+  "S2": 5,
+  "S3": 7,
+  "S4": 10,
+  "S5": 7,
+  "wow": 4,
+  "tracks": [
+   "compound"
+  ],
+  "name": "Pyre",
+  "note": "Kept. A bank assistant that refuses to act and hands you server-built forms; uses Anthropic models rather than Nemotron."
+ },
+ "declancollins_stockd": {
+  "S1": 6,
+  "S2": 7,
+  "S3": 8,
+  "S4": 12,
+  "S5": 10,
+  "wow": 6,
+  "tracks": [
+   "nowrapper",
+   "seed",
+   "compound"
+  ],
+  "name": "Stockd",
+  "note": "Completeness 13 to 12: everything is synthetic seed data, though the backtest, tests and live deployment are real. First three commits land ~7k lines in 15 minutes after a zip hand-off, so most code was produced outside git (inside the window)."
+ },
+ "ethantiller_badfaith": {
+  "S1": 6,
+  "S2": 5,
+  "S3": 7,
+  "S4": 9,
+  "S5": 9,
+  "wow": 6,
+  "tracks": [
+   "xtract",
+   "nemotron"
+  ],
+  "name": "Bad Faith",
+  "OBJ": 33.9,
+  "note": "Completeness 10 to 9: the eval harness described at length is an empty package and failed batches are dropped silently. Objective O4 cut by 1: auth-response.json with live Supabase access and refresh tokens is committed at the repo root."
+ },
+ "2004Moonlove_SteelHacks": {
+  "S1": 5,
+  "S2": 4,
+  "S3": 7,
+  "S4": 12,
+  "S5": 8,
+  "wow": 4,
+  "tracks": [
+   "nemotron",
+   "seed"
+  ],
+  "name": "Dayfork",
+  "note": "Novelty 6 to 5 and completeness 13 to 12: labelled offline story previews cover the no-key case; live generation needs an NVIDIA key. Deterministic browser math plus Nemotron narratives is a tidy division of labour."
+ },
+ "TimAkor23_Steelhacks": {
+  "S1": 3,
+  "S2": 3,
+  "S3": 3,
+  "S4": 8,
+  "S5": 6,
+  "wow": 3,
+  "tracks": [
+   "general",
+   "mlh"
+  ],
+  "name": "Life Ledger",
+  "note": "Kept. Static event tables; half of app.js is dead code from an earlier version."
+ },
+ "Mia-Melishchuk_SteelHacks-Test-2": {
+  "S1": 2,
+  "S2": 1,
+  "S3": 3,
+  "S4": 7,
+  "S5": 9,
+  "wow": 5,
+  "tracks": [
+   "general",
+   "nowrapper"
+  ],
+  "name": "Dragon Side-Scroller (Unity)",
+  "note": "Completeness 8 to 7: one level, no score, health or win state. Playable and responsive, no README."
+ },
+ "Ech118_BankManager": {
+  "S1": 6,
+  "S2": 5,
+  "S3": 4,
+  "S4": 5,
+  "S5": 5,
+  "wow": 3,
+  "tracks": [
+   "xtract",
+   "general"
+  ],
+  "name": "BankManager",
+  "note": "Completeness 6 to 5: only the fictional ACME fixture replays; live mode, calc and audit raise NotImplemented. Sixteen CLAUDE.md files and seven ADRs document an architecture that does not yet run."
+ },
+ "SporkyPorks_LABHEEK": {
+  "exclude": "Same project as Zaku-Seven/SH26 (Fernvale GBA); this repo holds a newer ROM build and a zip of the same source. Scored once under SH26."
+ },
+ "AdamLashnuk_WhereisMyMoney": {
+  "S1": 4,
+  "S2": 4,
+  "S3": 6,
+  "S4": 7,
+  "S5": 8,
+  "wow": 5,
+  "tracks": [
+   "compound",
+   "outloud",
+   "nemotron"
+  ],
+  "name": "Where Is My Money",
+  "note": "Completeness 8 to 7: the main branch holds only the backend; the integrated app lives on an unmerged Cursor-agent branch, and stubs sit behind STT, receipt parsing and categorisation. The phone call that scolds you is the moment, if Twilio and the tunnel hold."
+ },
+ "Adkhzhan_light": {
+  "S1": 3,
+  "S2": 4,
+  "S3": 4,
+  "S4": 8,
+  "S5": 8,
+  "wow": 3,
+  "tracks": [
+   "compound",
+   "nemotron"
+  ],
+  "name": "SplitSense",
+  "note": "Kept. A live NVIDIA API key is hardcoded as the default in the Nemotron client (objective hygiene already penalised)."
+ },
+ "AllenTimco_PennyWise": {
+  "S1": 1,
+  "S2": 3,
+  "S3": 3,
+  "S4": 5,
+  "S5": 5,
+  "wow": 1,
+  "tracks": [
+   "compound",
+   "presage"
+  ],
+  "note": "Kept. Presage vitals never reach the page; the webcam only previews. Presage key committed."
+ },
+ "Connor-W-Cahill_callback": {
+  "S1": 7,
+  "S2": 8,
+  "S3": 8,
+  "S4": 12,
+  "S5": 10,
+  "wow": 7,
+  "tracks": [
+   "compound",
+   "nemotron",
+   "outloud",
+   "seed"
+  ],
+  "name": "Trouvé",
+  "note": "Novelty 8 to 7 (callback verification is a known AP control; automating it with a voice agent is the twist), completeness 13 to 12 (demo-mode call is an assembled transcript, inbox is four synthetic emails), demo appeal 11 to 10. Solo build with CI, tests and honest evals; the judge answering into the mic and watching the payment flip to BLOCKED is a strong beat."
+ },
+ "HajinHyukson_RealityCheck": {
+  "S1": 7,
+  "S2": 6,
+  "S3": 7,
+  "S4": 9,
+  "S5": 7,
+  "wow": 4,
+  "tracks": [
+   "xtract",
+   "nemotron",
+   "compound"
+  ],
+  "note": "Novelty 9 to 7, completeness 11 to 9, wow 5 to 4: the demo replays recorded Nemotron responses, the whole 862-file repo arrived in two commits an hour before this snapshot, and ~460 KB of strategy markdown sits next to ~5k lines of Python. Deep domain thinking that a 3-minute judge will struggle to absorb."
+ },
+ "IvanC0821_SteelHacks2026": {
+  "S1": 4,
+  "S2": 5,
+  "S3": 1,
+  "S4": 6,
+  "S5": 8,
+  "wow": 2,
+  "tracks": [
+   "general"
+  ],
+  "name": "Verity",
+  "note": "Completeness 7 to 6: no model exists anywhere; every assessment is simulated and the UI says so. ~20k lines of polished React around an empty core; an 'authorized rebuild' of a prior HackCMU idea."
+ },
+ "JackDowell-08_SteelHacksXIII_Project": {
+  "S1": 2,
+  "S2": 3,
+  "S3": 2,
+  "S4": 2,
+  "S5": 1,
+  "wow": 0,
+  "tracks": [
+   "general"
+  ],
+  "name": "Stock News Agent (unfinished)",
+  "note": "The web page uppercases input; the LangChain agent is never connected."
+ },
+ "LeyuDing_SteelHacks2026": {
+  "S1": 7,
+  "S2": 2,
+  "S3": 5,
+  "S4": 9,
+  "S5": 10,
+  "wow": 7,
+  "tracks": [
+   "nemotron",
+   "general"
+  ],
+  "name": "Light Wizard Money Gang",
+  "note": "Novelty 6 to 7 and wow 6 to 7: texting a moody Nemotron 'handler' who invents three spells you cast seconds later is touchable and funny. Track fit 4 to 5 (structured spell generation is beyond chat, but no eval). Crashes if all three API attempts fail; depends on a hosted Brev endpoint."
+ },
+ "MichaelYeh507_OmniSight": {
+  "S1": 8,
+  "S2": 6,
+  "S3": 7,
+  "S4": 9,
+  "S5": 13,
+  "wow": 8,
+  "tracks": [
+   "nowrapper",
+   "seed"
+  ],
+  "note": "Novelty 9 to 8 and completeness 10 to 9: the three scenes on main are synthetic generator output; the real iPhone LiDAR recordings live on an undeployed branch. The AR moment (hold a phone to a wall, see the scanned room and a 'last seen 4 s ago' ghost behind it) is the strongest visceral beat in the field. No LLM anywhere, so a clean No Wrapper entry."
+ },
+ "NithyaJayakaran_Noise2Node": {
+  "S1": 3,
+  "S2": 2,
+  "S3": 2,
+  "S4": 4,
+  "S5": 0,
+  "wow": 1,
+  "tracks": [
+   "general"
+  ],
+  "name": "Noise2Node",
+  "note": "One 'boilerplate' commit of ROS 2/CUDA code with no README, launch files or demo."
+ },
+ "utiwari21_SteelHacks26": {
+  "S1": 6,
+  "S2": 7,
+  "S3": 4,
+  "S4": 9,
+  "S5": 2,
+  "wow": 3,
+  "tracks": [
+   "nowrapper",
+   "general"
+  ],
+  "name": "Panther Post",
+  "OBJ": 23.1,
+  "note": "Novelty 7 to 6, need 8 to 7, track fit 5 to 4, completeness 10 to 9, wow 4 to 3: a serious forecasting pipeline on two years of real Pitt mailroom data, but judges would see terminal tables (the Power BI dashboard and spoken briefing are described, not present). Objective O4 cut by 1: recipient and staff PII CSVs and a hardcoded ElevenLabs key are tracked in git."
+ },
+ "paulmtn_steelhacks-26": {
+  "S1": 4,
+  "S2": 2,
+  "S3": 4,
+  "S4": 12,
+  "S5": 10,
+  "wow": 5,
+  "tracks": [
+   "nowrapper",
+   "general"
+  ],
+  "name": "Night Shift",
+  "note": "Track fit 5 to 4. A finished, playable zombie survival roguelite; a committed .venv (1,117 files) already costs objective hygiene points."
+ },
+ "rularon12-sys_steelhacks": {
+  "S1": 3,
+  "S2": 4,
+  "S3": 2,
+  "S4": 8,
+  "S5": 8,
+  "wow": 4,
+  "tracks": [
+   "general"
+  ],
+  "name": "PGH Transit",
+  "note": "Track fit 3 to 2. The web map is live on PRT's public feed; the mobile app config is broken as committed; the entire codebase arrived in one late-night commit."
+ },
+ "JackCarluccio_try-optimize": {
+  "S1": 5,
+  "S2": 3,
+  "S3": 2,
+  "S4": 5,
+  "S5": 2,
+  "wow": 1,
+  "tracks": [
+   "general"
+  ],
+  "name": "try-optimize",
+  "note": "Kept. Backend compiles and times C++ but nothing renders on screen; unsandboxed remote code execution deployed publicly."
+ },
+ "owen-ipc_FoodFinder": {
+  "S1": 4,
+  "S2": 5,
+  "S3": 3,
+  "S4": 10,
+  "S5": 6,
+  "wow": 4,
+  "tracks": [
+   "seed",
+   "general"
+  ],
+  "name": "Food Finder",
+  "note": "Kept. Static Target price CSV; uses Claude, not Nemotron."
+ },
+ "Flizzy50_SteelHacks-26": {
+  "S1": 6,
+  "S2": 5,
+  "S3": 4,
+  "S4": 5,
+  "S5": 8,
+  "wow": 3,
+  "tracks": [
+   "xtract",
+   "general"
+  ],
+  "name": "Faultline",
+  "note": "Novelty 7 to 6 and wow 4 to 3: a handsome front end over hardcoded scenario data; no ingestion, no model call, no API routes."
+ },
+ "Anish-Satish_Steel-Hacks-2026-Game": {
+  "S1": 3,
+  "S2": 1,
+  "S3": 3,
+  "S4": 4,
+  "S5": 7,
+  "wow": 3,
+  "tracks": [
+   "general"
+  ],
+  "name": "Panzerkrankenwagen Simulator",
+  "note": "Kept. Godot 4 3D city with a siren; the main menu cannot launch the level as committed and there is no objective or scoring."
+ }
+}

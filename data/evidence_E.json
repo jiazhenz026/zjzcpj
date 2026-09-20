@@ -1,0 +1,142 @@
+[
+  {
+    "repo": "2004Moonlove/SteelHacks",
+    "project_name": "Dayfork",
+    "one_liner": "Describe a two-option decision; Nemotron structures it, a deterministic browser engine computes monthly cost/time, break-even or subscription totals, and Nemotron then writes paired parallel storylines for both paths without picking a winner.",
+    "problem": "People weighing medium/long-term two-way decisions (on- vs off-campus housing, gaming vs office laptop, coffee machine vs buying coffee, annual vs monthly membership) struggle to see both paths as lived tradeoffs rather than a spreadsheet.",
+    "target_user": "Students and individuals facing a personal two-option decision; generic, no user evidence given.",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "Seed Round (Pear VC & Afore Capital)",
+      "Compound"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind",
+      "Radix UI",
+      "zustand",
+      "zod",
+      "recharts",
+      "Java 21 Spring Boot 3.5",
+      "NVIDIA NIM API (nvidia/nemotron-3-super-120b-a12b)",
+      "vitest",
+      "JUnit",
+      "Node eval harness"
+    ],
+    "core_loop": "Textarea decision -> POST /api/scenarios/generate -> Spring GenerationService prompts Nemotron with a JSON schema generated from the frontend validator -> ContractValidator + one bounded repair -> Decision JSON -> zod validation -> BaselineReview numeric editors -> Dashboard runs simulate() in-browser (factor toggles, importance sliders, bar/line/step charts) -> StoryPanel POST /api/stories/generate with frozen snapshot + fact inventory -> Nemotron fills narrative slots -> StoryValidator/StoryDraftAssembler bind IDs and facts -> paired stories rendered with {{fact}} placeholders; edits mark the story stale until Update Story.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Four fixture decisions (campus housing, laptop, coffee, membership) and an offline story generator (offlineStories.ts) explicitly labeled 'Offline example preview'; backend unit tests mock ModelClient. Live generation requires NVIDIA_API_KEY/NVIDIA_MODEL env vars; without them the app reports 'model not configured' rather than silently swapping in fixtures.",
+    "demo_risks": "Hosted NVIDIA API: their own validation docs record 60s provider timeouts (5 of 7 cases timed out in one run; ~13s success after enabling low-effort reasoning). Model JSON can still fail validation after one repair and surface an error. Localhost only (Java 21 + Node 24, Vite proxy). Story generation is slow for a 3-minute demo; offline demos are the safe path.",
+    "ui_experience": "Polished light Tailwind UI (Manrope/DM Sans, blue/teal option accents): hero input screen with offline-demo chips, 3-step progress header, baseline review cards with numeric editors, dashboard with factor toggles + importance sliders, recharts bar/line/step charts, 'Trace every number' breakdown sheet (Radix dialog), story panel with paired stage timeline (Beginning/During/Later or Morning/Daytime/Evening), stale badges, loading/error/abort states, aria labels and reduced-motion support. Three screens; text/form heavy but touchable.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "All 15 commits inside the window (Sep 19 12:57 to Sep 20 05:16 EDT). No secrets (.env.example blank, .env ignored). README ends 'Coworked with Codex'; MEMORY.md says the agent should 'communicate with the user in Chinese' and that the user 'authorized implementation' -- the codebase is essentially agent-built by one person (IvanLiu/2004Moonlove). Originally named 'Parallel Me'; MEMORY.md lists differentiating from a 'SASEHacks ParallelMe project' and 'Wage101 Commute vs Rent', so the concept resembles a prior hackathon project (provenance unclear, no copied code seen). artifacts/ holds screenshots of a 'Clear Choice' app in CNY with a footer link 'Original Dayfork workspace' that does not match this codebase -- unexplained.",
+    "ai_scaffolding_flags": "AGENTS.md, 28KB MEMORY.md (project memory/contract for the agent), four dated validation reports in docs/. Docs are not larger than code (~55KB docs vs ~380KB src incl. tests), but the whole workflow is agent-driven.",
+    "novelty_notes": "'Parallel lives for a decision' is a known genre (their own memory cites a prior ParallelMe). The distinctive part is the mechanism: the LLM never does arithmetic; code owns cents/minutes, break-even and subscription math, generates the prompt schema from the frontend validator, validates and repairs once, and inserts facts via placeholders. A careful 'LLM as narrative layer' design rather than a new problem space.",
+    "need_notes": "Plausible everyday pain (housing, laptop, gym plan) but no user quotes, data or domain insight; the product explicitly refuses to recommend, which limits the payoff for the user.",
+    "wow_moment": "Toggle 'Take an Uber after class' and change 6 to 10 trips: the Far option's monthly cost/time changes instantly, the two parallel stories are flagged stale, and Update Story regenerates aligned Morning/Daytime/Evening narratives with the exact new figures inserted by code.",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 6,
+      "S2": 4,
+      "S3": 7,
+      "S4": 13,
+      "S5": 8,
+      "wow": 4
+    },
+    "score_rationale": "Known 'two-path stories' genre, but the mechanism (deterministic engine owns all math, Nemotron only fills narrative slots with fact placeholders, schema generated from the validator, bounded repair, live eval harness with documented failures) is unusually rigorous. Need is generic with no evidence. Strong Beyond-the-Chatbot fit. Wired end to end with 150+ tests and labeled offline fallbacks, but the live path depends on a hosted API that timed out in their own runs. Polished, text-heavy UI.",
+    "judge_summary": "Type a two-option decision; Nemotron builds a structured scenario, the browser computes monthly cost/time and break-evens, toggling factors updates numbers instantly, then Nemotron writes paired parallel stories with facts inserted by code. Clean UI, real eval harness, heavily Codex-built, localhost only."
+  },
+  {
+    "repo": "TimAkor23/Steelhacks",
+    "project_name": "Life Ledger",
+    "one_liner": "A one-page browser 'Monopoly Life Adventure': an emoji character walks a Mario-style scene, and at each random life/money event you pick one of three choices that move cash, debt, income, savings, investments, stress and a life-balance meter until a net-worth summary.",
+    "problem": "Financial literacy: help players learn, plan and adjust to real-world money situations and scenarios (per the two-line README).",
+    "target_user": "Students/young adults learning personal finance; not stated explicitly.",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "MLH bonus tracks: .Tech domain",
+      "Compound",
+      "Cold Start"
+    ],
+    "team_size_claimed": null,
+    "live_url": "https://lifeledger.tech (CNAME committed; GitHub Pages implied, not verified)",
+    "stack": [
+      "Vanilla HTML/CSS/JS (no build, no dependencies)",
+      "Google Fonts (Press Start 2P, Inter)",
+      "emoji art"
+    ],
+    "core_loop": "Page load -> startGame() picks one of 6 hardcoded starter scenarios -> renderEvent() picks a random event from 23 templates (avoiding last 3) -> decision modal with 3 choice buttons -> applyChoiceEffects() mutates stats, derives health/relationships/purpose, flashes changed stats -> character moves +1 step (or -1 if the choice cost money/added debt) -> after 6 net steps finishGame() shows net worth (savings+investments-debt), life balance and score; cash or income below zero ends the run early; Play again restarts.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Everything is static: 6 scenario templates, 23 events x 3 choices, 'style' hardcoded to 'saver'; income/bills/taxes never accrue between turns. Half of app.js is dead code from an earlier version: renderBoard() returns immediately; avatar picker, board token, story log, toast, confetti, shake, event icon and jump/collect buttons reference DOM IDs that no longer exist, so 'Big win!' toasts and confetti silently no-op (only the final-screen confetti call also no-ops). No backend, no persistence.",
+    "demo_risks": "Low: static site works offline. Runs are only ~6 decisions and can end abruptly (starter cash ~$1.2k, many choices cost $1.5k+). Missing feedback effects make choices feel flat. Random events may repeat across replays.",
+    "ui_experience": "Bright sky-gradient CSS scene with floating clouds, coin emojis, bobbing emoji enemies (alien, flying money, receipt), an emoji player that slides toward a flag, pixel 'Press Start 2P' headings, stat meters, a decision modal, and a summary view with meters and score. Two screens. Basic but colorful; judge can click through a run in under a minute.",
+    "physical_or_sensory": "game",
+    "integrity_flags": "All 8 commits inside the window (Sep 19 11:52 to Sep 20 03:58 EDT), two committers. No secrets. 'Finance Game' is a dangling gitlink (mode 160000, no .gitmodules) pointing at the repo's own merge commit -- an accidental nested clone, contents not in the repo. Code comments/patterns suggest AI-assisted writing; no evidence of pre-hackathon or template code.",
+    "ai_scaffolding_flags": "None (no CLAUDE.md/AGENTS.md; README is two lines).",
+    "novelty_notes": "Choose-your-own-adventure budgeting game is a well-worn category; the small twist is the parallel 'Life Balance' (health/relationships/academics) axis that trades off against money. Emoji Mario framing is cosmetic.",
+    "need_notes": "Financial-literacy games for students are plausible but generic; no evidence, data, or specific user pain offered beyond the README sentence.",
+    "wow_moment": "The emoji character sliding backwards toward the start when you take the predatory loan, while the stress meter jumps -- mildly amusing, nothing more.",
+    "wow_type": "NONE",
+    "scores": {
+      "S1": 3,
+      "S2": 3,
+      "S3": 3,
+      "S4": 8,
+      "S5": 6,
+      "wow": 3
+    },
+    "score_rationale": "Financial-literacy choose-your-own-adventure with a life-balance axis: seen many times. Plausible student audience, no evidence. Weak Compound fit (no payments/fraud/cash-flow data); .Tech domain registered. Core loop works end to end but is thin (6 steps, 23 static events), and half the code is dead from an earlier version so toast/confetti/story-log effects silently no-op. Colorful emoji Mario scene is basic but touchable.",
+    "judge_summary": "A one-page browser game: pick from three choices at each random money event while an emoji character inches toward a flag; stats and a life-balance meter update, then a net-worth summary. Cute, works, but shallow and generic; deployed at lifeledger.tech."
+  },
+  {
+    "repo": "Mia-Melishchuk/SteelHacks-Test-2",
+    "project_name": "SteelHacks Test 2 (untitled Unity dragon side-scroller)",
+    "one_liner": "A Unity 6 pixel-art 2D side-scroller: fly a gold dragon with the arrow keys, shoot fireballs with space at bandits and an evil wizard, avoid spikes, and reach a portal; includes a main menu and a prompt-driven tutorial level.",
+    "problem": "None stated. No README (title only), no docs, no theme tie-in; it is a for-fun action game.",
+    "target_user": "Not stated; casual players.",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "No Wrapper",
+      "Cold Start",
+      "General / no track"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "Unity 6000.3.23f1 (URP 2D template)",
+      "C#",
+      "Unity Input System",
+      "Tilemap",
+      "TextMeshPro",
+      "Git LFS (png/ogg)",
+      "third-party sprite packs: PF SET1 (~9.8k sliced sprites), Bandits - Pixel Art, Evil Wizard 2/3"
+    ],
+    "core_loop": "MainMenu buttons -> startButtonController.nextScene('Tutorial'|'Level1') -> DragonPlayer prefab (player.cs) auto-scrolls right, arrows add Rigidbody2D force with clamped bounds, space instantiates a fireball prefab (fireballSpawnerController sets velocity, destroys on any non-player hit) -> enemy1/enemy2/Wizard scripts flip toward the player, play Attack when within 20 units, set Dead and disable collider on fireball collision -> player collision with 'enemy' or 'spikes' tag enables Game Over text and disables the player -> Buttons prefab offers Restart Level / Main Menu -> Portal trigger loads the next scene (Level1's portal returns to MainMenu). Tutorial uses trigger colliders (tutorialPrompter) to swap TMP text: fly up, shoot, spikes, portal.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Only one real level (level1.1 disabled in build settings; SampleScene/sampleScene2 are template leftovers). No score, health, lives, or win screen; the Level1 portal just returns to the menu. Coin prefab has no script or trigger, while player.cs destroys the *player* on a 'coin' trigger -- coins are decorative or lethal. Three .ogg music tracks committed (LFS) but no AudioSource in any scene or prefab, so audio is unwired. Empty scripts (test.cs, parallaxBackground.cs, SceneManagerLevel1.cs); Debug.Log(distance) every FixedUpdate per enemy; Task.Delay(100) not awaited.",
+    "demo_risks": "Needs the Unity Editor or a local build (none committed) and LFS assets pulled; otherwise offline and stable. Instant game over on touching any enemy sprite makes runs short; Debug.Log spam may hitch the editor in Level1 (85 bandit instances). Asset-pack demo scenes (Bandit Demo, Evil Wizard demos) are in the project but not in the build.",
+    "ui_experience": "Pixel-art side-scroller: animated flying dragon (idle/flying), fireball flight + explosion animations, animated portal, layered day/night background packs, spikes and tilemap terrain, pixel bandits with attack/death animations, smooth-damp follow camera, TMP tutorial prompts, main menu with Start/How To Play, Game Over overlay with Restart/Main Menu. Keyboard-playable; judges can pick it up immediately.",
+    "physical_or_sensory": "game",
+    "integrity_flags": "53 commits from three committers, all inside the window (Sep 19 12:32 to Sep 20 03:22 EDT), with honest messages ('stupid fireball', merge-conflict fights). Built from the Unity URP Empty Template (Readme.asset, TutorialInfo, SampleScene present). Art is third-party asset packs, including their demo scenes and Bandit.cs demo scripts, which is normal but means most of the ~10k files are not team work. No secrets; standard Unity .gitignore. No README or documentation at all.",
+    "ai_scaffolding_flags": "None.",
+    "novelty_notes": "Generic 2D shoot-and-dodge side-scroller with stock fantasy sprites; no mechanic, theme, or problem that judges have not seen.",
+    "need_notes": "No need articulated; purely a learning/for-fun game build.",
+    "wow_moment": "Fireball explodes on a bandit and it collapses mid-attack animation while the dragon swoops past spikes -- a genuinely playable, responsive 30 seconds.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 2,
+      "S2": 1,
+      "S3": 3,
+      "S4": 8,
+      "S5": 9,
+      "wow": 5
+    },
+    "score_rationale": "Generic 2D side-scroller (dragon shoots fireballs at asset-pack bandits) with no theme or problem statement. No LLM so nominally No Wrapper, but nothing 'hard' to explain; Cold Start only if eligible. A playable loop exists: menu, tutorial with prompts, one large level, game over and restart; but coins kill the player, the portal loops to the menu, music is unwired and several scripts are empty. Pixel-art action judges can actually play gives it real demo appeal.",
+    "judge_summary": "A Unity pixel-art game where you fly a dragon, dodge spikes and bandits, and shoot fireballs, with a tutorial and one level. Fun for thirty seconds and genuinely playable, but no idea, no README, one level, and a coin that kills you."
+  }
+]
