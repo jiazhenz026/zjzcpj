@@ -1,0 +1,68 @@
+[
+  {
+    "repo": "oliverchennn/clausegraph",
+    "project_name": "ClauseGraph Verify",
+    "one_liner": "Evidence-backed emergency cash planner: contract clauses become reviewed rules, a dependency graph and a CP-SAT action schedule, then the saved plan is exhaustively verified against declared uncertainty bounds with concrete counterexamples.",
+    "problem": "People facing an income interruption must juggle rent, bills, approved payment shifts and cancellation clauses to avoid going negative; existing tools don't reason over interacting clauses or prove a plan survives an uncertain payday.",
+    "target_user": "Individuals bridging a short cash-timing gap (e.g., final paycheck delayed) who hold contracts/bills with deferral, cancellation or assistance clauses.",
+    "claimed_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "MLH: Tiger Data",
+      "MLH: DigitalOcean",
+      "MLH: ElevenLabs",
+      "MLH: Gemini API (optional)"
+    ],
+    "best_fit_tracks": [
+      "Xtract (LANXESS)",
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "Compound"
+    ],
+    "team_size_claimed": 3,
+    "live_url": null,
+    "stack": [
+      "Python 3.12",
+      "FastAPI",
+      "Pydantic",
+      "SQLAlchemy (SQLite/PostgreSQL 17)",
+      "OR-Tools CP-SAT",
+      "networkx",
+      "pypdf/pypdfium2",
+      "httpx",
+      "NVIDIA Nemotron 3.5 Lightning 30B (extraction)",
+      "NVIDIA Nemotron 3 Nano Omni 30B (evidence check/OCR)",
+      "Gemini (optional)",
+      "ElevenLabs STT/TTS (optional)",
+      "Next.js 15 / React",
+      "Tailwind v4 + custom CSS",
+      "Radix UI",
+      "Recharts",
+      "React Flow (@xyflow)",
+      "Playwright",
+      "pytest",
+      "Docker Compose",
+      "GitHub Actions CI"
+    ],
+    "core_loop": "Upload doc -> native text (or consented Nemotron OCR) -> Nemotron Lightning extracts typed rule/action candidates with quote spans -> deterministic validator checks quotes/offsets/amounts/dates literally in source -> Nemotron Omni evidence check -> human review + approval gates -> CP-SAT plans action schedule maximizing minimum cash -> Recharts projection + decision trace -> user declares uncertainty bounds -> exhaustive finite-state verification returns SAFE/UNSAFE/UNKNOWN with counterexample -> cash-gap minimality diagnostic -> resilient schedule search + fingerprinted adoption.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "Demo path is fully fixture-backed: the six synthetic docs' rules, events and actions are hand-coded in backend/clausegraph/demo.py (no model extracts them); demo script explicitly makes zero model calls. Real upload->worker->Nemotron path is implemented (httpx adapters, JSON-schema output, literal validators) but per the team's own EXTRACTION_CHECK.md both hosted NVIDIA attempts FAILED (native text timeout at 120s; OCR HTTP 503); the only successful live extraction was on a self-hosted Brev H100 via SSH tunnel (3/5 then 5/5 exact fields on five synthetic clauses). scripts/eval_nemotron.py default mode scores fixture candidates through local gates, not the model. Consequence walkthrough is a null placeholder component. ElevenLabs STT/TTS, Gemini, Tiger Data, DO Spaces adapters exist but were never live-tested. Resilient synthesis needs a separate 3-doc fixture because the main fixture admits no resilient schedule.",
+    "demo_risks": "Low for the synthetic story (local SQLite, no network, prepared fallback runbook, reset script). High for any live extraction: hosted NVIDIA endpoints timed out/503'd; Brev GPU must be running with tunnel; 120s provider timeout. Rehearsal log says no human spoken run was ever recorded; only a 180s Playwright-driven run. UI is dense and caveat-heavy, easy to lose a judge in 3 minutes.",
+    "ui_experience": "Polished SaaS dashboard: dark sidebar, 3 metric cards, 4 tabs (overview/documents/graph/history), Recharts step chart with baseline/plan lines and a red dashed counterexample overlay, React Flow dependency graph with click-to-evidence and rule highlighting, Radix evidence drawer with blockquoted source, review queue, scenario side-by-side previews, Verify panel with presets, cash-gap and resilient-plan panels, upload/consent/audio/settings dialogs. ~20 components, 13 media queries, responsive to 390px, focus management. Small 13px/9px type, long explanatory prose, no motion beyond spinners.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "All 48 commits fall inside the window (Sep 19 12:21 to Sep 20 10:56 EDT); no secrets committed (.env gitignored). However commit b547df2 at 13:38 on Sep 19 (2h38m after start) already dropped ~4.7K lines of working backend/frontend/tests/CI/Docker/migrations/deploy template plus AGENTS.md and handoff docs; consistent with heavy Codex-agent generation rather than a starter kit, but worth asking about. No copied prior-hackathon project detected.",
+    "ai_scaffolding_flags": "Heavy: AGENTS.md (12KB contributor contract), CLAUDE.md, 52 handoff docs under docs/handoffs, branch names codex/dev-a and codex/dev-b, docs/decisions ADRs, and an explicit 'solo completion instruction' authorizing 'this agent' to act as orchestrator for developers A/B/C. Docs (~3.3K md lines + 2.5K generated types) are comparable to the ~7K lines of hand-written source; code style (one-line dense JSX, exhaustive caveats) reads as agent-authored.",
+    "novelty_notes": "Cash-flow planners are common, but the mechanism is new: evidence-gated rule compiler that rejects any amount/date not literally quoted in the source, integer-cent CP-SAT lexicographic optimizer over clause-derived actions, exhaustive bounded model checking of a fixed schedule with counterexample witness, proven-minimal hypothetical cash diagnostic (amount passes, one cent less fails), and resilient-schedule synthesis with fingerprinted adoption. Formal verification of household finance is not something judges see often.",
+    "need_notes": "Specific, plausible pain (income gap + interacting deferral/cancellation clauses) with genuine domain insight (deferral is timing not savings; cancellation accelerates existing debt; unapproved benefits cannot enter a plan). No user quotes, data or interviews; persona and documents are synthetic.",
+    "wow_moment": "Declare 'payday could be any day Sep 21-28', click Verify: the $50-minimum plan flips to UNSAFE, a red counterexample line appears on the cash chart (payday Sep 27 -> -$400 on Sep 26), and one click opens the exact quoted clause. Then 'Explain cash gap' proves $400 is the minimum buffer because $399.99 fails.",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 8,
+      "S2": 6,
+      "S3": 7,
+      "S4": 12,
+      "S5": 9,
+      "wow": 6
+    },
+    "score_rationale": "S1 8: familiar category, genuinely new mechanism (formal verification + evidence-gated compiler). S2 6: real specific pain, domain insight, no user evidence. S3 7: strong Xtract traceability and honest Nemotron eval with documented failures, stacks with Compound, but sponsor model never runs in the demo and hosted path failed. S4 12: synthetic loop polished, 248 backend + 61 real-API browser tests, CI; live extraction unproven, walkthrough stubbed. S5 9: attractive interactive dashboard, dense text. Wow 6: one clear neat moment.",
+    "judge_summary": "A contract-clause-to-cash-plan tool that formally verifies a saved payment schedule and shows the exact payday that breaks it in red on the chart. Extremely rigorous engineering and honest docs, but the whole demo runs on hand-coded synthetic fixtures; live Nemotron extraction only worked on a self-hosted GPU."
+  }
+]

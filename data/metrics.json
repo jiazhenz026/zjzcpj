@@ -516,6 +516,69 @@
   "description_from_readme_head": "# PennyWise Steelhacks XIII / 2026   Idea: (similar things like this in the market but it\u2019s missing a lot of features) Expense tracker Investment advice(you type in ur financial situation)(give warning) PNC Api Score based on financial responsibility (advice to improve or mantain) Pie chart based on expenses Financial goal Write your goal and see it over time Roth IRA predicton different language "
  },
  {
+  "dir": "AndrewRoddy_MoneyMirror",
+  "repo": "AndrewRoddy_MoneyMirror",
+  "commits_total": 196,
+  "merge_commits": 100,
+  "first_commit": "2026-09-19T11:18:22-04:00",
+  "last_commit": "2026-09-20T10:33:20-04:00",
+  "commits_pre_hackathon": 0,
+  "commits_during_hackathon": 196,
+  "authors": {
+   "monster0506": 126,
+   "andrew roddy": 40,
+   "andrewroddy": 15,
+   "ben": 12,
+   "sumedh": 3
+  },
+  "n_authors": 5,
+  "bot_authors": [],
+  "top_author_share": 0.64,
+  "avg_msg_len": 44.4,
+  "low_quality_msg_share": 0.02,
+  "active_hours_during": 22,
+  "ai_coauthored_commits": 0,
+  "files_total": 225,
+  "vendored_files_committed": 0,
+  "vendored_dirs": [],
+  "loc_by_lang": {
+   "C#": 14480,
+   "CSS": 2952,
+   "JavaScript": 2045,
+   "Markdown": 258,
+   "JSON": 135,
+   "YAML": 93
+  },
+  "code_loc": 19477,
+  "code_files": 186,
+  "big_files": [],
+  "secrets_found": [],
+  "env_files_committed": [],
+  "has": {
+   "readme": true,
+   "tests": true,
+   "ci": true,
+   "docker": true,
+   "manifest": true,
+   "env_example": true,
+   "gitignore": true,
+   "license": false,
+   "lint": false,
+   "ts": false,
+   "assets": 11,
+   "notebooks": 0
+  },
+  "manifests": [
+   "package.json"
+  ],
+  "readme_len": 7342,
+  "readme_words": 1119,
+  "loc_added_during_hackathon": 19477,
+  "default_branch": "HEAD",
+  "branches": 104,
+  "description_from_readme_head": "# Money Mirror  Plenty of apps will tell you a net worth number. Very few will tell you where it came from, and almost none teach you anything you can act on afterwards.  Money Mirror is built on the opposite bet. A number you can't explain is a number you can't make decisions with, so every figure in this app arrives with its reasoning attached: the comparable listings behind a valuation, the BLS"
+ },
+ {
   "dir": "Anish-Satish_Steel-Hacks-2026-Game",
   "repo": "Anish-Satish_Steel-Hacks-2026-Game",
   "commits_total": 44,
@@ -1456,6 +1519,78 @@
   "default_branch": "main",
   "branches": 2,
   "description_from_readme_head": ""
+ },
+ {
+  "dir": "RandaKamal_slotsaver",
+  "repo": "RandaKamal_slotsaver",
+  "commits_total": 105,
+  "merge_commits": 6,
+  "first_commit": "2026-09-19T13:31:50-04:00",
+  "last_commit": "2026-09-20T10:48:25-04:00",
+  "commits_pre_hackathon": 0,
+  "commits_during_hackathon": 105,
+  "authors": {
+   "kevin dohsi": 69,
+   "randakamal237": 13,
+   "zaidhanif1": 22,
+   "randa kamal": 1
+  },
+  "n_authors": 4,
+  "bot_authors": [],
+  "top_author_share": 0.66,
+  "avg_msg_len": 50.2,
+  "low_quality_msg_share": 0.02,
+  "active_hours_during": 18,
+  "ai_coauthored_commits": 67,
+  "files_total": 230,
+  "vendored_files_committed": 0,
+  "vendored_dirs": [],
+  "loc_by_lang": {
+   "JSON": 14770,
+   "Python": 6976,
+   "TypeScript": 1944,
+   "Markdown": 1504,
+   "HTML": 517,
+   "CSS": 362,
+   "YAML": 328,
+   "JavaScript": 52,
+   "TOML": 4
+  },
+  "code_loc": 9851,
+  "code_files": 151,
+  "big_files": [
+   [
+    "docs/slotsaver.mp4",
+    5901329
+   ]
+  ],
+  "secrets_found": [],
+  "env_files_committed": [],
+  "has": {
+   "readme": true,
+   "tests": true,
+   "ci": true,
+   "docker": true,
+   "manifest": true,
+   "env_example": true,
+   "gitignore": true,
+   "license": true,
+   "lint": true,
+   "ts": true,
+   "assets": 5,
+   "notebooks": 0
+  },
+  "manifests": [
+   "apps/web/package.json",
+   "apps/api/requirements.txt",
+   "apps/api/pyproject.toml"
+  ],
+  "readme_len": 8446,
+  "readme_words": 1218,
+  "loc_added_during_hackathon": 9851,
+  "default_branch": "HEAD",
+  "branches": 6,
+  "description_from_readme_head": "# SlotSaver \u2014 AI-Powered Cancellation Recovery for Service Businesses  SlotSaver helps appointment-based businesses recover revenue from last-minute cancellations.  Instead of relying on static waitlists or manual phone calls, SlotSaver remembers customer scheduling preferences, ranks the best replacement candidates using NVIDIA Nemotron, and contacts them through ElevenLabs voice agents.  If norm"
  },
  {
   "dir": "RecursiveFunctions_HelloWord",
@@ -2999,6 +3134,77 @@
   "description_from_readme_head": "# SteelHacks2026-Squoders  Our SteelHacks 2026 submission: receive email over a [Meshtastic](https://meshtastic.org/) LoRa mesh network, with no cellular or Wi-Fi needed at the receiving end.  > **Status:** the gateway side works end to end on real hardware: Gmail polling, email parsing, compression into radio packets, LoRa transfer, and decoding on the far node. **Not built yet:** the gateway loo"
  },
  {
+  "dir": "jscanga_transfr",
+  "repo": "jscanga_transfr",
+  "commits_total": 32,
+  "merge_commits": 1,
+  "first_commit": "2026-09-19T21:33:36-04:00",
+  "last_commit": "2026-09-20T10:17:57-04:00",
+  "commits_pre_hackathon": 0,
+  "commits_during_hackathon": 32,
+  "authors": {
+   "james widmer": 6,
+   "aayush s": 15,
+   "jscanga": 11
+  },
+  "n_authors": 3,
+  "bot_authors": [],
+  "top_author_share": 0.47,
+  "avg_msg_len": 43.8,
+  "low_quality_msg_share": 0.0,
+  "active_hours_during": 7,
+  "ai_coauthored_commits": 5,
+  "files_total": 69,
+  "vendored_files_committed": 0,
+  "vendored_dirs": [],
+  "loc_by_lang": {
+   "TypeScript": 5859,
+   "JSON": 4095,
+   "JavaScript": 282,
+   "CSS": 241,
+   "Markdown": 28,
+   "HTML": 19
+  },
+  "code_loc": 6401,
+  "code_files": 46,
+  "big_files": [
+   [
+    "server/src/data/transfer-equivalencies.json",
+    12106987
+   ],
+   [
+    "client/public/data/transfer-equivalencies.json",
+    12106987
+   ]
+  ],
+  "secrets_found": [],
+  "env_files_committed": [],
+  "has": {
+   "readme": true,
+   "tests": false,
+   "ci": true,
+   "docker": false,
+   "manifest": true,
+   "env_example": false,
+   "gitignore": true,
+   "license": false,
+   "lint": true,
+   "ts": true,
+   "assets": 1,
+   "notebooks": 0
+  },
+  "manifests": [
+   "server/package.json",
+   "client/package.json"
+  ],
+  "readme_len": 1690,
+  "readme_words": 256,
+  "loc_added_during_hackathon": 6401,
+  "default_branch": "HEAD",
+  "branches": 2,
+  "description_from_readme_head": "## Steel Hacks 2026: James Scanga, Aayush Shah, James Widmer  # transfr ![Slopathon](client/public/favicon.svg)   Optimize Your Degree, Save Your Future  Most students plan their degree in a spreadsheet and find out what it costs when the bill arrives. transfr puts both in one screen: a four-year timeline that checks your major and gen-ed requirements as you build it, and a searchable database of "
+ },
+ {
   "dir": "kyuhan28_nemotrontriagemodel",
   "repo": "kyuhan28_nemotrontriagemodel",
   "commits_total": 6,
@@ -3187,6 +3393,74 @@
   "default_branch": "main",
   "branches": 7,
   "description_from_readme_head": "# corrective URL: [Access CorrectivePT here](https://corrective-theta.vercel.app/#/)  This is our Steelhacks 2026 Project. The team consisted of Nathan Pozzuto, Arjay Gralewski-Goel (GitHub Link), and Finn Petz (GitHub Link). For all 3 of us, this is our first actual coding project so we basically just used AI for everything (this choice seems justified because we were given over $100 in compute v"
+ },
+ {
+  "dir": "oliverchennn_clausegraph",
+  "repo": "oliverchennn_clausegraph",
+  "commits_total": 105,
+  "merge_commits": 13,
+  "first_commit": "2026-09-19T12:21:51-04:00",
+  "last_commit": "2026-09-20T12:01:24-04:00",
+  "commits_pre_hackathon": 0,
+  "commits_during_hackathon": 105,
+  "authors": {
+   "vincent zhu": 33,
+   "oliverchennn": 7,
+   "oliver chen": 7,
+   "vzhu08": 43,
+   "daniel": 15
+  },
+  "n_authors": 5,
+  "bot_authors": [],
+  "top_author_share": 0.41,
+  "avg_msg_len": 57.5,
+  "low_quality_msg_share": 0.0,
+  "active_hours_during": 20,
+  "ai_coauthored_commits": 14,
+  "files_total": 211,
+  "vendored_files_committed": 0,
+  "vendored_dirs": [],
+  "loc_by_lang": {
+   "Python": 8916,
+   "TypeScript": 6165,
+   "JSON": 4369,
+   "Markdown": 2391,
+   "CSS": 572,
+   "YAML": 295,
+   "SQL": 116,
+   "TOML": 10,
+   "JavaScript": 9
+  },
+  "code_loc": 15778,
+  "code_files": 99,
+  "big_files": [],
+  "secrets_found": [],
+  "env_files_committed": [],
+  "has": {
+   "readme": true,
+   "tests": true,
+   "ci": true,
+   "docker": true,
+   "manifest": true,
+   "env_example": true,
+   "gitignore": true,
+   "license": false,
+   "lint": true,
+   "ts": true,
+   "assets": 1,
+   "notebooks": 0
+  },
+  "manifests": [
+   "pyproject.toml",
+   "frontend/package.json",
+   "backend/requirements.txt"
+  ],
+  "readme_len": 9943,
+  "readme_words": 1287,
+  "loc_added_during_hackathon": 15778,
+  "default_branch": "HEAD",
+  "branches": 24,
+  "description_from_readme_head": "# ClauseGraph Verify  An evidence-backed emergency cash planner: uploaded clauses become reviewed rules, a dependency graph and a deterministic action plan. Verify the saved action schedule against every case in explicitly declared bounded uncertainties, or inspect the concrete counterexample that breaks it. It never sends requests, applies for benefits, cancels services or moves money.  ## Hackat"
  },
  {
   "dir": "owen-ipc_FoodFinder",

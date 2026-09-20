@@ -1,0 +1,109 @@
+[
+  {
+    "repo": "jscanga/transfr",
+    "project_name": "transfr",
+    "one_liner": "Pitt degree planner that pairs a 12-term timeline with a live requirement checker and a searchable, per-credit-priced database of 43,239 transfer equivalencies from 1,801 schools, plus a cost-optimizing 'Autocomplete my degree' that reroutes courses to cheaper schools.",
+    "problem": "Students plan degrees in spreadsheets and only discover the cost when the bill arrives; transfer credit from cheaper schools could cut tuition but Pitt's equivalency data is unsearchable and unpriced.",
+    "target_user": "University of Pittsburgh undergraduates (currently CS BS only), modelled as PA residents.",
+    "claimed_tracks": [],
+    "best_fit_tracks": [
+      "Seed Round (Pear VC & Afore Capital)",
+      "No Wrapper",
+      "Compound",
+      "MLH .Tech domain"
+    ],
+    "team_size_claimed": 3,
+    "live_url": "https://transfr.tech/",
+    "stack": [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/Radix UI",
+      "pdfjs-dist",
+      "static JSON data + localStorage",
+      "Express (dev-only, unused in prod)",
+      "Vercel",
+      "College Scorecard/IPEDS cost data"
+    ],
+    "core_loop": "User adds Pitt courses or transfer equivalencies (search by Pitt course, sorted cheapest-first, % online filter) into a 4-year Fall/Spring/Summer grid -> in-browser engine re-evaluates major + gen-ed requirements and cost (Pitt flat $12,322 at 12+ credits, $1,026/credit below; transfers billed at the home school's residency-aware per-credit rate) -> 'Autocomplete my degree' picks courses for every unmet requirement and sweeps 'transfer the cheapest k' to exploit the flat-rate cliff -> preview modal shows all-at-Pitt price struck through vs optimized total -> apply/undo. Optional PeopleSoft What-If PDF import seeds the plan.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "Pitt tuition constants hardcoded; single major (CS BS) with a scaffold dropdown; most catalog credits default to 3; per-credit cost is derived (annual tuition/30) and fuzzy-name matched (1,696 of 1,801 schools priced); PDF import contains a documented DEMO HARDCODE that routes specific transfer courses to named schools; hidden Ctrl+D demo panel loads two canned sample plans (they still run through the real engine); no prerequisite checking; Express server and student-plan.json are legacy, production is fully static.",
+    "demo_risks": "Low: no backend, no API keys, no LLM. The 12MB equivalency JSON loads lazily on first transfer search/autocomplete (a few seconds on venue wifi). PDF import only works on the PeopleSoft What-If format and carries demo-specific routing.",
+    "ui_experience": "Polished pastel 'aged paper' theme with hand-drawn inline-SVG seasonal art per term card (drifting leaves, swaying flowers, sun over dunes), animated count-up cost hero with light sweep, SVG progress ring, requirement pills bar, shadcn modals for course/term picking, autocomplete preview with per-term picks and savings hero, undo toast. ~15 components, 2 tabs. Fully touchable in a demo.",
+    "physical_or_sensory": "none",
+    "integrity_flags": "First commit (Sep 19 21:33, ~10.5h after start) already contained a complete MVP with a 'Redesign frontend' message, so earlier iterations were unversioned, though the timestamp is inside the event. Real Pitt equivalency data and IPEDS cost data (1,725 schools) shipped in-repo. No secrets committed. No starter-kit reuse detected. README names no tracks.",
+    "ai_scaffolding_flags": ".gitignore excludes 'Claude outputs/' (Claude-assisted build); code comments are long LLM-style essays; no CLAUDE.md/AGENTS.md/handoff docs; docs are smaller than code.",
+    "novelty_notes": "Degree planners are a common category; the twist is real: pricing every transfer equivalency with per-credit cost and online share, and an optimizer that understands Pitt's flat-rate cliff (moving one course out of a full term saves nothing, so it sweeps cutoffs instead of greedy per-course). No LLM anywhere.",
+    "need_notes": "Specific, credible pain (tuition cost, opaque transfer credit) backed by real data volume, but evidence of demand is the founders' own student experience; only CS BS is modelled; per-credit prices are estimates.",
+    "wow_moment": "Click 'Autocomplete my degree' on an empty planner: four years fill in, the all-at-Pitt price appears struck through next to a lower optimized total, and specific CCAC summer courses show $252/credit vs Pitt's $1,026.",
+    "wow_type": "UNEXPECTED-TWIST",
+    "scores": {
+      "S1": 7,
+      "S2": 7,
+      "S3": 7,
+      "S4": 12,
+      "S5": 9,
+      "wow": 6
+    },
+    "score_rationale": "Common category with a genuine new mechanism (S1 7). Real pain, real data, no demand evidence beyond authors (S2 7). Strong Seed Round and No Wrapper fit, credible .Tech stack; Compound only partial (S3 7). Static, real data path, error/loading states, undo, polished, but hardcoded tuition, demo hardcode in import, no tests (S4 12). Attractive animated UI, interactive, nothing physical (S5 9). One clear 'neat' savings reveal (wow 6).",
+    "judge_summary": "A Pitt degree planner that prices 43k real transfer equivalencies and auto-fills a cheaper four-year plan, showing the all-Pitt price struck through next to the optimized total. Fully static, no LLM, polished seasonal UI. Single major only and tuition constants are hardcoded, but the savings reveal is memorable."
+  },
+  {
+    "repo": "RandaKamal/slotsaver",
+    "project_name": "SlotSaver",
+    "one_liner": "Autonomous cancellation recovery for clinics: an ElevenLabs voice agent captures patients' scheduling intent, Nemotron extracts/ranks/decides, and when a slot is cancelled the system phones the best-fit patient via ElevenLabs+Twilio, cascades on decline or timeout, and falls back to policy-checked incentives.",
+    "problem": "Last-minute cancellations leave paid appointment slots empty; waitlists store availability rather than intent, and staff have no time to phone around, so revenue evaporates.",
+    "target_user": "Appointment-based small businesses (dental/medical clinic primary; tutoring and barber profiles seeded) and their patients.",
+    "claimed_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "Out Loud! (ElevenLabs)",
+      "Tiger Data (MLH)"
+    ],
+    "best_fit_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "Out Loud! (ElevenLabs)",
+      "Compound",
+      "Seed Round (Pear VC & Afore Capital)",
+      "MLH Tiger Data"
+    ],
+    "team_size_claimed": 3,
+    "live_url": "https://slotsaver-smoky.vercel.app",
+    "stack": [
+      "Next.js 14",
+      "TypeScript",
+      "Tailwind + CSS modules",
+      "@elevenlabs/react",
+      "FastAPI",
+      "SQLAlchemy",
+      "SQLite/Postgres (TigerData)",
+      "NVIDIA NIM via OpenAI SDK (nemotron-3-super-120b, fallback nemotron-3.5-lightning-30b)",
+      "ElevenLabs Conversational AI (browser agent + phone agent)",
+      "Twilio (trial)",
+      "Vercel + Render + GitHub Actions keep-warm",
+      "LaTeX/matplotlib paper"
+    ],
+    "core_loop": "Patient speaks to the ElevenLabs agent (browser widget or phone) -> save_scheduling_intent tool POSTs raw words -> Nemotron extracts hard constraints/soft preferences in a background task (plus a critique pass) -> owner cancels a booking on the calendar (or a patient cancels by voice) -> slot freed atomically -> deterministic eligibility filter (excluded days, providers, expiry) -> Nemotron ranks survivors -> Nemotron decide_outreach + generate_call_brief -> if the business profile has auto_call_enabled, ElevenLabs places a real outbound call with dynamic variables -> a 3s scheduler polls ElevenLabs for call end; booked-by-them = accepted, ended-without-booking = declined -> queue advances; on exhaustion Nemotron picks an incentive from the allowed list, backend validates it against max discount/revenue floor/excluded services, and re-offers -> calendar polls every 2s and shows stage badges.",
+    "wired_end_to_end": true,
+    "mocked_or_hardcoded": "DEMO_CALL_OVERRIDE_NUMBER routes every outbound call to one Twilio-verified number; 'Dr. Lee week' seed with scripted patient preference texts and an unauthenticated /api/dev/seed reset; seeded profiles set auto_call_enabled=True and 15-40s offer timeouts; frontend falls back to clearly labelled sample metrics/appointments/candidates when the API is unreachable; mock_store PATIENTS still back the legacy /api/recovery/plan playground route; the Gemini 'world-understanding' layer from the original plan is dead code (never imported); recent_declines fatigue signal hardcoded 0; voice_service.py is empty; README video path is wrong (docs/slotsaver.mp4 exists).",
+    "demo_risks": "High external surface: NVIDIA NIM rate limits (ranking measured 10-40s, with model fallback), ElevenLabs, Twilio trial ('press any key' preamble, only verified numbers callable), Render free tier ~1 min cold start (mitigated by a 10-min GitHub Actions ping), Vercel/Render CORS env. Failures degrade gracefully (eligible-but-unranked, ranking_failed retry) rather than crash. Hindi extraction known broken. Fix commits landed until 10:48 on deadline day.",
+    "ui_experience": "Clean indigo/white SaaS dashboard (Inter): sidebar, live metric cards, animated 'Scout' bunny mascot with states, week calendar grid where cancelling a booking opens a recovery panel that polls live ranking (scores + reasons), stage badges like 'Calling candidate 2 of 4' / 'Incentive offer', outreach queue, business-profile/incentive settings page, browser voice-agent page with live state indicator. ~10 components, 5 pages. Judges can cancel a slot and receive the phone call.",
+    "physical_or_sensory": "audio",
+    "integrity_flags": "All 111 commits inside the event window (Sep 19 13:31 to Sep 20 10:48). No secrets in git (.env.example only; render.yaml marks keys sync:false), though HANDOFF admits the ElevenLabs key leaked in chat transcripts and was not rotated; agent IDs and phone number are committed. Destructive seed and call-placing endpoints are unauthenticated (acknowledged). Paper's Gemini arm is n=23 with 42 quota errors, so its 95.7% is weak; earlier self-labelled N=5 RecoveryBench is explicitly disowned in docs. README names no tracks; sponsor use is implied.",
+    "ai_scaffolding_flags": "Heavy: HANDOFF.md is addressed to 'the next Claude Code session'; TEAM_INSTRUCTIONS.md and FOLDER_STRUCTURE.md are file-ownership maps for three developers running Claude Code in parallel; commit messages and comments are LLM-style essays; HANDOFF states Claude authored benchmark scenarios, labels and prompts. Docs ~60KB md + 22KB tex versus ~10.4k source lines, so code still outweighs docs.",
+    "novelty_notes": "Waitlist auto-fill tools exist commercially, but storing extracted scheduling intent (hard vs soft constraints, expiry) and closing the loop with autonomous outbound voice calls plus a policy-bounded incentive fallback is a distinctive combination. The side paper on output-token-ceiling confounds in NATURAL PLAN (Nemotron 84.6% at 4096 tokens, paired McNemar, n=65/model) is unusual rigor for a hackathon.",
+    "need_notes": "Specific buyer (clinic owner), quantified pain ($120 per empty slot), three business profiles suggest generality; evidence is framing and seeded scenarios, no interviews or quotes.",
+    "wow_moment": "Owner clicks cancel on a calendar booking; within ~30s the panel shows Nemotron's ranked patients with reasons, then a judge's phone actually rings with an ElevenLabs receptionist offering the slot; decline it and the panel visibly moves to candidate 2 with a discount spoken aloud.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 7,
+      "S2": 7,
+      "S3": 8,
+      "S4": 12,
+      "S5": 12,
+      "wow": 8
+    },
+    "score_rationale": "Distinctive intent-memory plus autonomous voice cascade (S1 7). Specific buyer and dollar pain, no external validation (S2 7). Nemotron as non-chat decision engine with a real public benchmark, documented failures, stacked with voice-first ElevenLabs and revenue recovery (S3 8). Loop is real end to end with tests, scheduler, race guards and graceful degradation, but demo relies on trial-Twilio override and seeded data (S4 12). Clean dashboard plus a live phone call (S5 12). Phone ringing is a strong wow (8).",
+    "judge_summary": "Cancel a clinic appointment on the dashboard and a real phone rings: Nemotron ranked the patients, ElevenLabs is offering the slot, and if they decline it moves to the next person with an approved discount. Real, well-guarded pipeline with a public Nemotron benchmark, but fragile on stage (NIM rate limits, trial Twilio, Render cold starts)."
+  }
+]

@@ -135,6 +135,451 @@
   }
  },
  {
+  "dir": "oliverchennn_clausegraph",
+  "repo": "oliverchennn/clausegraph",
+  "name": "ClauseGraph",
+  "one_liner": "Evidence-backed emergency cash planner: contract clauses become reviewed rules, a dependency graph and a CP-SAT action schedule, then the saved plan is exhaustively verified against declared uncertainty bounds with concrete counterexamples.",
+  "scores": {
+   "S1": 7.0,
+   "S2": 6.0,
+   "S3": 7.0,
+   "S4": 10.0,
+   "S5": 9.0,
+   "wow": 5.0
+  },
+  "SUBJ": 39.0,
+  "OBJ": 39.5,
+  "TOTAL": 78.5,
+  "tracks": [
+   "xtract",
+   "nemotron",
+   "compound"
+  ],
+  "judge_note": "A contract-clause-to-cash-plan tool that formally verifies a saved payment schedule and shows the exact payday that breaks it in red on the chart. Extremely rigorous engineering and honest docs, but the whole demo runs on hand-coded synthetic fixtures; live Nemotron extraction only worked on a self-hosted GPU.",
+  "wow_type": "UNEXPECTED-TWIST",
+  "wow_moment": "Declare 'payday could be any day Sep 21-28', click Verify: the $50-minimum plan flips to UNSAFE, a red counterexample line appears on the cash chart (payday Sep 27 -> -$400 on Sep 26), and one click opens the exact quoted clause. Then 'Explain cash gap' proves $400 is the minimum buffer because $399.99 fails.",
+  "rank": 2,
+  "track_rank": {
+   "nemotron": 2,
+   "xtract": 1,
+   "compound": 1
+  },
+  "judge_range": {
+   "nemotron": "11\u201314",
+   "xtract": "2\u20135",
+   "compound": "6\u20139"
+  },
+  "judge_rank": {
+   "nemotron": 12,
+   "xtract": 3,
+   "compound": 7
+  },
+  "evidence": {
+   "repo": "oliverchennn/clausegraph",
+   "project_name": "ClauseGraph Verify",
+   "one_liner": "Evidence-backed emergency cash planner: contract clauses become reviewed rules, a dependency graph and a CP-SAT action schedule, then the saved plan is exhaustively verified against declared uncertainty bounds with concrete counterexamples.",
+   "problem": "People facing an income interruption must juggle rent, bills, approved payment shifts and cancellation clauses to avoid going negative; existing tools don't reason over interacting clauses or prove a plan survives an uncertain payday.",
+   "target_user": "Individuals bridging a short cash-timing gap (e.g., final paycheck delayed) who hold contracts/bills with deferral, cancellation or assistance clauses.",
+   "claimed_tracks": [
+    "Beyond the Chatbot (NVIDIA Nemotron)",
+    "MLH: Tiger Data",
+    "MLH: DigitalOcean",
+    "MLH: ElevenLabs",
+    "MLH: Gemini API (optional)"
+   ],
+   "best_fit_tracks": [
+    "Xtract (LANXESS)",
+    "Beyond the Chatbot (NVIDIA Nemotron)",
+    "Compound"
+   ],
+   "team_size_claimed": 3,
+   "live_url": null,
+   "stack": [
+    "Python 3.12",
+    "FastAPI",
+    "Pydantic",
+    "SQLAlchemy (SQLite/PostgreSQL 17)",
+    "OR-Tools CP-SAT",
+    "networkx",
+    "pypdf/pypdfium2",
+    "httpx",
+    "NVIDIA Nemotron 3.5 Lightning 30B (extraction)",
+    "NVIDIA Nemotron 3 Nano Omni 30B (evidence check/OCR)",
+    "Gemini (optional)",
+    "ElevenLabs STT/TTS (optional)",
+    "Next.js 15 / React",
+    "Tailwind v4 + custom CSS",
+    "Radix UI",
+    "Recharts",
+    "React Flow (@xyflow)",
+    "Playwright",
+    "pytest",
+    "Docker Compose",
+    "GitHub Actions CI"
+   ],
+   "core_loop": "Upload doc -> native text (or consented Nemotron OCR) -> Nemotron Lightning extracts typed rule/action candidates with quote spans -> deterministic validator checks quotes/offsets/amounts/dates literally in source -> Nemotron Omni evidence check -> human review + approval gates -> CP-SAT plans action schedule maximizing minimum cash -> Recharts projection + decision trace -> user declares uncertainty bounds -> exhaustive finite-state verification returns SAFE/UNSAFE/UNKNOWN with counterexample -> cash-gap minimality diagnostic -> resilient schedule search + fingerprinted adoption.",
+   "wired_end_to_end": "partial",
+   "mocked_or_hardcoded": "Demo path is fully fixture-backed: the six synthetic docs' rules, events and actions are hand-coded in backend/clausegraph/demo.py (no model extracts them); demo script explicitly makes zero model calls. Real upload->worker->Nemotron path is implemented (httpx adapters, JSON-schema output, literal validators) but per the team's own EXTRACTION_CHECK.md both hosted NVIDIA attempts FAILED (native text timeout at 120s; OCR HTTP 503); the only successful live extraction was on a self-hosted Brev H100 via SSH tunnel (3/5 then 5/5 exact fields on five synthetic clauses). scripts/eval_nemotron.py default mode scores fixture candidates through local gates, not the model. Consequence walkthrough is a null placeholder component. ElevenLabs STT/TTS, Gemini, Tiger Data, DO Spaces adapters exist but were never live-tested. Resilient synthesis needs a separate 3-doc fixture because the main fixture admits no resilient schedule.",
+   "demo_risks": "Low for the synthetic story (local SQLite, no network, prepared fallback runbook, reset script). High for any live extraction: hosted NVIDIA endpoints timed out/503'd; Brev GPU must be running with tunnel; 120s provider timeout. Rehearsal log says no human spoken run was ever recorded; only a 180s Playwright-driven run. UI is dense and caveat-heavy, easy to lose a judge in 3 minutes.",
+   "ui_experience": "Polished SaaS dashboard: dark sidebar, 3 metric cards, 4 tabs (overview/documents/graph/history), Recharts step chart with baseline/plan lines and a red dashed counterexample overlay, React Flow dependency graph with click-to-evidence and rule highlighting, Radix evidence drawer with blockquoted source, review queue, scenario side-by-side previews, Verify panel with presets, cash-gap and resilient-plan panels, upload/consent/audio/settings dialogs. ~20 components, 13 media queries, responsive to 390px, focus management. Small 13px/9px type, long explanatory prose, no motion beyond spinners.",
+   "physical_or_sensory": "none",
+   "integrity_flags": "All 48 commits fall inside the window (Sep 19 12:21 to Sep 20 10:56 EDT); no secrets committed (.env gitignored). However commit b547df2 at 13:38 on Sep 19 (2h38m after start) already dropped ~4.7K lines of working backend/frontend/tests/CI/Docker/migrations/deploy template plus AGENTS.md and handoff docs; consistent with heavy Codex-agent generation rather than a starter kit, but worth asking about. No copied prior-hackathon project detected.",
+   "ai_scaffolding_flags": "Heavy: AGENTS.md (12KB contributor contract), CLAUDE.md, 52 handoff docs under docs/handoffs, branch names codex/dev-a and codex/dev-b, docs/decisions ADRs, and an explicit 'solo completion instruction' authorizing 'this agent' to act as orchestrator for developers A/B/C. Docs (~3.3K md lines + 2.5K generated types) are comparable to the ~7K lines of hand-written source; code style (one-line dense JSX, exhaustive caveats) reads as agent-authored.",
+   "novelty_notes": "Cash-flow planners are common, but the mechanism is new: evidence-gated rule compiler that rejects any amount/date not literally quoted in the source, integer-cent CP-SAT lexicographic optimizer over clause-derived actions, exhaustive bounded model checking of a fixed schedule with counterexample witness, proven-minimal hypothetical cash diagnostic (amount passes, one cent less fails), and resilient-schedule synthesis with fingerprinted adoption. Formal verification of household finance is not something judges see often.",
+   "need_notes": "Specific, plausible pain (income gap + interacting deferral/cancellation clauses) with genuine domain insight (deferral is timing not savings; cancellation accelerates existing debt; unapproved benefits cannot enter a plan). No user quotes, data or interviews; persona and documents are synthetic.",
+   "wow_moment": "Declare 'payday could be any day Sep 21-28', click Verify: the $50-minimum plan flips to UNSAFE, a red counterexample line appears on the cash chart (payday Sep 27 -> -$400 on Sep 26), and one click opens the exact quoted clause. Then 'Explain cash gap' proves $400 is the minimum buffer because $399.99 fails.",
+   "wow_type": "UNEXPECTED-TWIST",
+   "scores": {
+    "S1": 8,
+    "S2": 6,
+    "S3": 7,
+    "S4": 12,
+    "S5": 9,
+    "wow": 6
+   },
+   "score_rationale": "S1 8: familiar category, genuinely new mechanism (formal verification + evidence-gated compiler). S2 6: real specific pain, domain insight, no user evidence. S3 7: strong Xtract traceability and honest Nemotron eval with documented failures, stacks with Compound, but sponsor model never runs in the demo and hosted path failed. S4 12: synthetic loop polished, 248 backend + 61 real-API browser tests, CI; live extraction unproven, walkthrough stubbed. S5 9: attractive interactive dashboard, dense text. Wow 6: one clear neat moment.",
+   "judge_summary": "A contract-clause-to-cash-plan tool that formally verifies a saved payment schedule and shows the exact payday that breaks it in red on the chart. Extremely rigorous engineering and honest docs, but the whole demo runs on hand-coded synthetic fixtures; live Nemotron extraction only worked on a self-hosted GPU."
+  },
+  "objective": {
+   "dir": "oliverchennn_clausegraph",
+   "repo": "oliverchennn/clausegraph",
+   "code_loc": 15778,
+   "commits_during": 105,
+   "commits_pre": 0,
+   "active_hours": 20,
+   "n_authors": 5,
+   "top_share": 0.41,
+   "readme_words": 1287,
+   "run_instr": true,
+   "has": {
+    "readme": true,
+    "tests": true,
+    "ci": true,
+    "docker": true,
+    "manifest": true,
+    "env_example": true,
+    "gitignore": true,
+    "license": false,
+    "lint": true,
+    "ts": true,
+    "assets": 1,
+    "notebooks": 0
+   },
+   "vendored": 0,
+   "secrets": 0,
+   "fresh_ratio": 1.0,
+   "O1": 10,
+   "O2": 9.5,
+   "O3": 5,
+   "O4": 10,
+   "O5": 5,
+   "OBJ": 39.5,
+   "langs": {
+    "Python": 8916,
+    "TypeScript": 6165,
+    "JSON": 4369,
+    "Markdown": 2391,
+    "CSS": 572,
+    "YAML": 295,
+    "SQL": 116,
+    "TOML": 10,
+    "JavaScript": 9
+   },
+   "first_commit": "2026-09-19T12:21:51-04:00",
+   "last_commit": "2026-09-20T12:01:24-04:00",
+   "ai_coauthored": 14
+  }
+ },
+ {
+  "dir": "AndrewRoddy_MoneyMirror",
+  "repo": "AndrewRoddy/MoneyMirror",
+  "name": "MoneyMirror",
+  "one_liner": "Net-worth app that counts cash, camera-scanned possessions and your labor-market earning power, with every figure carrying its reasoning.",
+  "scores": {
+   "S1": 7.0,
+   "S2": 5.0,
+   "S3": 6.0,
+   "S4": 10.0,
+   "S5": 11.0,
+   "wow": 7.0
+  },
+  "SUBJ": 39.0,
+  "OBJ": 39.3,
+  "TOTAL": 78.3,
+  "tracks": [
+   "xtract",
+   "nemotron",
+   "seed"
+  ],
+  "judge_note": "Tap an object in a live camera feed, a glowing outline snaps to it, vision plus Nemotron name and price it, and it lands in your net worth beside a resume-derived earning range. Polished, well-tested Blazor app on real providers, but the advertised BLS grounding isn't wired and LLM guesses wear a 'Market evidence' badge.",
+  "wow_type": "VISCERAL",
+  "wow_moment": "Point a phone at a Fanta can or headphones, tap it, watch a glowing outline snap around it in the browser, then see it named, priced and rolled into net worth within seconds.",
+  "rank": 3,
+  "track_rank": {
+   "nemotron": 3,
+   "xtract": 2,
+   "seed": 1
+  },
+  "judge_range": {
+   "nemotron": "3\u20136",
+   "xtract": "1\u20133",
+   "seed": "1\u20134"
+  },
+  "judge_rank": {
+   "nemotron": 4,
+   "xtract": 1,
+   "seed": 2
+  },
+  "evidence": {
+   "repo": "AndrewRoddy/MoneyMirror",
+   "project_name": "MoneyMirror",
+   "one_liner": "Net-worth app that counts cash, camera-scanned possessions and your labor-market earning power, with every figure carrying its reasoning.",
+   "problem": "Finance apps hand over a total without explaining it; possessions and earning power go uncounted, so users learn nothing actionable.",
+   "target_user": "Young adults/students who want a fuller, explainable picture of net worth; single-user, runs locally via Docker.",
+   "claimed_tracks": [
+    "Beyond the Chatbot (NVIDIA Nemotron) - implied by 'Powered by NVIDIA Nemotron' on landing/README; no explicit track list in repo"
+   ],
+   "best_fit_tracks": [
+    "Beyond the Chatbot (NVIDIA Nemotron)",
+    "Xtract (LANXESS)",
+    "Seed Round (Pear VC & Afore Capital)"
+   ],
+   "team_size_claimed": null,
+   "live_url": null,
+   "stack": [
+    "ASP.NET Core 9 / Blazor Server (C#)",
+    "EF Core + PostgreSQL (Docker Compose)",
+    "NVIDIA NIM: nemotron-3-nano-omni-30b-a3b-reasoning + meta/llama-3.2-11b-vision-instruct",
+    "Anthropic Claude Sonnet 4.5 as silent LLM fallback",
+    "MobileSAM ONNX in-browser via onnxruntime-web (WebGPU/WASM, model from Hugging Face, ORT from jsDelivr)",
+    "eBay Browse API (sandbox default)",
+    "BLS Public Data API v2 client (built, unwired)",
+    "PdfPig + Open XML for resume text",
+    "Bootstrap 5 + custom token theme",
+    "xUnit/bunit + Node tests, GitHub Actions"
+   ],
+   "core_loop": "Blazor UI -> (a) photo upload or live camera: in-browser MobileSAM tap-to-segment cutout -> NVIDIA vision identifies item (JSON, re-prompt on prose) -> eBay comps median or Nemotron price guess -> save to Postgres inventory -> rolls into net worth; (b) resume PDF/DOCX -> text -> Nemotron JSON profile -> editable/saved -> Nemotron occupation matches + LLM salary range -> deterministic skill gaps, growth path, opportunities; (c) manual financial assets/liabilities in Postgres -> deterministic net worth.",
+   "wired_end_to_end": "partial",
+   "mocked_or_hardcoded": "BLS-grounded MarketPotentialPipeline (BlsWageDataService -> aggregator -> Nemotron explain-only) is built and tested but never called by any page (own remark #266: no occupation-to-series mapping after O*NET was dropped); the compensation range and per-occupation ranges shown are Nemotron guesses (AiEstimatedCompensationService prompt says 'not a lookup of real wage data'). eBay defaults to sandbox URLs that 'rarely' have comps, so valuation silently falls back to an LLM price guess; AssetValuation.SourceLabel is hardcoded to 'Market evidence' regardless of provenance and IsLowConfidence is deliberately never shown. Vision prompts embed a 7-item 'known demo prop set' (Pixel 9 Pro, Fanta can, Beats, Logitech keyboard, chips, mug, Yoggies) and tell the model to heavily favor them. Video room-scan is built but hidden (ShowVideoScan defaults false). InMemoryFinancialEntryStore registered but unused.",
+   "demo_risks": "Needs NVIDIA NIM keys and shared endpoint (code documents ~1-in-6 503s and non-JSON vision replies; retry handler + Claude fallback mitigate); Nemotron reasoning calls observed 60-90s; first camera start downloads ~40MB MobileSAM from Hugging Face plus onnxruntime from jsDelivr; camera/WebGPU require HTTPS or localhost (a phone on LAN over http gets no camera, WASM fallback is slow); Docker+Postgres must be up; eBay sandbox seldom returns comps so 'Market evidence' is usually an LLM guess.",
+   "ui_experience": "Blazor Server + Bootstrap 5 with a custom Pitt-branded token theme (Sora/Inter), mobile-first bottom tab bar / desktop rail. Landing pitch page with live net-worth band; Financial ledger with tabs, add/edit forms; Physical Assets page with live camera viewfinder, pulsing glow SVG contour, +/- refine taps, WebGPU/WASM badge, detection review cards with filters and bulk actions; 'Pocket Ledger' inventory with expandable valuation history and comps; Human Capital page is mostly plain lists. Spinners, error alerts with 'Show provider response'. Judges can point a phone at an object and tap.",
+   "physical_or_sensory": "AR-lite: live camera viewfinder with real-time on-device segmentation overlay; no hardware/audio/3D/map",
+   "integrity_flags": "All 258 commits inside the window (first 2026-09-19 11:18 EDT, last 2026-09-20 10:34 EDT) from 4 committers (Roddy, Raklovits, Leber, Joshi); no secrets (.env.example only); CI, 224 xUnit/bunit + 39 Node tests. Concerns: README and landing claim BLS-grounded ranges and 'low confidence gets flagged, not hidden' while code does the opposite; LLM guesses wear a 'Market evidence' badge (last-hour commits 'Remove AI estimate text from every page', 'drop confidence wording'); vision prompt biased to demo props; Claude can silently answer in Nemotron's place.",
+   "ai_scaffolding_flags": "No CLAUDE.md/AGENTS.md/handoff docs; docs (~110 lines) far smaller than code. 285 PRs in ~24h with issue-numbered XML-doc prose on nearly every class strongly suggests heavy agent-assisted development.",
+   "novelty_notes": "Net-worth trackers are common; the twist is treating possessions (scan a room, tap an object, price it from comps) and earning power (resume -> occupations -> range -> skill gaps -> reachable roles) as first-class capital, with in-browser MobileSAM segmentation. Each piece exists elsewhere; the combination and the 'every number explained' stance are distinctive.",
+   "need_notes": "Articulate framing (budget apps end at the balance; possessions and under-30 earning power uncounted) but no user evidence, data or quotes; single-user local tool with no auth. Plausible, somewhat generic.",
+   "wow_moment": "Point a phone at a Fanta can or headphones, tap it, watch a glowing outline snap around it in the browser, then see it named, priced and rolled into net worth within seconds.",
+   "wow_type": "VISCERAL",
+   "scores": {
+    "S1": 7,
+    "S2": 5,
+    "S3": 6,
+    "S4": 11,
+    "S5": 11,
+    "wow": 7
+   },
+   "score_rationale": "S1 7: familiar category, fresh mechanism (tap-to-segment possessions plus priced earning power). S2 5: articulate but unevidenced. S3 6: Nemotron does five non-chat jobs with documented failure handling and stacks with Xtract, but the BLS traceability headline is unwired and provenance labels mislead. S4 11: every user-facing loop runs on real providers with strong error handling and tests, yet BLS unwired, eBay sandbox, video scan hidden. S5 11: touchable live-camera segmentation; rest is Bootstrap. Wow 7.",
+   "judge_summary": "Tap an object in a live camera feed, a glowing outline snaps to it, vision plus Nemotron name and price it, and it lands in your net worth beside a resume-derived earning range. Polished, well-tested Blazor app on real providers, but the advertised BLS grounding isn't wired and LLM guesses wear a 'Market evidence' badge."
+  },
+  "objective": {
+   "dir": "AndrewRoddy_MoneyMirror",
+   "repo": "AndrewRoddy/MoneyMirror",
+   "code_loc": 19477,
+   "commits_during": 196,
+   "commits_pre": 0,
+   "active_hours": 22,
+   "n_authors": 5,
+   "top_share": 0.64,
+   "readme_words": 1119,
+   "run_instr": true,
+   "has": {
+    "readme": true,
+    "tests": true,
+    "ci": true,
+    "docker": true,
+    "manifest": true,
+    "env_example": true,
+    "gitignore": true,
+    "license": false,
+    "lint": false,
+    "ts": false,
+    "assets": 11,
+    "notebooks": 0
+   },
+   "vendored": 0,
+   "secrets": 0,
+   "fresh_ratio": 1.0,
+   "O1": 10,
+   "O2": 9.8,
+   "O3": 4.5,
+   "O4": 10,
+   "O5": 5,
+   "OBJ": 39.3,
+   "langs": {
+    "C#": 14480,
+    "CSS": 2952,
+    "JavaScript": 2045,
+    "Markdown": 258,
+    "JSON": 135,
+    "YAML": 93
+   },
+   "first_commit": "2026-09-19T11:18:22-04:00",
+   "last_commit": "2026-09-20T10:33:20-04:00",
+   "ai_coauthored": 0
+  }
+ },
+ {
+  "dir": "RandaKamal_slotsaver",
+  "repo": "RandaKamal/slotsaver",
+  "name": "SlotSaver",
+  "one_liner": "Autonomous cancellation recovery for clinics: an ElevenLabs voice agent captures patients' scheduling intent, Nemotron extracts/ranks/decides, and when a slot is cancelled the system phones the best-fit patient via ElevenLabs+Twilio, cascades on decline or timeout, and falls back to policy-checked incentives.",
+  "scores": {
+   "S1": 5.0,
+   "S2": 7.0,
+   "S3": 7.0,
+   "S4": 11.0,
+   "S5": 11.0,
+   "wow": 7.0
+  },
+  "SUBJ": 41.0,
+  "OBJ": 36.6,
+  "TOTAL": 77.6,
+  "tracks": [
+   "nemotron",
+   "outloud",
+   "compound",
+   "seed"
+  ],
+  "judge_note": "Cancel a clinic appointment on the dashboard and a real phone rings: Nemotron ranked the patients, ElevenLabs is offering the slot, and if they decline it moves to the next person with an approved discount. Real, well-guarded pipeline with a public Nemotron benchmark, but fragile on stage (NIM rate limits, trial Twilio, Render cold starts).",
+  "wow_type": "VISCERAL",
+  "wow_moment": "Owner clicks cancel on a calendar booking; within ~30s the panel shows Nemotron's ranked patients with reasons, then a judge's phone actually rings with an ElevenLabs receptionist offering the slot; decline it and the panel visibly moves to candidate 2 with a discount spoken aloud.",
+  "rank": 4,
+  "track_rank": {
+   "nemotron": 4,
+   "compound": 2,
+   "seed": 2,
+   "outloud": 1
+  },
+  "judge_range": {
+   "nemotron": "6\u20139",
+   "compound": "1\u20134",
+   "seed": "3\u20136",
+   "outloud": "3\u20136"
+  },
+  "judge_rank": {
+   "nemotron": 7,
+   "compound": 2,
+   "seed": 4,
+   "outloud": 4
+  },
+  "evidence": {
+   "repo": "RandaKamal/slotsaver",
+   "project_name": "SlotSaver",
+   "one_liner": "Autonomous cancellation recovery for clinics: an ElevenLabs voice agent captures patients' scheduling intent, Nemotron extracts/ranks/decides, and when a slot is cancelled the system phones the best-fit patient via ElevenLabs+Twilio, cascades on decline or timeout, and falls back to policy-checked incentives.",
+   "problem": "Last-minute cancellations leave paid appointment slots empty; waitlists store availability rather than intent, and staff have no time to phone around, so revenue evaporates.",
+   "target_user": "Appointment-based small businesses (dental/medical clinic primary; tutoring and barber profiles seeded) and their patients.",
+   "claimed_tracks": [
+    "Beyond the Chatbot (NVIDIA Nemotron)",
+    "Out Loud! (ElevenLabs)",
+    "Tiger Data (MLH)"
+   ],
+   "best_fit_tracks": [
+    "Beyond the Chatbot (NVIDIA Nemotron)",
+    "Out Loud! (ElevenLabs)",
+    "Compound",
+    "Seed Round (Pear VC & Afore Capital)",
+    "MLH Tiger Data"
+   ],
+   "team_size_claimed": 3,
+   "live_url": "https://slotsaver-smoky.vercel.app",
+   "stack": [
+    "Next.js 14",
+    "TypeScript",
+    "Tailwind + CSS modules",
+    "@elevenlabs/react",
+    "FastAPI",
+    "SQLAlchemy",
+    "SQLite/Postgres (TigerData)",
+    "NVIDIA NIM via OpenAI SDK (nemotron-3-super-120b, fallback nemotron-3.5-lightning-30b)",
+    "ElevenLabs Conversational AI (browser agent + phone agent)",
+    "Twilio (trial)",
+    "Vercel + Render + GitHub Actions keep-warm",
+    "LaTeX/matplotlib paper"
+   ],
+   "core_loop": "Patient speaks to the ElevenLabs agent (browser widget or phone) -> save_scheduling_intent tool POSTs raw words -> Nemotron extracts hard constraints/soft preferences in a background task (plus a critique pass) -> owner cancels a booking on the calendar (or a patient cancels by voice) -> slot freed atomically -> deterministic eligibility filter (excluded days, providers, expiry) -> Nemotron ranks survivors -> Nemotron decide_outreach + generate_call_brief -> if the business profile has auto_call_enabled, ElevenLabs places a real outbound call with dynamic variables -> a 3s scheduler polls ElevenLabs for call end; booked-by-them = accepted, ended-without-booking = declined -> queue advances; on exhaustion Nemotron picks an incentive from the allowed list, backend validates it against max discount/revenue floor/excluded services, and re-offers -> calendar polls every 2s and shows stage badges.",
+   "wired_end_to_end": true,
+   "mocked_or_hardcoded": "DEMO_CALL_OVERRIDE_NUMBER routes every outbound call to one Twilio-verified number; 'Dr. Lee week' seed with scripted patient preference texts and an unauthenticated /api/dev/seed reset; seeded profiles set auto_call_enabled=True and 15-40s offer timeouts; frontend falls back to clearly labelled sample metrics/appointments/candidates when the API is unreachable; mock_store PATIENTS still back the legacy /api/recovery/plan playground route; the Gemini 'world-understanding' layer from the original plan is dead code (never imported); recent_declines fatigue signal hardcoded 0; voice_service.py is empty; README video path is wrong (docs/slotsaver.mp4 exists).",
+   "demo_risks": "High external surface: NVIDIA NIM rate limits (ranking measured 10-40s, with model fallback), ElevenLabs, Twilio trial ('press any key' preamble, only verified numbers callable), Render free tier ~1 min cold start (mitigated by a 10-min GitHub Actions ping), Vercel/Render CORS env. Failures degrade gracefully (eligible-but-unranked, ranking_failed retry) rather than crash. Hindi extraction known broken. Fix commits landed until 10:48 on deadline day.",
+   "ui_experience": "Clean indigo/white SaaS dashboard (Inter): sidebar, live metric cards, animated 'Scout' bunny mascot with states, week calendar grid where cancelling a booking opens a recovery panel that polls live ranking (scores + reasons), stage badges like 'Calling candidate 2 of 4' / 'Incentive offer', outreach queue, business-profile/incentive settings page, browser voice-agent page with live state indicator. ~10 components, 5 pages. Judges can cancel a slot and receive the phone call.",
+   "physical_or_sensory": "audio",
+   "integrity_flags": "All 111 commits inside the event window (Sep 19 13:31 to Sep 20 10:48). No secrets in git (.env.example only; render.yaml marks keys sync:false), though HANDOFF admits the ElevenLabs key leaked in chat transcripts and was not rotated; agent IDs and phone number are committed. Destructive seed and call-placing endpoints are unauthenticated (acknowledged). Paper's Gemini arm is n=23 with 42 quota errors, so its 95.7% is weak; earlier self-labelled N=5 RecoveryBench is explicitly disowned in docs. README names no tracks; sponsor use is implied.",
+   "ai_scaffolding_flags": "Heavy: HANDOFF.md is addressed to 'the next Claude Code session'; TEAM_INSTRUCTIONS.md and FOLDER_STRUCTURE.md are file-ownership maps for three developers running Claude Code in parallel; commit messages and comments are LLM-style essays; HANDOFF states Claude authored benchmark scenarios, labels and prompts. Docs ~60KB md + 22KB tex versus ~10.4k source lines, so code still outweighs docs.",
+   "novelty_notes": "Waitlist auto-fill tools exist commercially, but storing extracted scheduling intent (hard vs soft constraints, expiry) and closing the loop with autonomous outbound voice calls plus a policy-bounded incentive fallback is a distinctive combination. The side paper on output-token-ceiling confounds in NATURAL PLAN (Nemotron 84.6% at 4096 tokens, paired McNemar, n=65/model) is unusual rigor for a hackathon.",
+   "need_notes": "Specific buyer (clinic owner), quantified pain ($120 per empty slot), three business profiles suggest generality; evidence is framing and seeded scenarios, no interviews or quotes.",
+   "wow_moment": "Owner clicks cancel on a calendar booking; within ~30s the panel shows Nemotron's ranked patients with reasons, then a judge's phone actually rings with an ElevenLabs receptionist offering the slot; decline it and the panel visibly moves to candidate 2 with a discount spoken aloud.",
+   "wow_type": "VISCERAL",
+   "scores": {
+    "S1": 7,
+    "S2": 7,
+    "S3": 8,
+    "S4": 12,
+    "S5": 12,
+    "wow": 8
+   },
+   "score_rationale": "Distinctive intent-memory plus autonomous voice cascade (S1 7). Specific buyer and dollar pain, no external validation (S2 7). Nemotron as non-chat decision engine with a real public benchmark, documented failures, stacked with voice-first ElevenLabs and revenue recovery (S3 8). Loop is real end to end with tests, scheduler, race guards and graceful degradation, but demo relies on trial-Twilio override and seeded data (S4 12). Clean dashboard plus a live phone call (S5 12). Phone ringing is a strong wow (8).",
+   "judge_summary": "Cancel a clinic appointment on the dashboard and a real phone rings: Nemotron ranked the patients, ElevenLabs is offering the slot, and if they decline it moves to the next person with an approved discount. Real, well-guarded pipeline with a public Nemotron benchmark, but fragile on stage (NIM rate limits, trial Twilio, Render cold starts)."
+  },
+  "objective": {
+   "dir": "RandaKamal_slotsaver",
+   "repo": "RandaKamal/slotsaver",
+   "code_loc": 9851,
+   "commits_during": 105,
+   "commits_pre": 0,
+   "active_hours": 18,
+   "n_authors": 4,
+   "top_share": 0.66,
+   "readme_words": 1218,
+   "run_instr": false,
+   "has": {
+    "readme": true,
+    "tests": true,
+    "ci": true,
+    "docker": true,
+    "manifest": true,
+    "env_example": true,
+    "gitignore": true,
+    "license": true,
+    "lint": true,
+    "ts": true,
+    "assets": 5,
+    "notebooks": 0
+   },
+   "vendored": 0,
+   "secrets": 0,
+   "fresh_ratio": 1.0,
+   "O1": 9.0,
+   "O2": 9.1,
+   "O3": 4.5,
+   "O4": 9,
+   "O5": 5,
+   "OBJ": 36.6,
+   "langs": {
+    "JSON": 14770,
+    "Python": 6976,
+    "TypeScript": 1944,
+    "Markdown": 1504,
+    "HTML": 517,
+    "CSS": 362,
+    "YAML": 328,
+    "JavaScript": 52,
+    "TOML": 4
+   },
+   "first_commit": "2026-09-19T13:31:50-04:00",
+   "last_commit": "2026-09-20T10:48:25-04:00",
+   "ai_coauthored": 67
+  }
+ },
+ {
   "dir": "declancollins_stockd",
   "repo": "declancollins/stockd",
   "name": "Stockd",
@@ -158,21 +603,21 @@
   "judge_note": "A no-LLM inventory forecaster for small restaurants that gives a new shop a day-one prediction from peer shops and blends toward its own scans over time. Polished, tested, phone-scannable, with a slider that shows the blend happening.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Drag the 'what if it only had N days of history' slider from 84 to 0 and watch the forecast line swing from the shop's own data onto the peer prior; then scan a barcode off the laptop screen with a phone and see stock and stats move.",
-  "rank": 2,
+  "rank": 5,
   "track_rank": {
-   "nowrapper": 1,
-   "seed": 1,
-   "compound": 1
+   "compound": 3,
+   "seed": 3,
+   "nowrapper": 1
   },
   "judge_range": {
-   "nowrapper": "4\u20137",
-   "seed": "3\u20136",
-   "compound": "2\u20135"
+   "compound": "3\u20136",
+   "seed": "5\u20138",
+   "nowrapper": "4\u20137"
   },
   "judge_rank": {
-   "nowrapper": 5,
-   "seed": 4,
-   "compound": 3
+   "compound": 4,
+   "seed": 6,
+   "nowrapper": 5
   },
   "evidence": {
    "repo": "declancollins/stockd",
@@ -301,21 +746,21 @@
   "judge_note": "A voice agent seniors can phone about their money, with a caretaker dashboard that approves changes and injects fraud scenarios live. Big, well-structured build; the demo lands or dies on the phone call actually connecting.",
   "wow_type": "VISCERAL",
   "wow_moment": "Caretaker clicks 'inject $400 gift-card charge' on the dashboard, and a phone on the table rings: June greets Dot by name, asks for her PIN, then warns about the charge.",
-  "rank": 3,
+  "rank": 6,
   "track_rank": {
-   "seed": 2,
-   "compound": 2,
-   "outloud": 1
+   "compound": 4,
+   "seed": 4,
+   "outloud": 2
   },
   "judge_range": {
-   "seed": "2\u20135",
-   "compound": "1\u20134",
-   "outloud": "3\u20136"
+   "compound": "2\u20135",
+   "seed": "4\u20137",
+   "outloud": "4\u20137"
   },
   "judge_rank": {
-   "seed": 3,
-   "compound": 2,
-   "outloud": 4
+   "compound": 3,
+   "seed": 5,
+   "outloud": 5
   },
   "evidence": {
    "repo": "leonac24/steelhacks-2026",
@@ -440,18 +885,18 @@
   "judge_note": "Point a Samsung at a wall and see a LiDAR-scanned room behind it, complete with ghosted people and surfaces that fade as they age. Real pipeline, real AR, deployed to GitHub Pages; the real-room recordings are on a branch and alignment accuracy is unproven.",
   "wow_type": "VISCERAL",
   "wow_moment": "Holding the Samsung up to a real wall and seeing the room behind it fill in as the recording plays, with a glowing 'person - last seen 4 s ago' ghost moving through it.",
-  "rank": 4,
+  "rank": 7,
   "track_rank": {
-   "nowrapper": 2,
-   "seed": 3
+   "seed": 5,
+   "nowrapper": 2
   },
   "judge_range": {
-   "nowrapper": "1\u20133",
-   "seed": "1\u20133"
+   "seed": "1\u20133",
+   "nowrapper": "1\u20133"
   },
   "judge_rank": {
-   "nowrapper": 1,
-   "seed": 1
+   "seed": 1,
+   "nowrapper": 1
   },
   "evidence": {
    "repo": "MichaelYeh507/OmniSight",
@@ -576,23 +1021,23 @@
   "judge_note": "An AP fraud desk that catches 'our bank details changed' emails, holds the payment, and phones the vendor with an ElevenLabs voice; a judge can answer into the mic and watch Nemotron block it. Honest evals, clean fallbacks, memorable demo.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "The presenter hands a judge the mic, the judge says 'no, we never sent that', and the payment flips to BLOCKED on the judge's own voice with the transcript and verdict on screen.",
-  "rank": 5,
+  "rank": 8,
   "track_rank": {
-   "nemotron": 2,
-   "seed": 4,
-   "compound": 3,
-   "outloud": 2
+   "nemotron": 5,
+   "compound": 5,
+   "seed": 6,
+   "outloud": 3
   },
   "judge_range": {
-   "nemotron": "3\u20136",
-   "seed": "1\u20134",
+   "nemotron": "4\u20137",
    "compound": "1\u20133",
+   "seed": "2\u20135",
    "outloud": "2\u20135"
   },
   "judge_rank": {
-   "nemotron": 4,
-   "seed": 2,
+   "nemotron": 5,
    "compound": 1,
+   "seed": 3,
    "outloud": 3
   },
   "evidence": {
@@ -724,10 +1169,10 @@
   "judge_note": "A 3D SimCity-style sandbox of the Pitt campus where you buy crosswalks and bike lanes, run simulations, and watch traffic, weather and crashes play out, with Gemini text and ElevenLabs voice. Big, beautiful, and honest about its uncalibrated model.",
   "wow_type": "VISCERAL",
   "wow_moment": "Drag a raised crosswalk onto Forbes/Bigelow in a 3D Pitt campus, hit Run, watch cars queue and pedestrians cross, trigger a collision-and-fire replay, then hear the spoken debrief.",
-  "rank": 6,
+  "rank": 9,
   "track_rank": {
    "general": 2,
-   "outloud": 3,
+   "outloud": 4,
    "mlh": 1
   },
   "judge_range": {
@@ -866,18 +1311,18 @@
   "judge_note": "A serious, near-production incremental-reading app where Nemotron drafts extracts, notes and quiz cards for you to approve, then FSRS schedules review. Very complete and polished for 24 hours, but a familiar category and the live model path may fall back to fixtures on stage.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Paste a URL, watch extracts appear in the read queue with a drafted note and three questions, approve one, and immediately get quizzed on it under a compressed FSRS clock.",
-  "rank": 7,
+  "rank": 10,
   "track_rank": {
-   "nemotron": 3,
+   "nemotron": 6,
    "mlh": 2
   },
   "judge_range": {
-   "nemotron": "14\u201317",
-   "mlh": "2\u20134"
+   "nemotron": "17\u201320",
+   "mlh": "3\u20135"
   },
   "judge_rank": {
-   "nemotron": 15,
-   "mlh": 3
+   "nemotron": 18,
+   "mlh": 4
   },
   "evidence": {
    "repo": "RecursiveFunctions/HelloWord",
@@ -1009,21 +1454,21 @@
   "judge_note": "Solo build that checks loan clauses against a synthetic bank's operating limits; Nemotron extracts, code decides, and a redraft re-tests to PASS live. Rigorous and honest, more impressive to a finance judge than a crowd.",
   "wow_type": "NEW-ARENA",
   "wow_moment": "Open the FAIL card, press 'Apply and re-test' and the redrafted clause (every value copied from bank policy) flips to PASS; then switch the bank's approval register to v8 and the same clause moves FAIL -> MANUAL because Treasury renewed an authority.",
-  "rank": 8,
+  "rank": 11,
   "track_rank": {
-   "nemotron": 4,
-   "compound": 4,
-   "xtract": 1
+   "nemotron": 7,
+   "xtract": 3,
+   "compound": 6
   },
   "judge_range": {
-   "nemotron": "9\u201312",
-   "compound": "4\u20137",
-   "xtract": "1\u20133"
+   "nemotron": "12\u201315",
+   "xtract": "3\u20136",
+   "compound": "7\u201310"
   },
   "judge_rank": {
-   "nemotron": 10,
-   "compound": 5,
-   "xtract": 2
+   "nemotron": 13,
+   "xtract": 4,
+   "compound": 8
   },
   "evidence": {
    "repo": "ethantran12345/loan-operability",
@@ -1143,18 +1588,18 @@
   "judge_note": "Two mics listen to a mock interrogation, transcribe each turn, and a voice alert fires when an officer offers leniency for a confession, quoting the exact line. Thoughtful, working, and different, but the demo may lean on mock/regex paths and the interface is utilitarian.",
   "wow_type": "NEW-ARENA",
   "wow_moment": "Judge says 'if you confess I can get you home tonight' into the officer mic and within seconds a voice interrupts: 'Potential inducement detected... You have the right to remain silent.'",
-  "rank": 9,
+  "rank": 12,
   "track_rank": {
-   "nemotron": 5,
-   "outloud": 4
+   "nemotron": 8,
+   "outloud": 5
   },
   "judge_range": {
-   "nemotron": "6\u20139",
-   "outloud": "6\u20138"
+   "nemotron": "8\u201311",
+   "outloud": "7\u20139"
   },
   "judge_rank": {
-   "nemotron": 7,
-   "outloud": 7
+   "nemotron": 9,
+   "outloud": 8
   },
   "evidence": {
    "repo": "Tim4769/SteelHacks-XIII",
@@ -1275,20 +1720,20 @@
   "judge_note": "A calm, well-finished Crohn's food companion: personal compatibility scores, Gemini menu scanning, nearby-restaurant picks and spoken cooking steps, all working without any keys. Memorable for the menu photo -> ranked dishes moment.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Snap a photo of a real restaurant menu and watch the dishes come back ranked against your own logged history, each with a 'why'.",
-  "rank": 10,
+  "rank": 13,
   "track_rank": {
-   "seed": 5,
-   "outloud": 5,
+   "seed": 7,
+   "outloud": 6,
    "mlh": 3
   },
   "judge_range": {
-   "seed": "4\u20137",
-   "outloud": "4\u20137",
+   "seed": "6\u20139",
+   "outloud": "5\u20138",
    "mlh": "1\u20133"
   },
   "judge_rank": {
-   "seed": 5,
-   "outloud": 5,
+   "seed": 7,
+   "outloud": 6,
    "mlh": 2
   },
   "evidence": {
@@ -1415,10 +1860,10 @@
   "judge_note": "Talk your way past a bouncer or landlord out loud; Nemotron listens to your actual voice and scores you, ElevenLabs answers in character with changing expressions and music. Fun, polished, and demo-able in 60 seconds, though it is a game with no real-world need.",
   "wow_type": "VISCERAL",
   "wow_moment": "Judge says out loud 'come on man, my friend is inside' and a skeptical bouncer answers in a real voice, his portrait shifts, and the success bar moves.",
-  "rank": 11,
+  "rank": 14,
   "track_rank": {
-   "nemotron": 6,
-   "outloud": 6
+   "nemotron": 9,
+   "outloud": 7
   },
   "judge_range": {
    "nemotron": "1\u20133",
@@ -1545,18 +1990,18 @@
   "judge_note": "A Chrome extension that highlights propaganda techniques and claims inside the article you are reading, backed by a Nemotron pipeline that throws away any quote it cannot find verbatim. Good live demo; the evaluation it advertises was never built.",
   "wow_type": "VISCERAL",
   "wow_moment": "Open a real news article, press Analyze, and watch 'reckless scheme' and similar phrases light up in the page with technique labels, then flip to Coverage to see what other outlets said.",
-  "rank": 12,
+  "rank": 15,
   "track_rank": {
-   "nemotron": 7,
-   "xtract": 2
+   "nemotron": 10,
+   "xtract": 4
   },
   "judge_range": {
-   "nemotron": "8\u201311",
-   "xtract": "1\u20132"
+   "nemotron": "10\u201313",
+   "xtract": "1\u20134"
   },
   "judge_rank": {
-   "nemotron": 9,
-   "xtract": 1
+   "nemotron": 11,
+   "xtract": 2
   },
   "evidence": {
    "repo": "ethantiller/badfaith",
@@ -1676,18 +2121,18 @@
   "judge_note": "Drop a transaction file and Nemotron, driven by an eight-file ruleset, returns an auditable fraud decision shown on a swinging fraudometer and a world map of card travel; a CLI lets Nemotron red-team itself and Claude patch the rules. Slick and working locally, familiar category.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Drop the Lagos file: the needle swings to red, an arrow leaps Toronto-to-Lagos on the world map, and the card explains GEO-001 impossible travel with a concrete analyst action.",
-  "rank": 13,
+  "rank": 16,
   "track_rank": {
-   "nemotron": 8,
-   "compound": 5
+   "nemotron": 11,
+   "compound": 7
   },
   "judge_range": {
-   "nemotron": "7\u201310",
-   "compound": "3\u20136"
+   "nemotron": "9\u201312",
+   "compound": "4\u20137"
   },
   "judge_rank": {
-   "nemotron": 8,
-   "compound": 4
+   "nemotron": 10,
+   "compound": 5
   },
   "evidence": {
    "repo": "chrisyang-gg/NemoScantron",
@@ -1804,9 +2249,9 @@
   "judge_note": "Swing your phone and a 3D pickleball flies on the laptop, with a voice referee and Nemotron shot calls. Fun to try if the HTTPS/Wi-Fi setup survives the stage; the AI evaluation is honest but entirely offline.",
   "wow_type": "VISCERAL",
   "wow_moment": "Swing your phone, the ball launches across a 3D court on the big screen with a thwack, the bot returns it, and a referee voice calls 'Fault, Red' while the evidence panel shows the bounce sequence and rule.",
-  "rank": 14,
+  "rank": 17,
   "track_rank": {
-   "nemotron": 9,
+   "nemotron": 12,
    "general": 3
   },
   "judge_range": {
@@ -1914,6 +2359,147 @@
   }
  },
  {
+  "dir": "jscanga_transfr",
+  "repo": "jscanga/transfr",
+  "name": "transfr",
+  "one_liner": "Pitt degree planner that pairs a 12-term timeline with a live requirement checker and a searchable, per-credit-priced database of 43,239 transfer equivalencies from 1,801 schools, plus a cost-optimizing 'Autocomplete my degree' that reroutes courses to cheaper schools.",
+  "scores": {
+   "S1": 6.0,
+   "S2": 7.0,
+   "S3": 6.0,
+   "S4": 11.0,
+   "S5": 9.0,
+   "wow": 6.0
+  },
+  "SUBJ": 39.0,
+  "OBJ": 30.3,
+  "TOTAL": 69.3,
+  "tracks": [
+   "compound",
+   "seed",
+   "nowrapper",
+   "mlh"
+  ],
+  "judge_note": "A Pitt degree planner that prices 43k real transfer equivalencies and auto-fills a cheaper four-year plan, showing the all-Pitt price struck through next to the optimized total. Fully static, no LLM, polished seasonal UI. Single major only and tuition constants are hardcoded, but the savings reveal is memorable.",
+  "wow_type": "UNEXPECTED-TWIST",
+  "wow_moment": "Click 'Autocomplete my degree' on an empty planner: four years fill in, the all-at-Pitt price appears struck through next to a lower optimized total, and specific CCAC summer courses show $252/credit vs Pitt's $1,026.",
+  "rank": 18,
+  "track_rank": {
+   "compound": 8,
+   "seed": 8,
+   "nowrapper": 3,
+   "mlh": 4
+  },
+  "judge_range": {
+   "compound": "5\u20138",
+   "seed": "8\u201311",
+   "nowrapper": "5\u20138",
+   "mlh": "2\u20134"
+  },
+  "judge_rank": {
+   "compound": 6,
+   "seed": 9,
+   "nowrapper": 6,
+   "mlh": 3
+  },
+  "evidence": {
+   "repo": "jscanga/transfr",
+   "project_name": "transfr",
+   "one_liner": "Pitt degree planner that pairs a 12-term timeline with a live requirement checker and a searchable, per-credit-priced database of 43,239 transfer equivalencies from 1,801 schools, plus a cost-optimizing 'Autocomplete my degree' that reroutes courses to cheaper schools.",
+   "problem": "Students plan degrees in spreadsheets and only discover the cost when the bill arrives; transfer credit from cheaper schools could cut tuition but Pitt's equivalency data is unsearchable and unpriced.",
+   "target_user": "University of Pittsburgh undergraduates (currently CS BS only), modelled as PA residents.",
+   "claimed_tracks": [],
+   "best_fit_tracks": [
+    "Seed Round (Pear VC & Afore Capital)",
+    "No Wrapper",
+    "Compound",
+    "MLH .Tech domain"
+   ],
+   "team_size_claimed": 3,
+   "live_url": "https://transfr.tech/",
+   "stack": [
+    "React 18",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "shadcn/Radix UI",
+    "pdfjs-dist",
+    "static JSON data + localStorage",
+    "Express (dev-only, unused in prod)",
+    "Vercel",
+    "College Scorecard/IPEDS cost data"
+   ],
+   "core_loop": "User adds Pitt courses or transfer equivalencies (search by Pitt course, sorted cheapest-first, % online filter) into a 4-year Fall/Spring/Summer grid -> in-browser engine re-evaluates major + gen-ed requirements and cost (Pitt flat $12,322 at 12+ credits, $1,026/credit below; transfers billed at the home school's residency-aware per-credit rate) -> 'Autocomplete my degree' picks courses for every unmet requirement and sweeps 'transfer the cheapest k' to exploit the flat-rate cliff -> preview modal shows all-at-Pitt price struck through vs optimized total -> apply/undo. Optional PeopleSoft What-If PDF import seeds the plan.",
+   "wired_end_to_end": true,
+   "mocked_or_hardcoded": "Pitt tuition constants hardcoded; single major (CS BS) with a scaffold dropdown; most catalog credits default to 3; per-credit cost is derived (annual tuition/30) and fuzzy-name matched (1,696 of 1,801 schools priced); PDF import contains a documented DEMO HARDCODE that routes specific transfer courses to named schools; hidden Ctrl+D demo panel loads two canned sample plans (they still run through the real engine); no prerequisite checking; Express server and student-plan.json are legacy, production is fully static.",
+   "demo_risks": "Low: no backend, no API keys, no LLM. The 12MB equivalency JSON loads lazily on first transfer search/autocomplete (a few seconds on venue wifi). PDF import only works on the PeopleSoft What-If format and carries demo-specific routing.",
+   "ui_experience": "Polished pastel 'aged paper' theme with hand-drawn inline-SVG seasonal art per term card (drifting leaves, swaying flowers, sun over dunes), animated count-up cost hero with light sweep, SVG progress ring, requirement pills bar, shadcn modals for course/term picking, autocomplete preview with per-term picks and savings hero, undo toast. ~15 components, 2 tabs. Fully touchable in a demo.",
+   "physical_or_sensory": "none",
+   "integrity_flags": "First commit (Sep 19 21:33, ~10.5h after start) already contained a complete MVP with a 'Redesign frontend' message, so earlier iterations were unversioned, though the timestamp is inside the event. Real Pitt equivalency data and IPEDS cost data (1,725 schools) shipped in-repo. No secrets committed. No starter-kit reuse detected. README names no tracks.",
+   "ai_scaffolding_flags": ".gitignore excludes 'Claude outputs/' (Claude-assisted build); code comments are long LLM-style essays; no CLAUDE.md/AGENTS.md/handoff docs; docs are smaller than code.",
+   "novelty_notes": "Degree planners are a common category; the twist is real: pricing every transfer equivalency with per-credit cost and online share, and an optimizer that understands Pitt's flat-rate cliff (moving one course out of a full term saves nothing, so it sweeps cutoffs instead of greedy per-course). No LLM anywhere.",
+   "need_notes": "Specific, credible pain (tuition cost, opaque transfer credit) backed by real data volume, but evidence of demand is the founders' own student experience; only CS BS is modelled; per-credit prices are estimates.",
+   "wow_moment": "Click 'Autocomplete my degree' on an empty planner: four years fill in, the all-at-Pitt price appears struck through next to a lower optimized total, and specific CCAC summer courses show $252/credit vs Pitt's $1,026.",
+   "wow_type": "UNEXPECTED-TWIST",
+   "scores": {
+    "S1": 7,
+    "S2": 7,
+    "S3": 7,
+    "S4": 12,
+    "S5": 9,
+    "wow": 6
+   },
+   "score_rationale": "Common category with a genuine new mechanism (S1 7). Real pain, real data, no demand evidence beyond authors (S2 7). Strong Seed Round and No Wrapper fit, credible .Tech stack; Compound only partial (S3 7). Static, real data path, error/loading states, undo, polished, but hardcoded tuition, demo hardcode in import, no tests (S4 12). Attractive animated UI, interactive, nothing physical (S5 9). One clear 'neat' savings reveal (wow 6).",
+   "judge_summary": "A Pitt degree planner that prices 43k real transfer equivalencies and auto-fills a cheaper four-year plan, showing the all-Pitt price struck through next to the optimized total. Fully static, no LLM, polished seasonal UI. Single major only and tuition constants are hardcoded, but the savings reveal is memorable."
+  },
+  "objective": {
+   "dir": "jscanga_transfr",
+   "repo": "jscanga/transfr",
+   "code_loc": 6401,
+   "commits_during": 32,
+   "commits_pre": 0,
+   "active_hours": 7,
+   "n_authors": 3,
+   "top_share": 0.47,
+   "readme_words": 256,
+   "run_instr": false,
+   "has": {
+    "readme": true,
+    "tests": false,
+    "ci": true,
+    "docker": false,
+    "manifest": true,
+    "env_example": false,
+    "gitignore": true,
+    "license": false,
+    "lint": true,
+    "ts": true,
+    "assets": 1,
+    "notebooks": 0
+   },
+   "vendored": 0,
+   "secrets": 0,
+   "fresh_ratio": 1.0,
+   "O1": 8.2,
+   "O2": 5.6,
+   "O3": 4.5,
+   "O4": 7,
+   "O5": 5,
+   "OBJ": 30.3,
+   "langs": {
+    "TypeScript": 5859,
+    "JSON": 4095,
+    "JavaScript": 282,
+    "CSS": 241,
+    "Markdown": 28,
+    "HTML": 19
+   },
+   "first_commit": "2026-09-19T21:33:36-04:00",
+   "last_commit": "2026-09-20T10:17:57-04:00",
+   "ai_coauthored": 5
+  }
+ },
+ {
   "dir": "ethanliu2026_meal-plan-tracker",
   "repo": "ethanliu2026/meal-plan-tracker",
   "name": "Meal Plan Tracker",
@@ -1937,21 +2523,21 @@
   "judge_note": "A very complete, live meal-plan tracker for ten schools with on-device receipt OCR and a Monte Carlo run-out forecast. Solid No Wrapper entry; not flashy. Note several feature commits landed ~90 minutes before the official start.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Photograph a real thermal receipt on your phone and it logs '1 block + $2.75 FLEX' at the right cafe, then the home screen says 'FLEX: over 99% chance of running out, Nov 6-17'.",
-  "rank": 15,
+  "rank": 19,
   "track_rank": {
-   "nowrapper": 3,
-   "seed": 6,
-   "mlh": 4
+   "seed": 9,
+   "nowrapper": 4,
+   "mlh": 5
   },
   "judge_range": {
-   "nowrapper": "7\u201310",
-   "seed": "6\u20139",
-   "mlh": "3\u20135"
+   "seed": "9\u201312",
+   "nowrapper": "8\u201311",
+   "mlh": "4\u20136"
   },
   "judge_rank": {
-   "nowrapper": 8,
-   "seed": 7,
-   "mlh": 4
+   "seed": 10,
+   "nowrapper": 9,
+   "mlh": 5
   },
   "evidence": {
    "repo": "ethanliu2026/meal-plan-tracker",
@@ -2078,18 +2664,18 @@
   "judge_note": "Type a two-option decision; Nemotron builds a structured scenario, the browser computes monthly cost/time and break-evens, toggling factors updates numbers instantly, then Nemotron writes paired parallel stories with facts inserted by code. Clean UI, real eval harness, heavily Codex-built, localhost only.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Toggle 'Take an Uber after class' and change 6 to 10 trips: the Far option's monthly cost/time changes instantly, the two parallel stories are flagged stale, and Update Story regenerates aligned Morning/Daytime/Evening narratives with the exact new figures inserted by code.",
-  "rank": 16,
+  "rank": 20,
   "track_rank": {
-   "nemotron": 10,
-   "seed": 7
+   "nemotron": 13,
+   "seed": 10
   },
   "judge_range": {
-   "nemotron": "15\u201318",
-   "seed": "7\u20139"
+   "nemotron": "18\u201321",
+   "seed": "10\u201312"
   },
   "judge_rank": {
-   "nemotron": 16,
-   "seed": 8
+   "nemotron": 19,
+   "seed": 11
   },
   "evidence": {
    "repo": "2004Moonlove/SteelHacks",
@@ -2214,10 +2800,10 @@
   "judge_note": "Email squeezed into 200-byte LoRa packets and read on an internet-less laptop through two Meshtastic radios, with replies going back. Genuinely hard, physical, no LLM; rough edges and no phone app yet.",
   "wow_type": "VISCERAL",
   "wow_moment": "Send yourself an email, watch the gateway laptop chunk it into ~70 bytes, and seconds later it appears in an inbox on an air-gapped laptop wired only to a blinking LoRa radio, then reply back through the mesh.",
-  "rank": 17,
+  "rank": 21,
   "track_rank": {
    "general": 4,
-   "nowrapper": 4
+   "nowrapper": 5
   },
   "judge_range": {
    "general": "5\u20138",
@@ -2341,21 +2927,21 @@
   "judge_note": "A sticky-note board that listens to the meeting, files ideas as cards, researches them in the background and talks back when asked. Charming and well-evaluated on the Nemotron side; fragile on stage and partly built from a pre-hackathon base.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Say 'Heard, has anyone built this before?' and a few seconds later a card reads 'DONE BEFORE, 9+ times' while the board speaks 'nine Devpost projects do this, plus Be My Eyes...' with a linked research page.",
-  "rank": 18,
+  "rank": 22,
   "track_rank": {
-   "nemotron": 11,
-   "seed": 8,
-   "outloud": 7
+   "nemotron": 14,
+   "seed": 11,
+   "outloud": 8
   },
   "judge_range": {
-   "nemotron": "5\u20138",
-   "seed": "5\u20138",
-   "outloud": "5\u20138"
+   "nemotron": "7\u201310",
+   "seed": "7\u201310",
+   "outloud": "6\u20139"
   },
   "judge_rank": {
-   "nemotron": 6,
-   "seed": 6,
-   "outloud": 6
+   "nemotron": 8,
+   "seed": 8,
+   "outloud": 7
   },
   "evidence": {
    "repo": "jiazhenz026/heard-meeting",
@@ -2478,15 +3064,15 @@
   "judge_note": "A bank chatbot that refuses to act: it classifies intent cheaply, reads only your own data, hands you a server-built dispute or fraud form, and routes the case to a staff dashboard that credits the account. Well-engineered, conventional to look at.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Type 'I don't recognize this charge', get a triage card that asks whether you made it, lock the card and open a claim, then flip to the staff dashboard, approve it, and watch the balance credit appear.",
-  "rank": 19,
+  "rank": 23,
   "track_rank": {
-   "compound": 6
+   "compound": 9
   },
   "judge_range": {
-   "compound": "7\u201310"
+   "compound": "10\u201313"
   },
   "judge_rank": {
-   "compound": 8
+   "compound": 11
   },
   "evidence": {
    "repo": "RuadhanKM/Steelhacks26",
@@ -2601,9 +3187,9 @@
   "judge_note": "A pixel-art deforestation game where your webcam-measured stress shrinks the clock and stacks the deck with greedy cards. Playable, themed, and physical; the Presage hookup is real with a simulated fallback.",
   "wow_type": "VISCERAL",
   "wow_moment": "Judge sits down, the stress bar flips from 'simulated' to 'live', and as they hurry their pulse shortens the timer and the land-grab card starts showing up every turn.",
-  "rank": 20,
+  "rank": 24,
   "track_rank": {
-   "nowrapper": 5,
+   "nowrapper": 6,
    "presage": 1
   },
   "judge_range": {
@@ -2728,17 +3314,17 @@
   "judge_note": "A playable Godot wizard-survivor game where levelling up means texting a moody Nemotron handler named Doyle who invents three new spells for you on the spot. Fun and touchable; lives or dies on a hosted endpoint staying up.",
   "wow_type": "VISCERAL",
   "wow_moment": "Typing 'give me something that sets the laundromat on fire' and having Doyle sass you in gang-slang-Q-branch voice before offering three custom spells that immediately work in the arena.",
-  "rank": 21,
+  "rank": 25,
   "track_rank": {
-   "nemotron": 12,
+   "nemotron": 15,
    "general": 5
   },
   "judge_range": {
-   "nemotron": "4\u20137",
+   "nemotron": "5\u20138",
    "general": "4\u20137"
   },
   "judge_rank": {
-   "nemotron": 5,
+   "nemotron": 6,
    "general": 5
   },
   "evidence": {
@@ -2854,18 +3440,18 @@
   "judge_note": "An ambitious, meticulously documented multi-agent equity-research architecture that, as submitted, only replays a fictional ACME fixture: no real ticker, no real model call, math and audit are stubs. Impressive engineering scaffold and SEC data insight; not a working product yet. Enormous Claude-Code scaffolding.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Pitch line 'the model is never allowed to type a number; code computes, the red team argues the other side, the verifier checks every claim' while agent lanes fill in parallel. Undercut immediately if a judge types NVDA and gets 'Mock mode only knows ACME'.",
-  "rank": 22,
+  "rank": 26,
   "track_rank": {
    "general": 6,
-   "xtract": 3
+   "xtract": 5
   },
   "judge_range": {
    "general": "12\u201315",
-   "xtract": "4\u20135"
+   "xtract": "6\u20137"
   },
   "judge_rank": {
    "general": 13,
-   "xtract": 5
+   "xtract": 7
   },
   "evidence": {
    "repo": "Ech118/BankManager",
@@ -2990,17 +3576,17 @@
   "judge_note": "Drop lecture slides in, get a printable fill-in-the-blank note sheet built by Nemotron and LaTeX, write on it (web or iPad), then photograph it and see your handwriting merged back. Competent and complete, moderately novel, fragile local model hosting.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Photograph a handwritten sheet and the same template reappears with your scrawl typed in teal in the right blanks.",
-  "rank": 23,
+  "rank": 27,
   "track_rank": {
-   "nemotron": 13,
+   "nemotron": 16,
    "general": 7
   },
   "judge_range": {
-   "nemotron": "10\u201313",
+   "nemotron": "13\u201316",
    "general": "7\u201310"
   },
   "judge_rank": {
-   "nemotron": 11,
+   "nemotron": 14,
    "general": 8
   },
   "evidence": {
@@ -3119,18 +3705,18 @@
   "judge_note": "A finished, playable pixel-art zombie survival game with eight abilities and a merchant van that drives around the map. Fun and polished for a hackathon, but a well-worn genre with no problem it solves.",
   "wow_type": "VISCERAL",
   "wow_moment": "The shop van barrelling through a horde on its way to its next parking spot, then opening for business.",
-  "rank": 24,
+  "rank": 28,
   "track_rank": {
    "general": 8,
-   "nowrapper": 6
+   "nowrapper": 7
   },
   "judge_range": {
    "general": "6\u20139",
-   "nowrapper": "5\u20138"
+   "nowrapper": "6\u20139"
   },
   "judge_rank": {
    "general": 7,
-   "nowrapper": 6
+   "nowrapper": 7
   },
   "evidence": {
    "repo": "paulmtn/steelhacks-26",
@@ -3243,21 +3829,21 @@
   "judge_note": "A budgeting app whose gimmick is that it calls your phone to scold you. Voice/receipt logging via Nemotron and ElevenLabs works with stubs behind everything; the live call is the demo moment but hinges on Twilio and ngrok cooperating.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "The judge's phone actually rings mid-demo and a voice says 'You went over your Food limit by 14 dollars.'",
-  "rank": 25,
+  "rank": 29,
   "track_rank": {
-   "nemotron": 14,
-   "compound": 7,
-   "outloud": 8
+   "nemotron": 17,
+   "compound": 10,
+   "outloud": 9
   },
   "judge_range": {
-   "nemotron": "11\u201314",
-   "compound": "5\u20138",
-   "outloud": "7\u20138"
+   "nemotron": "14\u201317",
+   "compound": "8\u201311",
+   "outloud": "8\u20139"
   },
   "judge_rank": {
-   "nemotron": 12,
-   "compound": 6,
-   "outloud": 8
+   "nemotron": 15,
+   "compound": 9,
+   "outloud": 9
   },
   "evidence": {
    "repo": "AdamLashnuk/WhereisMyMoney",
@@ -3375,21 +3961,21 @@
   "judge_note": "A private-credit analyst tool where Nemotron keeps a loan's original assumptions attached and flags when new reports contradict them, with quotes verified against sources. Deep, honest about a mixed benchmark, but dense to demo and the repo was pushed in two commits at 5am.",
   "wow_type": "NEW-ARENA",
   "wow_moment": "The model derives a $33.6M covenant cash figure from three stated amounts, flags the floor breach, and refuses to let good sales news offset it, with the quote highlighted in the source.",
-  "rank": 26,
+  "rank": 30,
   "track_rank": {
-   "nemotron": 15,
-   "compound": 8,
-   "xtract": 4
+   "nemotron": 18,
+   "xtract": 6,
+   "compound": 11
   },
   "judge_range": {
-   "nemotron": "13\u201316",
-   "compound": "6\u20139",
-   "xtract": "2\u20134"
+   "nemotron": "16\u201319",
+   "xtract": "4\u20137",
+   "compound": "9\u201312"
   },
   "judge_rank": {
-   "nemotron": 14,
-   "compound": 7,
-   "xtract": 3
+   "nemotron": 17,
+   "xtract": 5,
+   "compound": 10
   },
   "evidence": {
    "repo": "HajinHyukson/RealityCheck",
@@ -3512,17 +4098,17 @@
   "judge_note": "A Java scraper plus React site that turns six companies' job boards into hiring-velocity stats and a Nemotron-written analyst blurb. Works in principle, honest about fallbacks, but little to see or touch.",
   "wow_type": "NONE",
   "wow_moment": "Open the investor view and read Nemotron's take on why Stripe posted 18 roles this month; paste a resume and see roles re-rank. Mild.",
-  "rank": 27,
+  "rank": 31,
   "track_rank": {
-   "nemotron": 16,
+   "nemotron": 19,
    "general": 9
   },
   "judge_range": {
-   "nemotron": "18\u201320",
+   "nemotron": "21\u201323",
    "general": "15\u201318"
   },
   "judge_rank": {
-   "nemotron": 19,
+   "nemotron": 22,
    "general": 16
   },
   "evidence": {
@@ -3641,10 +4227,10 @@
   "judge_note": "A real Game Boy Advance cartridge about the team's hackathon weekend: drive into a neon Pittsburgh, wake your teammate, win minigames to recruit the crew. Delightful and playable, no AI in the product, but provenance is thin (two commits, docs that read like a generation log).",
   "wow_type": "VISCERAL",
   "wow_moment": "The orange car rolls toward the neon 'SteelHacks XIII' skyline on a real GBA emulator, then you walk into a house and wake a pixel version of your teammate with an energy drink.",
-  "rank": 28,
+  "rank": 32,
   "track_rank": {
    "general": 10,
-   "nowrapper": 7
+   "nowrapper": 8
   },
   "judge_range": {
    "general": "3\u20136",
@@ -3767,17 +4353,17 @@
   "judge_note": "A clean v0-scaffolded stock dashboard where Nemotron writes SEC-grounded verdicts and comparisons. Competent and complete-ish, but a familiar idea with nothing to touch and no README.",
   "wow_type": "NONE",
   "wow_moment": "Nemotron's verdict cites a 10-K revenue figure and flags insider open-market sells on the compare page. Mild.",
-  "rank": 29,
+  "rank": 33,
   "track_rank": {
-   "nemotron": 17,
+   "nemotron": 20,
    "general": 11
   },
   "judge_range": {
-   "nemotron": "17\u201320",
+   "nemotron": "20\u201323",
    "general": "13\u201316"
   },
   "judge_rank": {
-   "nemotron": 18,
+   "nemotron": 21,
    "general": 14
   },
   "evidence": {
@@ -3896,15 +4482,15 @@
   "judge_note": "A solo Nemotron-track entry where Nemotron is the auditor, not the chatbot: it triages a symptom, checks another model's draft, and Python rules decide. Comes with a 43-case eval, a coverage-vs-recall argument, and a live ablation toggle. Gradio demo, no product polish.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Set the verifier dropdown to None and watch raw unchecked advice ship; then the table showing GPT-4o-mini blocks 8/10 safe answers because it rates how sick the patient is, not how unsafe the answer is.",
-  "rank": 30,
+  "rank": 34,
   "track_rank": {
-   "nemotron": 18
+   "nemotron": 21
   },
   "judge_range": {
-   "nemotron": "12\u201315"
+   "nemotron": "15\u201318"
   },
   "judge_rank": {
-   "nemotron": 13
+   "nemotron": 16
   },
   "evidence": {
    "repo": "kyuhan28/nemotrontriagemodel",
@@ -4018,18 +4604,18 @@
   "judge_note": "A good-looking Splitwise-style dashboard where you type an expense in plain English and Nemotron decides who splits it. Works, looks nice, but it is a familiar idea and the API key is committed in the repo.",
   "wow_type": "NONE",
   "wow_moment": "Typing 'Sam wasn't there' and watching Sam drop out of the split with a Nemotron-written summary.",
-  "rank": 31,
+  "rank": 35,
   "track_rank": {
-   "nemotron": 19,
-   "compound": 9
+   "nemotron": 22,
+   "compound": 12
   },
   "judge_range": {
-   "nemotron": "16\u201319",
-   "compound": "8\u201310"
+   "nemotron": "19\u201322",
+   "compound": "11\u201313"
   },
   "judge_rank": {
-   "nemotron": 17,
-   "compound": 9
+   "nemotron": 20,
+   "compound": 12
   },
   "evidence": {
    "repo": "Adkhzhan/light",
@@ -4144,7 +4730,7 @@
   "judge_note": "A beautifully built grading and feedback web app for handwritten math homework with rubrics, revisions and TA review, but no model behind it: every 'assessment' is simulated. Great scaffolding around an empty core, and a re-do of a previous hackathon idea.",
   "wow_type": "NONE",
   "wow_moment": "Flipping through a handwritten PDF while criterion cards light up; but the verdicts are random, so nothing to say 'wow' about.",
-  "rank": 32,
+  "rank": 36,
   "track_rank": {
    "general": 12
   },
@@ -4274,18 +4860,18 @@
   "judge_note": "Ask for a meal, get a Claude recipe priced line-by-line against 1,000 real Target prices with store-brand savings. Functional and honest about gaps, but a familiar idea with a simple one-page UI.",
   "wow_type": "UNEXPECTED-TWIST",
   "wow_moment": "Tap 'tacos for four people' and see a real Target total and per-serving price appear with a 'saved $X buying store brand' line.",
-  "rank": 33,
+  "rank": 37,
   "track_rank": {
    "general": 13,
-   "seed": 9
+   "seed": 12
   },
   "judge_range": {
    "general": "10\u201313",
-   "seed": "8\u20139"
+   "seed": "11\u201312"
   },
   "judge_rank": {
    "general": 11,
-   "seed": 9
+   "seed": 12
   },
   "evidence": {
    "repo": "owen-ipc/FoodFinder",
@@ -4402,7 +4988,7 @@
   "judge_note": "First-timers' AI-generated PT journal: six CRUD screens on an in-memory Spring Boot API. Works, looks tidy, nothing memorable.",
   "wow_type": "NONE",
   "wow_moment": "None; the pain chart is the closest thing to a moment.",
-  "rank": 34,
+  "rank": 38,
   "track_rank": {
    "general": 14,
    "coldstart": 1
@@ -4531,18 +5117,18 @@
   "judge_note": "A serious forecasting pipeline on two years of real Pitt mailroom data that argues Tower B's overflow is a collection-policy problem, not demand. Impressive analysis, but judges see terminal output only; no dashboard or voice feature exists in the repo, and private data plus an API key were committed.",
   "wow_type": "NEW-ARENA",
   "wow_moment": "The pivot slide: 'Tower B does not need more lockers; a 30-day return-to-sender rule cuts peak holdings ~90%' backed by real occupancy data.",
-  "rank": 35,
+  "rank": 39,
   "track_rank": {
    "general": 15,
-   "nowrapper": 8
+   "nowrapper": 9
   },
   "judge_range": {
    "general": "18\u201321",
-   "nowrapper": "8\u201310"
+   "nowrapper": "9\u201311"
   },
   "judge_rank": {
    "general": 19,
-   "nowrapper": 9
+   "nowrapper": 10
   },
   "evidence": {
    "repo": "utiwari21/SteelHacks26",
@@ -4657,18 +5243,18 @@
   "judge_note": "A handsome mock of a supply-chain risk inbox: three fictional alerts with clickable evidence and a dependency path. The design thinking is good, but no documents are ingested and no model runs; it is a front end for a product that was never built.",
   "wow_type": "NEW-ARENA",
   "wow_moment": "Clicking a claim opens the exact quoted source excerpt, and the event->facility->supplier->material->order chain is laid out with evidence on every link.",
-  "rank": 36,
+  "rank": 40,
   "track_rank": {
    "general": 16,
-   "xtract": 5
+   "xtract": 7
   },
   "judge_range": {
    "general": "11\u201314",
-   "xtract": "3\u20135"
+   "xtract": "5\u20137"
   },
   "judge_rank": {
    "general": 12,
-   "xtract": 4
+   "xtract": 6
   },
   "evidence": {
    "repo": "Flizzy50/SteelHacks-26",
@@ -4784,18 +5370,18 @@
   "judge_note": "A one-page browser game: pick from three choices at each random money event while an emoji character inches toward a flag; stats and a life-balance meter update, then a net-worth summary. Cute, works, but shallow and generic; deployed at lifeledger.tech.",
   "wow_type": "NONE",
   "wow_moment": "The emoji character sliding backwards toward the start when you take the predatory loan, while the stress meter jumps -- mildly amusing, nothing more.",
-  "rank": 37,
+  "rank": 41,
   "track_rank": {
    "general": 17,
-   "mlh": 5
+   "mlh": 6
   },
   "judge_range": {
    "general": "16\u201319",
-   "mlh": "4\u20135"
+   "mlh": "5\u20136"
   },
   "judge_rank": {
    "general": 17,
-   "mlh": 5
+   "mlh": 6
   },
   "evidence": {
    "repo": "TimAkor23/Steelhacks",
@@ -4907,18 +5493,18 @@
   "judge_note": "A Unity pixel-art game where you fly a dragon, dodge spikes and bandits, and shoot fireballs, with a tutorial and one level. Fun for thirty seconds and genuinely playable, but no idea, no README, one level, and a coin that kills you.",
   "wow_type": "VISCERAL",
   "wow_moment": "Fireball explodes on a bandit and it collapses mid-attack animation while the dragon swoops past spikes -- a genuinely playable, responsive 30 seconds.",
-  "rank": 38,
+  "rank": 42,
   "track_rank": {
    "general": 18,
-   "nowrapper": 9
+   "nowrapper": 10
   },
   "judge_range": {
    "general": "8\u201311",
-   "nowrapper": "6\u20139"
+   "nowrapper": "7\u201310"
   },
   "judge_rank": {
    "general": 9,
-   "nowrapper": 7
+   "nowrapper": 8
   },
   "evidence": {
    "repo": "Mia-Melishchuk/SteelHacks-Test-2",
@@ -5033,7 +5619,7 @@
   "judge_note": "A clean live map of Pittsburgh buses using PRT's public feed. Works in the browser, but it is a familiar transit tracker with no track fit, a broken mobile config, and one late-night commit for the whole project.",
   "wow_type": "VISCERAL",
   "wow_moment": "Open the page and buses near you are already moving along real streets without picking a route.",
-  "rank": 39,
+  "rank": 43,
   "track_rank": {
    "general": 19
   },
@@ -5156,17 +5742,17 @@
   "judge_note": "A student budgeting website with calculators and a Spring Boot backend. The 'Before You Buy' camera pause sounds interesting but only shows your webcam; Presage vitals never reach the page. Standard idea, partially wired.",
   "wow_type": "NONE",
   "wow_moment": "None; the webcam turning on during 'Before You Buy' is the closest thing but nothing is measured.",
-  "rank": 40,
+  "rank": 44,
   "track_rank": {
-   "compound": 10,
+   "compound": 13,
    "presage": 2
   },
   "judge_range": {
-   "compound": "9\u201310",
+   "compound": "12\u201313",
    "presage": "2"
   },
   "judge_rank": {
-   "compound": 10,
+   "compound": 13,
    "presage": 2
   },
   "evidence": {
@@ -5283,18 +5869,18 @@
   "judge_note": "A one-person Tkinter Monte Carlo VaR calculator with correlated paths and a backtest tab. Works, explains itself, no AI, but a familiar textbook project with a plain desktop UI.",
   "wow_type": "NONE",
   "wow_moment": "Fan of 20,000 simulated portfolio paths with a VaR line drawn on the terminal distribution.",
-  "rank": 41,
+  "rank": 45,
   "track_rank": {
    "general": 20,
-   "nowrapper": 10
+   "nowrapper": 11
   },
   "judge_range": {
    "general": "20\u201323",
-   "nowrapper": "9\u201310"
+   "nowrapper": "10\u201311"
   },
   "judge_rank": {
    "general": 21,
-   "nowrapper": 10
+   "nowrapper": 11
   },
   "evidence": {
    "repo": "cadent06/SteelHacks",
@@ -5405,7 +5991,7 @@
   "judge_note": "A 3D city you can slide an ambulance around with a siren playing. Looks like a game from a distance, but there is no patient delivery, no scoring, and the main menu cannot actually launch the level.",
   "wow_type": "VISCERAL",
   "wow_moment": "Siren wailing while a low-poly ambulance slides through a surprisingly large 3D city.",
-  "rank": 42,
+  "rank": 46,
   "track_rank": {
    "general": 21
   },
@@ -5526,7 +6112,7 @@
   "judge_note": "A bare-bones backend that compiles and times user-submitted C++ and stores it in Postgres. The idea of optimization challenges is fine, but nothing is shown on screen and there is no leaderboard, README, or safety.",
   "wow_type": "NONE",
   "wow_moment": "None; the only visible interaction is a textarea whose result goes to the console.",
-  "rank": 43,
+  "rank": 47,
   "track_rank": {
    "general": 22
   },
@@ -5648,7 +6234,7 @@
   "judge_note": "A ROS 2 Kalman-filter and CUDA point-cloud pipeline dumped in one commit called 'boilerplate' three hours before the deadline, with no README, no demo and no visuals. Competent-looking code, nothing to judge.",
   "wow_type": "NONE",
   "wow_moment": "None.",
-  "rank": 44,
+  "rank": 48,
   "track_rank": {
    "general": 23
   },
@@ -5771,7 +6357,7 @@
   "judge_note": "An Android speedometer idea that never got past the template screen; the sensor math exists in one untested file and is not connected to anything.",
   "wow_type": "NONE",
   "wow_moment": "None; the app cannot yet show a number.",
-  "rank": 45,
+  "rank": 49,
   "track_rank": {
    "general": 24
   },
@@ -5888,7 +6474,7 @@
   "judge_note": "An unfinished stock-news summarizer: a LangChain agent file using Nemotron and Tavily, plus a web page that only capitalizes your input. Not connected, not demoable.",
   "wow_type": "NONE",
   "wow_moment": "None.",
-  "rank": 46,
+  "rank": 50,
   "track_rank": {
    "general": 25
   },
@@ -6009,15 +6595,15 @@
   "judge_note": "Two scripts that ask a Nemotron vision NIM to list basketball plays from a clip. No README, UI, results or evidence; effectively a starting point.",
   "wow_type": "NONE",
   "wow_moment": "None visible; at best a JSON list of plays printed from a clip.",
-  "rank": 47,
+  "rank": 51,
   "track_rank": {
-   "nemotron": 20
+   "nemotron": 23
   },
   "judge_range": {
-   "nemotron": "19\u201320"
+   "nemotron": "22\u201323"
   },
   "judge_rank": {
-   "nemotron": 20
+   "nemotron": 23
   },
   "evidence": {
    "repo": "etsbr3514/SteelHacks_Finding-NEMOtron",

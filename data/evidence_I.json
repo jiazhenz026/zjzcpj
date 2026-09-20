@@ -1,0 +1,53 @@
+[
+  {
+    "repo": "AndrewRoddy/MoneyMirror",
+    "project_name": "MoneyMirror",
+    "one_liner": "Net-worth app that counts cash, camera-scanned possessions and your labor-market earning power, with every figure carrying its reasoning.",
+    "problem": "Finance apps hand over a total without explaining it; possessions and earning power go uncounted, so users learn nothing actionable.",
+    "target_user": "Young adults/students who want a fuller, explainable picture of net worth; single-user, runs locally via Docker.",
+    "claimed_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron) - implied by 'Powered by NVIDIA Nemotron' on landing/README; no explicit track list in repo"
+    ],
+    "best_fit_tracks": [
+      "Beyond the Chatbot (NVIDIA Nemotron)",
+      "Xtract (LANXESS)",
+      "Seed Round (Pear VC & Afore Capital)"
+    ],
+    "team_size_claimed": null,
+    "live_url": null,
+    "stack": [
+      "ASP.NET Core 9 / Blazor Server (C#)",
+      "EF Core + PostgreSQL (Docker Compose)",
+      "NVIDIA NIM: nemotron-3-nano-omni-30b-a3b-reasoning + meta/llama-3.2-11b-vision-instruct",
+      "Anthropic Claude Sonnet 4.5 as silent LLM fallback",
+      "MobileSAM ONNX in-browser via onnxruntime-web (WebGPU/WASM, model from Hugging Face, ORT from jsDelivr)",
+      "eBay Browse API (sandbox default)",
+      "BLS Public Data API v2 client (built, unwired)",
+      "PdfPig + Open XML for resume text",
+      "Bootstrap 5 + custom token theme",
+      "xUnit/bunit + Node tests, GitHub Actions"
+    ],
+    "core_loop": "Blazor UI -> (a) photo upload or live camera: in-browser MobileSAM tap-to-segment cutout -> NVIDIA vision identifies item (JSON, re-prompt on prose) -> eBay comps median or Nemotron price guess -> save to Postgres inventory -> rolls into net worth; (b) resume PDF/DOCX -> text -> Nemotron JSON profile -> editable/saved -> Nemotron occupation matches + LLM salary range -> deterministic skill gaps, growth path, opportunities; (c) manual financial assets/liabilities in Postgres -> deterministic net worth.",
+    "wired_end_to_end": "partial",
+    "mocked_or_hardcoded": "BLS-grounded MarketPotentialPipeline (BlsWageDataService -> aggregator -> Nemotron explain-only) is built and tested but never called by any page (own remark #266: no occupation-to-series mapping after O*NET was dropped); the compensation range and per-occupation ranges shown are Nemotron guesses (AiEstimatedCompensationService prompt says 'not a lookup of real wage data'). eBay defaults to sandbox URLs that 'rarely' have comps, so valuation silently falls back to an LLM price guess; AssetValuation.SourceLabel is hardcoded to 'Market evidence' regardless of provenance and IsLowConfidence is deliberately never shown. Vision prompts embed a 7-item 'known demo prop set' (Pixel 9 Pro, Fanta can, Beats, Logitech keyboard, chips, mug, Yoggies) and tell the model to heavily favor them. Video room-scan is built but hidden (ShowVideoScan defaults false). InMemoryFinancialEntryStore registered but unused.",
+    "demo_risks": "Needs NVIDIA NIM keys and shared endpoint (code documents ~1-in-6 503s and non-JSON vision replies; retry handler + Claude fallback mitigate); Nemotron reasoning calls observed 60-90s; first camera start downloads ~40MB MobileSAM from Hugging Face plus onnxruntime from jsDelivr; camera/WebGPU require HTTPS or localhost (a phone on LAN over http gets no camera, WASM fallback is slow); Docker+Postgres must be up; eBay sandbox seldom returns comps so 'Market evidence' is usually an LLM guess.",
+    "ui_experience": "Blazor Server + Bootstrap 5 with a custom Pitt-branded token theme (Sora/Inter), mobile-first bottom tab bar / desktop rail. Landing pitch page with live net-worth band; Financial ledger with tabs, add/edit forms; Physical Assets page with live camera viewfinder, pulsing glow SVG contour, +/- refine taps, WebGPU/WASM badge, detection review cards with filters and bulk actions; 'Pocket Ledger' inventory with expandable valuation history and comps; Human Capital page is mostly plain lists. Spinners, error alerts with 'Show provider response'. Judges can point a phone at an object and tap.",
+    "physical_or_sensory": "AR-lite: live camera viewfinder with real-time on-device segmentation overlay; no hardware/audio/3D/map",
+    "integrity_flags": "All 258 commits inside the window (first 2026-09-19 11:18 EDT, last 2026-09-20 10:34 EDT) from 4 committers (Roddy, Raklovits, Leber, Joshi); no secrets (.env.example only); CI, 224 xUnit/bunit + 39 Node tests. Concerns: README and landing claim BLS-grounded ranges and 'low confidence gets flagged, not hidden' while code does the opposite; LLM guesses wear a 'Market evidence' badge (last-hour commits 'Remove AI estimate text from every page', 'drop confidence wording'); vision prompt biased to demo props; Claude can silently answer in Nemotron's place.",
+    "ai_scaffolding_flags": "No CLAUDE.md/AGENTS.md/handoff docs; docs (~110 lines) far smaller than code. 285 PRs in ~24h with issue-numbered XML-doc prose on nearly every class strongly suggests heavy agent-assisted development.",
+    "novelty_notes": "Net-worth trackers are common; the twist is treating possessions (scan a room, tap an object, price it from comps) and earning power (resume -> occupations -> range -> skill gaps -> reachable roles) as first-class capital, with in-browser MobileSAM segmentation. Each piece exists elsewhere; the combination and the 'every number explained' stance are distinctive.",
+    "need_notes": "Articulate framing (budget apps end at the balance; possessions and under-30 earning power uncounted) but no user evidence, data or quotes; single-user local tool with no auth. Plausible, somewhat generic.",
+    "wow_moment": "Point a phone at a Fanta can or headphones, tap it, watch a glowing outline snap around it in the browser, then see it named, priced and rolled into net worth within seconds.",
+    "wow_type": "VISCERAL",
+    "scores": {
+      "S1": 7,
+      "S2": 5,
+      "S3": 6,
+      "S4": 11,
+      "S5": 11,
+      "wow": 7
+    },
+    "score_rationale": "S1 7: familiar category, fresh mechanism (tap-to-segment possessions plus priced earning power). S2 5: articulate but unevidenced. S3 6: Nemotron does five non-chat jobs with documented failure handling and stacks with Xtract, but the BLS traceability headline is unwired and provenance labels mislead. S4 11: every user-facing loop runs on real providers with strong error handling and tests, yet BLS unwired, eBay sandbox, video scan hidden. S5 11: touchable live-camera segmentation; rest is Bootstrap. Wow 7.",
+    "judge_summary": "Tap an object in a live camera feed, a glowing outline snaps to it, vision plus Nemotron name and price it, and it lands in your net worth beside a resume-derived earning range. Polished, well-tested Blazor app on real providers, but the advertised BLS grounding isn't wired and LLM guesses wear a 'Market evidence' badge."
+  }
+]

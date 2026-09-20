@@ -56,3 +56,7 @@ Anish-Satish/Steel-Hacks-2026-Game
 SporkyPorks/LABHEEK
 Ech118/BankManager
 Landyn-bot/steel-hacks
+oliverchennn/clausegraph
+AndrewRoddy/MoneyMirror
+jscanga/transfr
+RandaKamal/slotsaver

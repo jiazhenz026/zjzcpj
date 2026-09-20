@@ -17,7 +17,8 @@
   "<strong>Agent scaffolding is everywhere.</strong> CLAUDE.md, AGENTS.md, handoff briefs and PRDs appear in well over a third of repositories; in RealityCheck, BankManager, OmniSight and HelloWord the planning documents outweigh the code. Completeness was scored on the wired code path, never on the plan.",
   "<strong>Hygiene slips worth fixing before the deadline.</strong> Live keys or tokens are committed in SplitSense (NVIDIA), PennyWise (Presage), Panther Post (ElevenLabs, plus recipient and staff PII), Bad Faith (Supabase auth tokens) and GutGuide (ElevenLabs, in history); Night Shift committed a full .venv.",
   "<strong>Provenance gaps.</strong> Several repositories arrive as one or two bulk commits with no development history (RealityCheck, Fernvale GBA, PGH Transit, Noise2Node, Stockd's first 7k lines). Meal Plan Tracker landed eight feature commits before the 11:00 start and Heard! ported 3,867 lines from a prior build; both are reflected in the objective fresh-code score.",
-  "<strong>Finance dominates the themes.</strong> A dozen projects are fintech (fraud desks, banking agents, budgeting, valuation, credit), followed by games, campus utilities and voice products. Presage and Solana drew almost nothing: one real Presage integration (Canopy Co.) and no Solana build was found."
+  "<strong>Finance dominates the themes.</strong> A dozen projects are fintech (fraud desks, banking agents, budgeting, valuation, credit), followed by games, campus utilities and voice products. Presage and Solana drew almost nothing: one real Presage integration (Canopy Co.) and no Solana build was found.",
+  "<strong>What the announced winners revealed.</strong> Of the twelve winners across the four tracks announced so far, only Heard! was in the original keyword sweep; four more (MoneyMirror, ClauseGraph, transfr, SlotSaver) turned out to be public repositories that never say 'SteelHacks' in their name or description, and seven have no findable public repository at all. Scored after the fact at their pre-deadline commits, the four late additions post the highest objective scores in the field (39.5, 39.3, 36.6, 30.3): sustained commit volume, several authors, tests and CI turned out to be a better predictor of sponsor-track wins than any single subjective dimension."
  ],
  "actual_results": [
   {
@@ -39,7 +40,7 @@
     "StateOfUs",
     "Slotsaver"
    ],
-   "note": "Announced as the PNC track; the closest bucket in this scoreboard is the Compound financial-hack track (PNC's API also appears in PennyWise's README). None of the three winners is public on GitHub under those names, so all three were invisible to this analysis. Of the ten finance projects scored here, none placed."
+   "note": "Announced as the PNC track; the closest bucket in this scoreboard is the Compound financial-hack track. transfr (jscanga/transfr, README names SteelHacks 2026) and SlotSaver (RandaKamal/slotsaver, identity inferred from its Nemotron + ElevenLabs stack and timing) were found afterwards and scored at their last pre-deadline commit. StateOfUs has no findable public repository. None of the ten finance projects in the original scan placed."
   },
   {
    "track": "xtract",
@@ -49,7 +50,17 @@
     "MoneyMirror",
     "ClauseGraph"
    ],
-   "note": "None of the three Xtract winners is public on GitHub under those names, so all three were invisible to this analysis. The five Xtract entrants scored here (Bad Faith, Dryrun, RealityCheck, BankManager, Faultline) did not place."
+   "note": "Shore has no findable public repository. MoneyMirror (AndrewRoddy/MoneyMirror) and ClauseGraph (oliverchennn/clausegraph) are public but neither name nor README mentioned SteelHacks before the deadline, so the keyword sweep missed them; both were cloned afterwards, checked out at their last pre-deadline commit, and scored with the same pipeline. Of the five Xtract entrants in the original scan (Bad Faith, Dryrun, RealityCheck, BankManager, Faultline), none placed."
+  },
+  {
+   "track": "seed",
+   "announced": "2026-09-20 awards ceremony",
+   "winners": [
+    "SportsAnalyst",
+    "BetterRaw",
+    "FlyBrain"
+   ],
+   "note": "None of the three Seed Round winners is public on GitHub under those names, so all three were invisible to this analysis. The nine Seed Round entrants scored here (Stockd, NestEgg, OmniSight, Trouvé, GutGuide, Meal Plan Tracker, Dayfork, Heard!, Food Finder) did not place."
   }
  ]
 }

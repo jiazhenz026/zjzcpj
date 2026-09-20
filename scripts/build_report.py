@@ -235,7 +235,7 @@ def leaderboard_html():
         jr = p['judge_range'].get(prim, '')
         rows.append(f'''<tr data-tracks="{e(' '.join(p['tracks']))}" data-name="{e(p['name'].lower())}">
 <td class="num">{p['rank']}</td>
-<td><a href="#d-{e(p['dir'])}" class="pname">{e(p['name'])}</a><div class="small muted">{repo_link(p['repo'])}</div></td>
+<td><a href="#d-{e(p['dir'])}" class="pname">{e(p['name'])}</a>{' <span class="chip">added after ceremony</span>' if p['cal'].get('late') else ''}<div class="small muted">{repo_link(p['repo'])}</div></td>
 <td class="chips">{chips(p['tracks'])}</td>
 <td class="num">{fmt(o['O1'])}</td><td class="num">{fmt(o['O2'])}</td><td class="num">{fmt(o['O3'])}</td><td class="num">{fmt(o['O4'])}</td><td class="num">{fmt(o['O5'])}</td>
 <td class="num strong obj-c">{fmt(p['OBJ'])}</td>
@@ -292,7 +292,7 @@ def dossier_html():
         wired_s = {True: 'yes', False: 'no', 'partial': 'partial'}.get(wired, str(wired))
         items.append(f'''
 <details class="dossier" id="d-{e(p['dir'])}">
-<summary><span class="num rk">#{p['rank']}</span><span class="dname">{e(p['name'])}</span><span class="muted dline">{e(p['one_liner'])}</span><span class="dscore">{fmt(p['TOTAL'])}<small>/100</small></span><span class="wow w{int(round(s['wow']))}">wow {fmt(s['wow'])}</span></summary>
+<summary><span class="num rk">#{p['rank']}</span><span class="dname">{e(p['name'])}{' <span class="chip">added after ceremony</span>' if p['cal'].get('late') else ''}</span><span class="muted dline">{e(p['one_liner'])}</span><span class="dscore">{fmt(p['TOTAL'])}<small>/100</small></span><span class="wow w{int(round(s['wow']))}">wow {fmt(s['wow'])}</span></summary>
 <div class="dbody">
 <div class="dmeta">{repo_link(p['repo'])} · {chips(p['tracks'])} · team size claimed: {e(ev.get('team_size_claimed') or '?')}{(' · live: <a href="'+e(ev['live_url'])+'" target="_blank" rel="noopener">'+e(ev['live_url'])+'</a>') if ev.get('live_url') else ''}</div>
 <div class="cols">
@@ -340,7 +340,7 @@ def results_html():
                 rows.append(f'<tr><td><span class="num rk">#{place}</span> <strong>{e(w)}</strong></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="note">Not in this analysis.</td></tr>')
         blocks.append(f'<h3><span class="chip t-{e(k)}">{e(r.get("label") or track_label(k))}</span> <span class="muted">announced {e(r["announced"])}</span></h3><div class="tbl-wrap"><table class="lb small-t"><thead><tr><th>Place · winner</th><th class="num">Score rank</th><th class="num">Predicted judge range</th><th class="num">Total</th><th class="num">Wow</th><th>Read</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div><p class="small muted">{e(r.get("note",""))}</p>')
     return f'''<section id="results" class="sec"><h2>Actual results vs prediction</h2><p class="lede">Official winners as they were announced, next to what this scoreboard predicted. Added after the ceremony; scores above were not changed.</p>{"".join(blocks)}
-<p><strong>What the outcome says about the model.</strong> The Nemotron track was called correctly as Heard!'s best chance because it is the one track that explicitly asks for evidence, and Heard! shipped a written Nemotron eval. The predicted judge range (5–8) still undershot a first place, which points to two adjustments for next time: the Wow model overweights visual spectacle relative to a moment the judge can trigger and hear personally, and objective penalties such as fresh-code integrity have no weight with live judges who never open git history.</p></section>'''
+<p><strong>What the outcome says about the model.</strong> The Nemotron track was called correctly as Heard!'s best chance because it is the one track that explicitly asks for evidence, and Heard! shipped a written Nemotron eval. The predicted judge range (5–8) still undershot a first place, which points to two adjustments for next time: the Wow model overweights visual spectacle relative to a moment the judge can trigger and hear personally, and objective penalties such as fresh-code integrity have no weight with live judges who never open git history. The four winners scored after the ceremony add a third lesson: they carry the four highest objective scores in the field, so raw build volume with a team, tests and CI predicted sponsor-track wins better than the subjective read did. The winners' rows in the leaderboard and dossiers are marked 'added after ceremony'.</p></section>'''
 
 def appendix_html():
     rows = ''.join(f'<tr><td>{repo_link(x["repo"])}</td><td class="num">{x["obj"]["code_loc"]}</td><td class="num">{x["obj"]["commits_during"] + x["obj"]["commits_pre"]}</td><td>{e(x["reason"])}</td></tr>' for x in sorted(placeholders, key=lambda x: x['repo'].lower()))

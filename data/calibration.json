@@ -643,5 +643,71 @@
   ],
   "name": "Panzerkrankenwagen Simulator",
   "note": "Kept. Godot 4 3D city with a siren; the main menu cannot launch the level as committed and there is no objective or scoring."
+ },
+ "oliverchennn_clausegraph": {
+  "S1": 7,
+  "S2": 6,
+  "S3": 7,
+  "S4": 10,
+  "S5": 9,
+  "wow": 5,
+  "tracks": [
+   "xtract",
+   "nemotron",
+   "compound"
+  ],
+  "name": "ClauseGraph",
+  "late": true,
+  "note": "Added after the ceremony (Xtract third place); scored at the last pre-deadline commit. Novelty 8 to 7 (same clause-to-consequence family as Dryrun), completeness 12 to 10 (the demo path is entirely hand-coded fixtures and makes zero model calls; live Nemotron extraction only ran on a self-hosted GPU), wow 6 to 5. Highest objective score in the field: 105 commits, 5 authors, tests, CI, Docker."
+ },
+ "AndrewRoddy_MoneyMirror": {
+  "S1": 7,
+  "S2": 5,
+  "S3": 6,
+  "S4": 10,
+  "S5": 11,
+  "wow": 7,
+  "tracks": [
+   "xtract",
+   "nemotron",
+   "seed"
+  ],
+  "name": "MoneyMirror",
+  "late": true,
+  "note": "Added after the ceremony (Xtract second place); scored at the last pre-deadline commit. Completeness 11 to 10: the advertised BLS wage pipeline is built and tested but never called by any page, so the compensation ranges on screen are Nemotron guesses wearing a 'market evidence' badge. The live-camera tap-to-segment valuation is the strongest visceral beat among the late additions. 258 commits, 4 authors, 263 tests."
+ },
+ "jscanga_transfr": {
+  "S1": 6,
+  "S2": 7,
+  "S3": 6,
+  "S4": 11,
+  "S5": 9,
+  "wow": 6,
+  "tracks": [
+   "compound",
+   "seed",
+   "nowrapper",
+   "mlh"
+  ],
+  "name": "transfr",
+  "late": true,
+  "note": "Added after the ceremony (PNC track first place); scored at the last pre-deadline commit. Novelty 7 to 6 (degree planners exist; pricing 43k real transfer equivalencies and auto-rerouting to cheaper schools is the twist), completeness 12 to 11 (single major, hardcoded tuition constants, a documented demo hardcode in PDF import). Fully static, no LLM, live at transfr.tech. Mapped to the Compound bucket, which is this scoreboard's closest match to the PNC track."
+ },
+ "RandaKamal_slotsaver": {
+  "S1": 5,
+  "S2": 7,
+  "S3": 7,
+  "S4": 11,
+  "S5": 11,
+  "wow": 7,
+  "tracks": [
+   "nemotron",
+   "outloud",
+   "compound",
+   "seed"
+  ],
+  "name": "SlotSaver",
+  "late": true,
+  "note": "Added after the ceremony (PNC track third place); identity inferred from the sponsor stack (Nemotron + ElevenLabs), timing and name, since the README does not mention SteelHacks. Novelty 7 to 5: an earlier public 'slotsaver' project with the same clinic-cancellation premise exists from another hackathon; provenance of the idea is unclear, all 111 commits are inside the window. Track fit 8 to 7, completeness 12 to 11 (every outbound call is routed to one verified number; seeded demo week), demo appeal 12 to 11, wow 8 to 7, in line with NestEgg and Trouvé whose demo is also a phone ringing on the table."
  }
 }
