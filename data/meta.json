@@ -29,6 +29,17 @@
     "Weave"
    ],
    "note": "The awards slide for Beyond the Chatbot (Best Use of NVIDIA Nemotron, $3,000+ value) names Heard! first and SurrealEstate second; the third place, announced separately, went to Weave. Neither SurrealEstate nor Weave was found by this analysis: no public GitHub repository under those names mentions SteelHacks, so they were private, differently named, or submitted outside GitHub. Two of the three winners being invisible to a keyword search is the clearest limit of this method."
+  },
+  {
+   "track": "compound",
+   "label": "PNC track (finance)",
+   "announced": "2026-09-20 awards ceremony",
+   "winners": [
+    "transfr",
+    "StateOfUs",
+    "Slotsaver"
+   ],
+   "note": "Announced as the PNC track; the closest bucket in this scoreboard is the Compound financial-hack track (PNC's API also appears in PennyWise's README). None of the three winners is public on GitHub under those names, so all three were invisible to this analysis. Of the ten finance projects scored here, none placed."
   }
  ]
 }
