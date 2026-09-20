@@ -40,6 +40,16 @@
     "Slotsaver"
    ],
    "note": "Announced as the PNC track; the closest bucket in this scoreboard is the Compound financial-hack track (PNC's API also appears in PennyWise's README). None of the three winners is public on GitHub under those names, so all three were invisible to this analysis. Of the ten finance projects scored here, none placed."
+  },
+  {
+   "track": "xtract",
+   "announced": "2026-09-20 awards ceremony",
+   "winners": [
+    "Shore",
+    "MoneyMirror",
+    "ClauseGraph"
+   ],
+   "note": "None of the three Xtract winners is public on GitHub under those names, so all three were invisible to this analysis. The five Xtract entrants scored here (Bad Faith, Dryrun, RealityCheck, BankManager, Faultline) did not place."
   }
  ]
 }
